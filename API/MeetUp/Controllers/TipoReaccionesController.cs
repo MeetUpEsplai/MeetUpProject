@@ -31,6 +31,7 @@ namespace MeetUp.Controllers
           }
             return await _context.TipoReacciones.ToListAsync();
         }
+       
 
         // GET: api/TipoReacciones/5
         [HttpGet("{id}")]
@@ -49,6 +50,30 @@ namespace MeetUp.Controllers
 
             return tipoReaccion;
         }
+
+
+        // POST: api/TipoReacciones
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<TipoReaccion>> PostTipoReaccion(TipoReaccion tipoReaccion)
+        {
+          if (_context.TipoReacciones == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.TipoReacciones'  is null.");
+          }
+            _context.TipoReacciones.Add(tipoReaccion);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetTipoReaccion", new { id = tipoReaccion.Id }, tipoReaccion);
+        }
+
+
+        private bool TipoReaccionExists(int id)
+        {
+            return (_context.TipoReacciones?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        #region CRUD no Usado
 
         // PUT: api/TipoReacciones/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -81,20 +106,7 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        // POST: api/TipoReacciones
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<TipoReaccion>> PostTipoReaccion(TipoReaccion tipoReaccion)
-        {
-          if (_context.TipoReacciones == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.TipoReacciones'  is null.");
-          }
-            _context.TipoReacciones.Add(tipoReaccion);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTipoReaccion", new { id = tipoReaccion.Id }, tipoReaccion);
-        }
 
         // DELETE: api/TipoReacciones/5
         [HttpDelete("{id}")]
@@ -116,9 +128,6 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        private bool TipoReaccionExists(int id)
-        {
-            return (_context.TipoReacciones?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        #endregion
     }
 }

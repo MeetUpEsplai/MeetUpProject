@@ -21,6 +21,7 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
+
         // GET: api/Etiquetas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Etiqueta>>> GetEtiquetas()
@@ -32,14 +33,38 @@ namespace MeetUp.Controllers
             return await _context.Etiquetas.ToListAsync();
         }
 
+
+        // POST: api/Etiquetas
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Etiqueta>> PostEtiqueta(Etiqueta etiqueta)
+        {
+          if (_context.Etiquetas == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.Etiquetas'  is null.");
+          }
+            _context.Etiquetas.Add(etiqueta);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetEtiqueta", new { id = etiqueta.Id }, etiqueta);
+        }
+
+        
+
+        private bool EtiquetaExists(int id)
+        {
+            return (_context.Etiquetas?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        #region CRUD no Utilizada
         // GET: api/Etiquetas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Etiqueta>> GetEtiqueta(int id)
         {
-          if (_context.Etiquetas == null)
-          {
-              return NotFound();
-          }
+            if (_context.Etiquetas == null)
+            {
+                return NotFound();
+            }
             var etiqueta = await _context.Etiquetas.FindAsync(id);
 
             if (etiqueta == null)
@@ -49,6 +74,7 @@ namespace MeetUp.Controllers
 
             return etiqueta;
         }
+
 
         // PUT: api/Etiquetas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -81,21 +107,6 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        // POST: api/Etiquetas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Etiqueta>> PostEtiqueta(Etiqueta etiqueta)
-        {
-          if (_context.Etiquetas == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Etiquetas'  is null.");
-          }
-            _context.Etiquetas.Add(etiqueta);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEtiqueta", new { id = etiqueta.Id }, etiqueta);
-        }
-
         // DELETE: api/Etiquetas/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEtiqueta(int id)
@@ -115,10 +126,7 @@ namespace MeetUp.Controllers
 
             return NoContent();
         }
-
-        private bool EtiquetaExists(int id)
-        {
-            return (_context.Etiquetas?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        
+        #endregion
     }
 }

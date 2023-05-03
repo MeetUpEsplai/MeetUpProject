@@ -21,16 +21,7 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
-        // GET: api/Comentarios
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Comentario>>> GetComentarios()
-        {
-          if (_context.Comentarios == null)
-          {
-              return NotFound();
-          }
-            return await _context.Comentarios.ToListAsync();
-        }
+        
 
         // GET: api/Comentarios/5
         [HttpGet("{id}")]
@@ -120,5 +111,20 @@ namespace MeetUp.Controllers
         {
             return (_context.Comentarios?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        #region CRUD no Usado
+
+        // GET: api/Comentarios
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Comentario>>> GetComentarios()
+        {
+            if (_context.Comentarios == null)
+            {
+                return NotFound();
+            }
+            return await _context.Comentarios.ToListAsync();
+        }
+
+        #endregion
     }
 }
