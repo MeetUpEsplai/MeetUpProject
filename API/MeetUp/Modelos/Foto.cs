@@ -6,6 +6,8 @@ namespace MeetUp.Modelos
     {
         [Key]
         public int Id { get; set; }
+
+        [StringLength(250)]
         public string Referencia { get; set; }
         
         public int IdEvento { get; set; }

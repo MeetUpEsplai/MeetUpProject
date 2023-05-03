@@ -8,12 +8,20 @@ namespace MeetUp.Modelos
     {
         [Key]
         public int Id { get; set; }
+
+        [StringLength(250)]
         public string Nombre { get; set; }
         public DateTime FechaEvento { get; set; }
         [Precision(10, 2)]
         public decimal Precio { get; set; }
+
+        [StringLength(500)]
         public string Descripcion { get; set; }
+
+        [StringLength(100)]
         public string? Coordenadas { get; set; }
+
+        [StringLength(50)]
         public string? CiudadProxima { get; set; } 
 
         public int IdUsuario { get; set; }

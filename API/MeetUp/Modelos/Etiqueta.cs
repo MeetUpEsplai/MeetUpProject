@@ -6,6 +6,8 @@ namespace MeetUp.Modelos
     {
         [Key]
         public int Id { get; set; }
+
+        [StringLength(50)]
         public string Nombre { get; set; }
 
         public ICollection<Evento>? Eventos { get; set; }
