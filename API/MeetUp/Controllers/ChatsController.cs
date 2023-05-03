@@ -42,7 +42,7 @@ namespace MeetUp.Controllers
         }
 
         #region CRUD no utilizado
-        /*
+        
        
         // GET: api/Chats
         [HttpGet]
@@ -123,7 +123,7 @@ namespace MeetUp.Controllers
 
             return NoContent();
         }
-        */
+        
 
         #endregion
     }

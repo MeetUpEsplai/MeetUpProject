@@ -32,14 +32,38 @@ namespace MeetUp.Controllers
             return await _context.Mensajes.ToListAsync();
         }
 
+       
+        // POST: api/Mensajes
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Mensaje>> PostMensaje(Mensaje mensaje)
+        {
+          if (_context.Mensajes == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.Mensajes'  is null.");
+          }
+            _context.Mensajes.Add(mensaje);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetMensaje", new { id = mensaje.Id }, mensaje);
+        }
+
+
+        private bool MensajeExists(int id)
+        {
+            return (_context.Mensajes?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        #region CRUD no Usado
+
         // GET: api/Mensajes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Mensaje>> GetMensaje(int id)
         {
-          if (_context.Mensajes == null)
-          {
-              return NotFound();
-          }
+            if (_context.Mensajes == null)
+            {
+                return NotFound();
+            }
             var mensaje = await _context.Mensajes.FindAsync(id);
 
             if (mensaje == null)
@@ -49,6 +73,7 @@ namespace MeetUp.Controllers
 
             return mensaje;
         }
+
 
         // PUT: api/Mensajes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -81,20 +106,6 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        // POST: api/Mensajes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Mensaje>> PostMensaje(Mensaje mensaje)
-        {
-          if (_context.Mensajes == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Mensajes'  is null.");
-          }
-            _context.Mensajes.Add(mensaje);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetMensaje", new { id = mensaje.Id }, mensaje);
-        }
 
         // DELETE: api/Mensajes/5
         [HttpDelete("{id}")]
@@ -116,9 +127,6 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        private bool MensajeExists(int id)
-        {
-            return (_context.Mensajes?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        #endregion
     }
 }
