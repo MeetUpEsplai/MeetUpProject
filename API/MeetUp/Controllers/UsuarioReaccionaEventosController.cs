@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MeetUp.Context;
+using MeetUp.Modelos;
+
+namespace MeetUp.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UsuarioReaccionaEventosController : ControllerBase
+    {
+        private readonly ApplicationDbContext _context;
+
+        public UsuarioReaccionaEventosController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/UsuarioReaccionaEventos
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UsuarioReaccionaEvento>>> GetUsuariosaEventos()
+        {
+          if (_context.UsuariosaEventos == null)
+          {
+              return NotFound();
+          }
+            return await _context.UsuariosaEventos.ToListAsync();
+        }
+
+        // GET: api/UsuarioReaccionaEventos/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UsuarioReaccionaEvento>> GetUsuarioReaccionaEvento(int id)
+        {
+          if (_context.UsuariosaEventos == null)
+          {
+              return NotFound();
+          }
+            var usuarioReaccionaEvento = await _context.UsuariosaEventos.FindAsync(id);
+
+            if (usuarioReaccionaEvento == null)
+            {
+                return NotFound();
+            }
+
+            return usuarioReaccionaEvento;
+        }
+
+        // PUT: api/UsuarioReaccionaEventos/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUsuarioReaccionaEvento(int id, UsuarioReaccionaEvento usuarioReaccionaEvento)
+        {
+            if (id != usuarioReaccionaEvento.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(usuarioReaccionaEvento).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsuarioReaccionaEventoExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // POST: api/UsuarioReaccionaEventos
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<UsuarioReaccionaEvento>> PostUsuarioReaccionaEvento(UsuarioReaccionaEvento usuarioReaccionaEvento)
+        {
+          if (_context.UsuariosaEventos == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.UsuariosaEventos'  is null.");
+          }
+            _context.UsuariosaEventos.Add(usuarioReaccionaEvento);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUsuarioReaccionaEvento", new { id = usuarioReaccionaEvento.Id }, usuarioReaccionaEvento);
+        }
+
+        // DELETE: api/UsuarioReaccionaEventos/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUsuarioReaccionaEvento(int id)
+        {
+            if (_context.UsuariosaEventos == null)
+            {
+                return NotFound();
+            }
+            var usuarioReaccionaEvento = await _context.UsuariosaEventos.FindAsync(id);
+            if (usuarioReaccionaEvento == null)
+            {
+                return NotFound();
+            }
+
+            _context.UsuariosaEventos.Remove(usuarioReaccionaEvento);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool UsuarioReaccionaEventoExists(int id)
+        {
+            return (_context.UsuariosaEventos?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+    }
+}
