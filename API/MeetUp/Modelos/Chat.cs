@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MeetUp.Modelos.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,5 +18,11 @@ namespace MeetUp.Modelos
         public ICollection<Mensaje>? Mensaje { get; set;}
         [InverseProperty("Chats")]
         public ICollection<Usuario> Usuarios { get; set; }
+
+        public void AddModelInfo(ChatViewModel model)
+        {
+            Nombre = model.Nombre;
+            FechaCreacion = model.FechaCreacion;
+        }
     }
 }

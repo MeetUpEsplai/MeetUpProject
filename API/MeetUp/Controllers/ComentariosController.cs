@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
 using MeetUp.Modelos;
+using MeetUp.Modelos.ViewModels;
 
 namespace MeetUp.Controllers
 {
@@ -21,35 +22,38 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
-        
+        #region Post and Put
 
-        // GET: api/Comentarios/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Comentario>> GetComentario(int id)
+        // POST: api/Comentarios
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Comentario>> PostComentario(ComentarioViewModel model)
         {
-          if (_context.Comentarios == null)
-          {
-              return NotFound();
-          }
-            var comentario = await _context.Comentarios.FindAsync(id);
-
-            if (comentario == null)
+            if (_context.Comentarios == null)
             {
-                return NotFound();
+                return Problem("Entity set 'ApplicationDbContext.Comentarios'  is null.");
             }
+            Comentario comentario = new Comentario();
+            comentario.AddModelInfo(model);
 
-            return comentario;
+            _context.Comentarios.Add(comentario);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetComentario", new { id = comentario.Id }, comentario);
         }
+
 
         // PUT: api/Comentarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutComentario(int id, Comentario comentario)
+        public async Task<IActionResult> PutComentario(int id, ComentarioViewModel model)
         {
-            if (id != comentario.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
+            Comentario? comentario = GetComentario(id).Result.Value;
+            comentario.AddModelInfo(model);
 
             _context.Entry(comentario).State = EntityState.Modified;
 
@@ -72,20 +76,45 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        // POST: api/Comentarios
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Comentario>> PostComentario(Comentario comentario)
-        {
-          if (_context.Comentarios == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Comentarios'  is null.");
-          }
-            _context.Comentarios.Add(comentario);
-            await _context.SaveChangesAsync();
+        #endregion
 
-            return CreatedAtAction("GetComentario", new { id = comentario.Id }, comentario);
+
+        #region Get
+
+        // GET: api/Comentarios/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Comentario>> GetComentario(int id)
+        {
+            if (_context.Comentarios == null)
+            {
+                return NotFound();
+            }
+            var comentario = await _context.Comentarios.FindAsync(id);
+
+            if (comentario == null)
+            {
+                return NotFound();
+            }
+
+            return comentario;
         }
+
+
+        // GET: api/Comentarios
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Comentario>>> GetComentarios()
+        {
+            if (_context.Comentarios == null)
+            {
+                return NotFound();
+            }
+            return await _context.Comentarios.ToListAsync();
+        }
+
+        #endregion
+
+
+        #region Delete
 
         // DELETE: api/Comentarios/5
         [HttpDelete("{id}")]
@@ -107,24 +136,12 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
+        #endregion
+
+
         private bool ComentarioExists(int id)
         {
             return (_context.Comentarios?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-
-        #region CRUD no Usado
-
-        // GET: api/Comentarios
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Comentario>>> GetComentarios()
-        {
-            if (_context.Comentarios == null)
-            {
-                return NotFound();
-            }
-            return await _context.Comentarios.ToListAsync();
-        }
-
-        #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MeetUp.Modelos.ViewModels;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MeetUp.Modelos
@@ -18,5 +19,12 @@ namespace MeetUp.Modelos
         [InverseProperty("TipoReaccion")]
         public ICollection<UsuarioReaccionaEvento>? ReaccionesEventos { get; set; }
         public ICollection<UsuarioReaccionaComentario>? ReaccionesComentarios { get; set; }
+
+
+        public void AddModelInfo(TipoReaccionViewModel model)
+        {
+            Nombre = model.Nombre;
+            Emoji = model.Emoji;
+        }
     }
 }

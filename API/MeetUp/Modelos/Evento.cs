@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MeetUp.Modelos.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,7 +25,7 @@ namespace MeetUp.Modelos
         [StringLength(50)]
         public string? CiudadProxima { get; set; } 
 
-        public int IdUsuario { get; set; }
+        public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
 
         public ICollection<Foto>? Fotos { get; set; }
@@ -33,5 +34,17 @@ namespace MeetUp.Modelos
         [InverseProperty("Evento")]
         public ICollection<UsuarioReaccionaEvento>? Reacciones { get; set; }
         public ICollection<Etiqueta>? Etiquetas { get; set; }
+
+
+        public void AddModelInfo(EventoViewModel model)
+        {
+            Nombre = model.Nombre;
+            FechaEvento = model.FechaEvento;
+            Precio = model.Precio;
+            Descripcion = model.Descripcion;
+            Coordenadas = model.Coordenadas;
+            CiudadProxima = model.CiudadProxima;
+            UsuarioId = model.UsuarioId;
+        }
     }
 }

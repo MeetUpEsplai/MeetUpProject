@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
 using MeetUp.Modelos;
+using MeetUp.Modelos.ViewModels;
 
 namespace MeetUp.Controllers
 {
@@ -84,12 +85,15 @@ namespace MeetUp.Controllers
         // POST: api/Usuarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
+        public async Task<ActionResult<Usuario>> PostUsuario(UsuarioViewModel modelUsuario)
         {
           if (_context.Usuarios == null)
           {
               return Problem("Entity set 'ApplicationDbContext.Usuarios'  is null.");
           }
+            Usuario usuario = new Usuario();
+            usuario.AddModelInfo(modelUsuario);
+
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 

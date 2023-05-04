@@ -5,17 +5,27 @@ namespace MeetUp.Modelos.ViewModels
 {
     public class EventoViewModel
     {
-        public int Id { get; set; }
+        [Required]
+        [StringLength(250)]
         public string Nombre { get; set; }
+
+        [Required]
         public DateTime FechaEvento { get; set; }
+
+        [Required]
+        [Range(0, Double.MaxValue)]
         public decimal Precio { get; set; }
 
+        [Required]
+        [StringLength(500)]
         public string Descripcion { get; set; }
 
-        public string? Coordenadas { get; set; }
+        [StringLength(100)]
+        public string Coordenadas { get; set; }
 
-        public string? CiudadProxima { get; set; }
+        [StringLength(50)]
+        public string CiudadProxima { get; set; }
 
-        public int IdUsuario { get; set; }
+        public int UsuarioId { get; set; }
     }
 }

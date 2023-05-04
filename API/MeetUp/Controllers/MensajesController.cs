@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
 using MeetUp.Modelos;
+using MeetUp.Modelos.ViewModels;
 
 namespace MeetUp.Controllers
 {
@@ -21,57 +22,25 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
-        // GET: api/Mensajes
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Mensaje>>> GetMensajes()
-        {
-          if (_context.Mensajes == null)
-          {
-              return NotFound();
-          }
-            return await _context.Mensajes.ToListAsync();
-        }
 
-       
+        #region Post and Put
+
         // POST: api/Mensajes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Mensaje>> PostMensaje(Mensaje mensaje)
+        public async Task<ActionResult<Mensaje>> PostMensaje(MensajeViewModel model)
         {
-          if (_context.Mensajes == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Mensajes'  is null.");
-          }
+            if (_context.Mensajes == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Mensajes'  is null.");
+            }
+            Mensaje mensaje = new Mensaje();
+            mensaje.AddModelInfo(model);
+
             _context.Mensajes.Add(mensaje);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetMensaje", new { id = mensaje.Id }, mensaje);
-        }
-
-
-        private bool MensajeExists(int id)
-        {
-            return (_context.Mensajes?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
-
-        #region CRUD no Usado
-
-        // GET: api/Mensajes/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Mensaje>> GetMensaje(int id)
-        {
-            if (_context.Mensajes == null)
-            {
-                return NotFound();
-            }
-            var mensaje = await _context.Mensajes.FindAsync(id);
-
-            if (mensaje == null)
-            {
-                return NotFound();
-            }
-
-            return mensaje;
         }
 
 
@@ -106,6 +75,45 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
+        #endregion
+
+
+        #region Get
+
+        // GET: api/Mensajes/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Mensaje>> GetMensaje(int id)
+        {
+            if (_context.Mensajes == null)
+            {
+                return NotFound();
+            }
+            var mensaje = await _context.Mensajes.FindAsync(id);
+
+            if (mensaje == null)
+            {
+                return NotFound();
+            }
+
+            return mensaje;
+        }
+
+
+        // GET: api/Mensajes
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Mensaje>>> GetMensajes()
+        {
+            if (_context.Mensajes == null)
+            {
+                return NotFound();
+            }
+            return await _context.Mensajes.ToListAsync();
+        }
+
+        #endregion
+
+
+        #region Delete
 
         // DELETE: api/Mensajes/5
         [HttpDelete("{id}")]
@@ -128,5 +136,11 @@ namespace MeetUp.Controllers
         }
 
         #endregion
+
+
+        private bool MensajeExists(int id)
+        {
+            return (_context.Mensajes?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
     }
 }

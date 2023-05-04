@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
 using MeetUp.Modelos;
+using MeetUp.Modelos.ViewModels;
 
 namespace MeetUp.Controllers
 {
@@ -21,34 +22,27 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
-        // GET: api/UsuarioReaccionaMensajes
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuarioReaccionaMensaje>>> GetUsuariosMensajes()
-        {
-          if (_context.UsuariosMensajes == null)
-          {
-              return NotFound();
-          }
-            return await _context.UsuariosMensajes.ToListAsync();
-        }
 
-        // GET: api/UsuarioReaccionaMensajes/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UsuarioReaccionaMensaje>> GetUsuarioReaccionaMensaje(int id)
-        {
-          if (_context.UsuariosMensajes == null)
-          {
-              return NotFound();
-          }
-            var usuarioReaccionaMensaje = await _context.UsuariosMensajes.FindAsync(id);
+        #region Post and Get
 
-            if (usuarioReaccionaMensaje == null)
+        // POST: api/UsuarioReaccionaMensajes
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<UsuarioReaccionaMensaje>> PostUsuarioReaccionaMensaje(UsuarioReaccionaMensajeViewModel model)
+        {
+            if (_context.UsuariosMensajes == null)
             {
-                return NotFound();
+                return Problem("Entity set 'ApplicationDbContext.UsuariosMensajes'  is null.");
             }
+            UsuarioReaccionaMensaje reaccion = new UsuarioReaccionaMensaje();
+            reaccion.AddModelInfo(model);
 
-            return usuarioReaccionaMensaje;
+            _context.UsuariosMensajes.Add(reaccion);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUsuarioReaccionaMensaje", new { id = reaccion.Id }, reaccion);
         }
+
 
         // PUT: api/UsuarioReaccionaMensajes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -81,20 +75,46 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        // POST: api/UsuarioReaccionaMensajes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<UsuarioReaccionaMensaje>> PostUsuarioReaccionaMensaje(UsuarioReaccionaMensaje usuarioReaccionaMensaje)
-        {
-          if (_context.UsuariosMensajes == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.UsuariosMensajes'  is null.");
-          }
-            _context.UsuariosMensajes.Add(usuarioReaccionaMensaje);
-            await _context.SaveChangesAsync();
+        #endregion
 
-            return CreatedAtAction("GetUsuarioReaccionaMensaje", new { id = usuarioReaccionaMensaje.Id }, usuarioReaccionaMensaje);
+
+        #region Get
+
+        // GET: api/UsuarioReaccionaMensajes/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UsuarioReaccionaMensaje>> GetUsuarioReaccionaMensaje(int id)
+        {
+            if (_context.UsuariosMensajes == null)
+            {
+                return NotFound();
+            }
+            var usuarioReaccionaMensaje = await _context.UsuariosMensajes.FindAsync(id);
+
+            if (usuarioReaccionaMensaje == null)
+            {
+                return NotFound();
+            }
+
+            return usuarioReaccionaMensaje;
         }
+
+
+        // GET: api/UsuarioReaccionaMensajes
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UsuarioReaccionaMensaje>>> GetUsuariosMensajes()
+        {
+            if (_context.UsuariosMensajes == null)
+            {
+                return NotFound();
+            }
+            return await _context.UsuariosMensajes.ToListAsync();
+        }
+
+        #endregion
+
+
+
+        #region Delete
 
         // DELETE: api/UsuarioReaccionaMensajes/5
         [HttpDelete("{id}")]
@@ -115,6 +135,9 @@ namespace MeetUp.Controllers
 
             return NoContent();
         }
+
+        #endregion
+
 
         private bool UsuarioReaccionaMensajeExists(int id)
         {

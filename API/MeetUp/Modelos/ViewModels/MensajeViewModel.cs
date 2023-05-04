@@ -7,7 +7,7 @@ namespace MeetUp.Modelos.ViewModels
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public string Texto { get; set; }
-        public int IdChat { get; set; }
-        public int IdUsuario { get; set; }
+        public int ChatId { get; set; }
+        public int UsuarioId { get; set; }
     }
 }

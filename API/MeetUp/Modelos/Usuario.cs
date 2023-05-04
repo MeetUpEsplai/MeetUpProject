@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MeetUp.Modelos.ViewModels;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MeetUp.Modelos
@@ -17,7 +18,7 @@ namespace MeetUp.Modelos
         [StringLength(100)]
         public string Email { get; set; }
 
-        [StringLength(50)] 
+        [StringLength(50)]
         public string Password { get; set; }
         public DateTime FechaNacimiento { get; set; }
 
@@ -31,5 +32,14 @@ namespace MeetUp.Modelos
         public ICollection<UsuarioReaccionaEvento>? ReaccionesEventos { get; set; }
         public ICollection<UsuarioReaccionaComentario>? ReaccionesComentarios { get; set; }
 
+
+        public void AddModelInfo(UsuarioViewModel model)
+        {
+            Nombre = model.Nombre;
+            Apellido = model.Apellido;
+            Email = model.Email;
+            Password = model.Contrasena;
+            FechaNacimiento = model.FechaNacimiento;
+        }
     }
 }

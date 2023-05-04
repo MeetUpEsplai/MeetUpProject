@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
 using MeetUp.Modelos;
+using MeetUp.Modelos.ViewModels;
 
 namespace MeetUp.Controllers
 {
@@ -21,34 +22,28 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
-        // GET: api/UsuarioReaccionaEventos
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuarioReaccionaEvento>>> GetUsuariosaEventos()
-        {
-          if (_context.UsuariosaEventos == null)
-          {
-              return NotFound();
-          }
-            return await _context.UsuariosaEventos.ToListAsync();
-        }
 
-        // GET: api/UsuarioReaccionaEventos/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UsuarioReaccionaEvento>> GetUsuarioReaccionaEvento(int id)
-        {
-          if (_context.UsuariosaEventos == null)
-          {
-              return NotFound();
-          }
-            var usuarioReaccionaEvento = await _context.UsuariosaEventos.FindAsync(id);
+        #region Post and Put
 
-            if (usuarioReaccionaEvento == null)
+        // POST: api/UsuarioReaccionaEventos
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<UsuarioReaccionaEvento>> PostUsuarioReaccionaEvento(UsuarioReaccionaEventoViewModel model)
+        {
+            if (_context.UsuariosaEventos == null)
             {
-                return NotFound();
+                return Problem("Entity set 'ApplicationDbContext.UsuariosaEventos'  is null.");
             }
 
-            return usuarioReaccionaEvento;
+            UsuarioReaccionaEvento reaccion = new UsuarioReaccionaEvento();
+            reaccion.AddModelInfo(model);
+
+            _context.UsuariosaEventos.Add(reaccion);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUsuarioReaccionaEvento", new { id = reaccion.Id }, reaccion);
         }
+
 
         // PUT: api/UsuarioReaccionaEventos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -81,20 +76,45 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        // POST: api/UsuarioReaccionaEventos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<UsuarioReaccionaEvento>> PostUsuarioReaccionaEvento(UsuarioReaccionaEvento usuarioReaccionaEvento)
-        {
-          if (_context.UsuariosaEventos == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.UsuariosaEventos'  is null.");
-          }
-            _context.UsuariosaEventos.Add(usuarioReaccionaEvento);
-            await _context.SaveChangesAsync();
+        #endregion
 
-            return CreatedAtAction("GetUsuarioReaccionaEvento", new { id = usuarioReaccionaEvento.Id }, usuarioReaccionaEvento);
+
+        #region Get
+
+        // GET: api/UsuarioReaccionaEventos/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UsuarioReaccionaEvento>> GetUsuarioReaccionaEvento(int id)
+        {
+            if (_context.UsuariosaEventos == null)
+            {
+                return NotFound();
+            }
+            var usuarioReaccionaEvento = await _context.UsuariosaEventos.FindAsync(id);
+
+            if (usuarioReaccionaEvento == null)
+            {
+                return NotFound();
+            }
+
+            return usuarioReaccionaEvento;
         }
+
+
+        // GET: api/UsuarioReaccionaEventos
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UsuarioReaccionaEvento>>> GetUsuariosaEventos()
+        {
+            if (_context.UsuariosaEventos == null)
+            {
+                return NotFound();
+            }
+            return await _context.UsuariosaEventos.ToListAsync();
+        }
+
+        #endregion
+
+
+        #region Delete 
 
         // DELETE: api/UsuarioReaccionaEventos/5
         [HttpDelete("{id}")]
@@ -115,6 +135,9 @@ namespace MeetUp.Controllers
 
             return NoContent();
         }
+
+        #endregion
+
 
         private bool UsuarioReaccionaEventoExists(int id)
         {

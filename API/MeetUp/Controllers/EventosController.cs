@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
 using MeetUp.Modelos;
+using MeetUp.Modelos.ViewModels;
 
 namespace MeetUp.Controllers
 {
@@ -21,34 +22,28 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
-        // GET: api/Eventos
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Evento>>> GetEvents()
-        {
-          if (_context.Events == null)
-          {
-              return NotFound();
-          }
-            return await _context.Events.ToListAsync();
-        }
 
-        // GET: api/Eventos/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Evento>> GetEvento(int id)
-        {
-          if (_context.Events == null)
-          {
-              return NotFound();
-          }
-            var evento = await _context.Events.FindAsync(id);
+        #region Post and Put
 
-            if (evento == null)
+        // POST: api/Eventos
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Evento>> PostEvento(EventoViewModel model)
+        {
+            if (_context.Events == null)
             {
-                return NotFound();
+                return Problem("Entity set 'ApplicationDbContext.Events'  is null.");
             }
 
-            return evento;
+            Evento evento = new Evento();
+            evento.AddModelInfo(model);
+
+            _context.Events.Add(evento);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetEvento", new { id = evento.Id }, evento);
         }
+
 
         // PUT: api/Eventos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -81,20 +76,45 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        // POST: api/Eventos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Evento>> PostEvento(Evento evento)
-        {
-          if (_context.Events == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Events'  is null.");
-          }
-            _context.Events.Add(evento);
-            await _context.SaveChangesAsync();
+        #endregion
 
-            return CreatedAtAction("GetEvento", new { id = evento.Id }, evento);
+
+        #region Get
+
+        // GET: api/Eventos/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Evento>> GetEvento(int id)
+        {
+            if (_context.Events == null)
+            {
+                return NotFound();
+            }
+            var evento = await _context.Events.FindAsync(id);
+
+            if (evento == null)
+            {
+                return NotFound();
+            }
+
+            return evento;
         }
+
+
+        // GET: api/Eventos
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Evento>>> GetEvents()
+        {
+            if (_context.Events == null)
+            {
+                return NotFound();
+            }
+            return await _context.Events.ToListAsync();
+        }
+
+        #endregion
+
+
+        #region Delete
 
         // DELETE: api/Eventos/5
         [HttpDelete("{id}")]
@@ -115,6 +135,9 @@ namespace MeetUp.Controllers
 
             return NoContent();
         }
+
+        #endregion
+
 
         private bool EventoExists(int id)
         {

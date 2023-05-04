@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MeetUp.Modelos.ViewModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace MeetUp.Modelos
 {
@@ -11,5 +12,11 @@ namespace MeetUp.Modelos
         public string Nombre { get; set; }
 
         public ICollection<Evento>? Eventos { get; set; }
+
+        public void AddModelInfo(EtiquetaViewModel model)
+        {
+            Nombre = model.Nombre;
+        }
     }
 }
+    

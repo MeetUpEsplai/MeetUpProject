@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
 using MeetUp.Modelos;
+using MeetUp.Modelos.ViewModels;
+using System.Reflection.PortableExecutable;
 
 namespace MeetUp.Controllers
 {
@@ -21,77 +23,28 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
+
+        #region Post and Put
+
         // POST: api/UsuarioSuscribeEventos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UsuarioSuscribeEvento>> PostUsuarioSuscribeEvento(UsuarioSuscribeEvento usuarioSuscribeEvento)
+        public async Task<ActionResult<UsuarioSuscribeEvento>> PostUsuarioSuscribeEvento(UsuarioSuscribeEventoViewModel model)
         {
-          if (_context.UsuarioSuscribeEvento == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.UsuarioSuscribeEvento'  is null.");
-          }
-            _context.UsuarioSuscribeEvento.Add(usuarioSuscribeEvento);
+            if (_context.UsuarioSuscribeEvento == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.UsuarioSuscribeEvento'  is null.");
+            }
+
+            UsuarioSuscribeEvento suscripcion = new UsuarioSuscribeEvento();
+            suscripcion.AddModelInfo(model);
+
+            _context.UsuarioSuscribeEvento.Add(suscripcion);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuarioSuscribeEvento", new { id = usuarioSuscribeEvento.Id }, usuarioSuscribeEvento);
+            return CreatedAtAction("GetUsuarioSuscribeEvento", new { id = suscripcion.Id }, suscripcion);
         }
 
-        // DELETE: api/UsuarioSuscribeEventos/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuarioSuscribeEvento(int id)
-        {
-            if (_context.UsuarioSuscribeEvento == null)
-            {
-                return NotFound();
-            }
-            var usuarioSuscribeEvento = await _context.UsuarioSuscribeEvento.FindAsync(id);
-            if (usuarioSuscribeEvento == null)
-            {
-                return NotFound();
-            }
-
-            _context.UsuarioSuscribeEvento.Remove(usuarioSuscribeEvento);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool UsuarioSuscribeEventoExists(int id)
-        {
-            return (_context.UsuarioSuscribeEvento?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
-
-        #region CRUD no Usado
-
-
-        // GET: api/UsuarioSuscribeEventos
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuarioSuscribeEvento>>> GetUsuarioSuscribeEvento()
-        {
-            if (_context.UsuarioSuscribeEvento == null)
-            {
-                return NotFound();
-            }
-            return await _context.UsuarioSuscribeEvento.ToListAsync();
-        }
-
-        // GET: api/UsuarioSuscribeEventos/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UsuarioSuscribeEvento>> GetUsuarioSuscribeEvento(int id)
-        {
-            if (_context.UsuarioSuscribeEvento == null)
-            {
-                return NotFound();
-            }
-            var usuarioSuscribeEvento = await _context.UsuarioSuscribeEvento.FindAsync(id);
-
-            if (usuarioSuscribeEvento == null)
-            {
-                return NotFound();
-            }
-
-            return usuarioSuscribeEvento;
-        }
 
         // PUT: api/UsuarioSuscribeEventos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -124,7 +77,72 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
+        #endregion
+
+
+        #region Get
+
+        // GET: api/UsuarioSuscribeEventos/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UsuarioSuscribeEvento>> GetUsuarioSuscribeEvento(int id)
+        {
+            if (_context.UsuarioSuscribeEvento == null)
+            {
+                return NotFound();
+            }
+            var usuarioSuscribeEvento = await _context.UsuarioSuscribeEvento.FindAsync(id);
+
+            if (usuarioSuscribeEvento == null)
+            {
+                return NotFound();
+            }
+
+            return usuarioSuscribeEvento;
+        }
+
+
+        // GET: api/UsuarioSuscribeEventos
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UsuarioSuscribeEvento>>> GetUsuarioSuscribeEvento()
+        {
+            if (_context.UsuarioSuscribeEvento == null)
+            {
+                return NotFound();
+            }
+            return await _context.UsuarioSuscribeEvento.ToListAsync();
+        }
 
         #endregion
+
+
+        #region Delete
+
+        // DELETE: api/UsuarioSuscribeEventos/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUsuarioSuscribeEvento(int id)
+        {
+            if (_context.UsuarioSuscribeEvento == null)
+            {
+                return NotFound();
+            }
+            var usuarioSuscribeEvento = await _context.UsuarioSuscribeEvento.FindAsync(id);
+            if (usuarioSuscribeEvento == null)
+            {
+                return NotFound();
+            }
+
+            _context.UsuarioSuscribeEvento.Remove(usuarioSuscribeEvento);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        #endregion
+
+
+        private bool UsuarioSuscribeEventoExists(int id)
+        {
+            return (_context.UsuarioSuscribeEvento?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
     }
 }

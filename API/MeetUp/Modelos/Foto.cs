@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MeetUp.Modelos.ViewModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace MeetUp.Modelos
 {
@@ -10,7 +11,13 @@ namespace MeetUp.Modelos
         [StringLength(250)]
         public string Referencia { get; set; }
         
-        public int IdEvento { get; set; }
+        public int EventoId { get; set; }
         public Evento Evento { get; set; }
+
+        public void AddModelInfo(FotoViewModel model)
+        {
+            Referencia = model.Referencia;
+            EventoId = model.EventoId;
+        }
     }
 }
