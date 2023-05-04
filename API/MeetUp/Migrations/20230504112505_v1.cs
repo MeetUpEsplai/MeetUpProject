@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MeetUp.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace MeetUp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -31,7 +31,7 @@ namespace MeetUp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,8 +44,8 @@ namespace MeetUp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Emoji = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Emoji = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,10 +58,10 @@ namespace MeetUp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -99,13 +99,12 @@ namespace MeetUp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     FechaEvento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Precio = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Coordenadas = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CiudadProxima = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdUsuario = table.Column<int>(type: "int", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Coordenadas = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    CiudadProxima = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -126,10 +125,8 @@ namespace MeetUp.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Texto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdChat = table.Column<int>(type: "int", nullable: false),
+                    Texto = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     ChatId = table.Column<int>(type: "int", nullable: false),
-                    IdUsuario = table.Column<int>(type: "int", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -156,10 +153,9 @@ namespace MeetUp.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Texto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuario = table.Column<int>(type: "int", nullable: false),
-                    IdEvento = table.Column<int>(type: "int", nullable: true),
-                    IdComentarioPadre = table.Column<int>(type: "int", nullable: true),
+                    Texto = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    EventoId = table.Column<int>(type: "int", nullable: false),
                     ComentarioPadreId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -171,16 +167,17 @@ namespace MeetUp.Migrations
                         principalTable: "Comentarios",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Comentarios_Events_IdEvento",
-                        column: x => x.IdEvento,
+                        name: "FK_Comentarios_Events_EventoId",
+                        column: x => x.EventoId,
                         principalTable: "Events",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Comentarios_Usuarios_IdUsuario",
-                        column: x => x.IdUsuario,
-                        principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comentarios_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -213,8 +210,7 @@ namespace MeetUp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Referencia = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdEvento = table.Column<int>(type: "int", nullable: false),
+                    Referencia = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     EventoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -234,29 +230,28 @@ namespace MeetUp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdEvento = table.Column<int>(type: "int", nullable: false),
-                    IdUsuario = table.Column<int>(type: "int", nullable: false),
-                    IdTipoReaccion = table.Column<int>(type: "int", nullable: false),
-                    IdReaccion = table.Column<int>(type: "int", nullable: false)
+                    EventoId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    TipoReaccionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UsuariosaEventos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UsuariosaEventos_Events_IdEvento",
-                        column: x => x.IdEvento,
+                        name: "FK_UsuariosaEventos_Events_EventoId",
+                        column: x => x.EventoId,
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsuariosaEventos_TipoReacciones_IdReaccion",
-                        column: x => x.IdReaccion,
+                        name: "FK_UsuariosaEventos_TipoReacciones_TipoReaccionId",
+                        column: x => x.TipoReaccionId,
                         principalTable: "TipoReacciones",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_UsuariosaEventos_Usuarios_IdUsuario",
-                        column: x => x.IdUsuario,
+                        name: "FK_UsuariosaEventos_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -268,21 +263,21 @@ namespace MeetUp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdEvento = table.Column<int>(type: "int", nullable: false),
-                    IdUsuario = table.Column<int>(type: "int", nullable: false)
+                    EventoId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UsuarioSuscribeEvento", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UsuarioSuscribeEvento_Events_IdEvento",
-                        column: x => x.IdEvento,
+                        name: "FK_UsuarioSuscribeEvento_Events_EventoId",
+                        column: x => x.EventoId,
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsuarioSuscribeEvento_Usuarios_IdUsuario",
-                        column: x => x.IdUsuario,
+                        name: "FK_UsuarioSuscribeEvento_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -294,29 +289,28 @@ namespace MeetUp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdMensaje = table.Column<int>(type: "int", nullable: false),
-                    IdUsuario = table.Column<int>(type: "int", nullable: false),
-                    IdTipoReaccion = table.Column<int>(type: "int", nullable: false),
-                    IdReaccion = table.Column<int>(type: "int", nullable: false)
+                    MensajeId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    TipoReaccionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UsuariosMensajes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UsuariosMensajes_Mensajes_IdMensaje",
-                        column: x => x.IdMensaje,
+                        name: "FK_UsuariosMensajes_Mensajes_MensajeId",
+                        column: x => x.MensajeId,
                         principalTable: "Mensajes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsuariosMensajes_TipoReacciones_IdReaccion",
-                        column: x => x.IdReaccion,
+                        name: "FK_UsuariosMensajes_TipoReacciones_TipoReaccionId",
+                        column: x => x.TipoReaccionId,
                         principalTable: "TipoReacciones",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_UsuariosMensajes_Usuarios_IdUsuario",
-                        column: x => x.IdUsuario,
+                        name: "FK_UsuariosMensajes_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -328,29 +322,28 @@ namespace MeetUp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdComentario = table.Column<int>(type: "int", nullable: false),
-                    IdUsuario = table.Column<int>(type: "int", nullable: false),
-                    IdTipoReaccion = table.Column<int>(type: "int", nullable: false),
-                    IdReaccion = table.Column<int>(type: "int", nullable: false)
+                    ComentarioId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    TipoReaccionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UsuariosComentarios", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UsuariosComentarios_Comentarios_IdComentario",
-                        column: x => x.IdComentario,
+                        name: "FK_UsuariosComentarios_Comentarios_ComentarioId",
+                        column: x => x.ComentarioId,
                         principalTable: "Comentarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsuariosComentarios_TipoReacciones_IdReaccion",
-                        column: x => x.IdReaccion,
+                        name: "FK_UsuariosComentarios_TipoReacciones_TipoReaccionId",
+                        column: x => x.TipoReaccionId,
                         principalTable: "TipoReacciones",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_UsuariosComentarios_Usuarios_IdUsuario",
-                        column: x => x.IdUsuario,
+                        name: "FK_UsuariosComentarios_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -367,14 +360,14 @@ namespace MeetUp.Migrations
                 column: "ComentarioPadreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comentarios_IdEvento",
+                name: "IX_Comentarios_EventoId",
                 table: "Comentarios",
-                column: "IdEvento");
+                column: "EventoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comentarios_IdUsuario",
+                name: "IX_Comentarios_UsuarioId",
                 table: "Comentarios",
-                column: "IdUsuario");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EtiquetaEvento_EventosId",
@@ -402,59 +395,59 @@ namespace MeetUp.Migrations
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsuariosaEventos_IdEvento",
+                name: "IX_UsuariosaEventos_EventoId",
                 table: "UsuariosaEventos",
-                column: "IdEvento");
+                column: "EventoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsuariosaEventos_IdReaccion",
+                name: "IX_UsuariosaEventos_TipoReaccionId",
                 table: "UsuariosaEventos",
-                column: "IdReaccion");
+                column: "TipoReaccionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsuariosaEventos_IdUsuario",
+                name: "IX_UsuariosaEventos_UsuarioId",
                 table: "UsuariosaEventos",
-                column: "IdUsuario");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsuariosComentarios_IdComentario",
+                name: "IX_UsuariosComentarios_ComentarioId",
                 table: "UsuariosComentarios",
-                column: "IdComentario");
+                column: "ComentarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsuariosComentarios_IdReaccion",
+                name: "IX_UsuariosComentarios_TipoReaccionId",
                 table: "UsuariosComentarios",
-                column: "IdReaccion");
+                column: "TipoReaccionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsuariosComentarios_IdUsuario",
+                name: "IX_UsuariosComentarios_UsuarioId",
                 table: "UsuariosComentarios",
-                column: "IdUsuario");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsuariosMensajes_IdMensaje",
+                name: "IX_UsuariosMensajes_MensajeId",
                 table: "UsuariosMensajes",
-                column: "IdMensaje");
+                column: "MensajeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsuariosMensajes_IdReaccion",
+                name: "IX_UsuariosMensajes_TipoReaccionId",
                 table: "UsuariosMensajes",
-                column: "IdReaccion");
+                column: "TipoReaccionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsuariosMensajes_IdUsuario",
+                name: "IX_UsuariosMensajes_UsuarioId",
                 table: "UsuariosMensajes",
-                column: "IdUsuario");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsuarioSuscribeEvento_IdEvento",
+                name: "IX_UsuarioSuscribeEvento_EventoId",
                 table: "UsuarioSuscribeEvento",
-                column: "IdEvento");
+                column: "EventoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsuarioSuscribeEvento_IdUsuario",
+                name: "IX_UsuarioSuscribeEvento_UsuarioId",
                 table: "UsuarioSuscribeEvento",
-                column: "IdUsuario");
+                column: "UsuarioId");
         }
 
         /// <inheritdoc />

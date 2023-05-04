@@ -435,7 +435,7 @@ namespace MeetUp.Migrations
                     b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
                         .WithMany("Comentarios")
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ComentarioPadre");

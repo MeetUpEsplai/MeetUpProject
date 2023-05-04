@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeetUp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230504092727_v3")]
-    partial class v3
+    [Migration("20230504112505_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,30 +87,28 @@ namespace MeetUp.Migrations
                     b.Property<int?>("ComentarioPadreId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("EventoId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("IdComentarioPadre")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdEvento")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUsuario")
-                        .HasColumnType("int");
 
                     b.Property<string>("Texto")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ComentarioPadreId");
 
-                    b.HasIndex("IdEvento");
+                    b.HasIndex("EventoId");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Comentarios");
                 });
@@ -187,9 +185,6 @@ namespace MeetUp.Migrations
                     b.Property<int>("EventoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdEvento")
-                        .HasColumnType("int");
-
                     b.Property<string>("Referencia")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -210,24 +205,18 @@ namespace MeetUp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ChatId")
+                    b.Property<int>("ChatId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IdChat")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUsuario")
-                        .HasColumnType("int");
 
                     b.Property<string>("Texto")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int?>("UsuarioId")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -305,25 +294,22 @@ namespace MeetUp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IdComentario")
+                    b.Property<int>("ComentarioId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdReaccion")
+                    b.Property<int>("TipoReaccionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdTipoReaccion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUsuario")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdComentario");
+                    b.HasIndex("ComentarioId");
 
-                    b.HasIndex("IdReaccion");
+                    b.HasIndex("TipoReaccionId");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("UsuariosComentarios");
                 });
@@ -336,25 +322,22 @@ namespace MeetUp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IdEvento")
+                    b.Property<int>("EventoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdReaccion")
+                    b.Property<int>("TipoReaccionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdTipoReaccion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUsuario")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdEvento");
+                    b.HasIndex("EventoId");
 
-                    b.HasIndex("IdReaccion");
+                    b.HasIndex("TipoReaccionId");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("UsuariosaEventos");
                 });
@@ -367,25 +350,22 @@ namespace MeetUp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IdMensaje")
+                    b.Property<int>("MensajeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdReaccion")
+                    b.Property<int>("TipoReaccionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdTipoReaccion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUsuario")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdMensaje");
+                    b.HasIndex("MensajeId");
 
-                    b.HasIndex("IdReaccion");
+                    b.HasIndex("TipoReaccionId");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("UsuariosMensajes");
                 });
@@ -398,17 +378,17 @@ namespace MeetUp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IdEvento")
+                    b.Property<int>("EventoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdUsuario")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdEvento");
+                    b.HasIndex("EventoId");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("UsuarioSuscribeEvento");
                 });
@@ -451,12 +431,14 @@ namespace MeetUp.Migrations
 
                     b.HasOne("MeetUp.Modelos.Evento", "Evento")
                         .WithMany("Comentarios")
-                        .HasForeignKey("IdEvento");
+                        .HasForeignKey("EventoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
                         .WithMany("Comentarios")
-                        .HasForeignKey("IdUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ComentarioPadre");
@@ -492,11 +474,15 @@ namespace MeetUp.Migrations
                 {
                     b.HasOne("MeetUp.Modelos.Chat", "Chat")
                         .WithMany("Mensaje")
-                        .HasForeignKey("ChatId");
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
                         .WithMany("Mensajes")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Chat");
 
@@ -507,19 +493,19 @@ namespace MeetUp.Migrations
                 {
                     b.HasOne("MeetUp.Modelos.Comentario", "Comentario")
                         .WithMany("Reacciones")
-                        .HasForeignKey("IdComentario")
+                        .HasForeignKey("ComentarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MeetUp.Modelos.TipoReaccion", "TipoReaccion")
                         .WithMany("ReaccionesComentarios")
-                        .HasForeignKey("IdReaccion")
+                        .HasForeignKey("TipoReaccionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
                         .WithMany("ReaccionesComentarios")
-                        .HasForeignKey("IdUsuario")
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -534,19 +520,19 @@ namespace MeetUp.Migrations
                 {
                     b.HasOne("MeetUp.Modelos.Evento", "Evento")
                         .WithMany("Reacciones")
-                        .HasForeignKey("IdEvento")
+                        .HasForeignKey("EventoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MeetUp.Modelos.TipoReaccion", "TipoReaccion")
                         .WithMany("ReaccionesEventos")
-                        .HasForeignKey("IdReaccion")
+                        .HasForeignKey("TipoReaccionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
                         .WithMany("ReaccionesEventos")
-                        .HasForeignKey("IdUsuario")
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -561,19 +547,19 @@ namespace MeetUp.Migrations
                 {
                     b.HasOne("MeetUp.Modelos.Mensaje", "Mensaje")
                         .WithMany("Reacciones")
-                        .HasForeignKey("IdMensaje")
+                        .HasForeignKey("MensajeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MeetUp.Modelos.TipoReaccion", "TipoReaccion")
                         .WithMany("ReaccionesMensajes")
-                        .HasForeignKey("IdReaccion")
+                        .HasForeignKey("TipoReaccionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
                         .WithMany("ReaccionesMensajes")
-                        .HasForeignKey("IdUsuario")
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -588,13 +574,13 @@ namespace MeetUp.Migrations
                 {
                     b.HasOne("MeetUp.Modelos.Evento", "Evento")
                         .WithMany("UsuariosSuscritos")
-                        .HasForeignKey("IdEvento")
+                        .HasForeignKey("EventoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
                         .WithMany("EventosSuscritos")
-                        .HasForeignKey("IdUsuario")
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

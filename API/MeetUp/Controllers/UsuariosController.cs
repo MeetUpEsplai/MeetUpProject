@@ -22,34 +22,27 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
-        // GET: api/Usuarios
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
-        {
-          if (_context.Usuarios == null)
-          {
-              return NotFound();
-          }
-            return await _context.Usuarios.ToListAsync();
-        }
 
-        // GET: api/Usuarios/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario>> GetUsuario(int id)
-        {
-          if (_context.Usuarios == null)
-          {
-              return NotFound();
-          }
-            var usuario = await _context.Usuarios.FindAsync(id);
+        #region Post and Put
 
-            if (usuario == null)
+        // POST: api/Usuarios
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Usuario>> PostUsuario(UsuarioViewModel modelUsuario)
+        {
+            if (_context.Usuarios == null)
             {
-                return NotFound();
+                return Problem("Entity set 'ApplicationDbContext.Usuarios'  is null.");
             }
+            Usuario usuario = new Usuario();
+            usuario.AddModelInfo(modelUsuario);
 
-            return usuario;
+            _context.Usuarios.Add(usuario);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
         }
+
 
         // PUT: api/Usuarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -82,23 +75,45 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuario(UsuarioViewModel modelUsuario)
+        #endregion
+
+
+        #region Get
+
+        // GET: api/Usuarios/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
-          if (_context.Usuarios == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Usuarios'  is null.");
-          }
-            Usuario usuario = new Usuario();
-            usuario.AddModelInfo(modelUsuario);
+            if (_context.Usuarios == null)
+            {
+                return NotFound();
+            }
+            var usuario = await _context.Usuarios.FindAsync(id);
 
-            _context.Usuarios.Add(usuario);
-            await _context.SaveChangesAsync();
+            if (usuario == null)
+            {
+                return NotFound();
+            }
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
+            return usuario;
         }
+
+
+        // GET: api/Usuarios
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
+        {
+            if (_context.Usuarios == null)
+            {
+                return NotFound();
+            }
+            return await _context.Usuarios.ToListAsync();
+        }
+
+        #endregion
+
+
+        #region Delete
 
         // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
@@ -119,6 +134,9 @@ namespace MeetUp.Controllers
 
             return NoContent();
         }
+
+        #endregion
+
 
         private bool UsuarioExists(int id)
         {
