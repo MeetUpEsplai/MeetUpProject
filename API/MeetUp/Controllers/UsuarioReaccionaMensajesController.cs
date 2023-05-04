@@ -110,6 +110,19 @@ namespace MeetUp.Controllers
             return await _context.UsuariosMensajes.ToListAsync();
         }
 
+
+        // GET: api/UsuarioReaccionaComentarios/5
+        [HttpGet("IdMensaje{idMensaje}IdTipoReaccion{idTipoReaccion}")]
+        public async Task<ActionResult<int>> GetReaccionCount(int idMensaje, int idTipoReaccion)
+        {
+            if (_context.UsuariosMensajes == null)
+            {
+                return NotFound();
+            }
+
+            return _context.UsuariosMensajes.Count(urc => urc.TipoReaccionId == idTipoReaccion && urc.Mensaje.Id == idMensaje); ;
+        }
+
         #endregion
 
 

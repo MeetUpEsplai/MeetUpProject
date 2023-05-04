@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
 using MeetUp.Modelos;
 using MeetUp.Modelos.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace MeetUp.Controllers
 {
@@ -111,6 +112,19 @@ namespace MeetUp.Controllers
             return await _context.UsuariosComentarios.ToListAsync();
         }
 
+
+        // GET: api/UsuarioReaccionaComentarios/5
+        [HttpGet("IdComentario{idComentario}IdTipoReaccion{idTipoReaccion}")]
+        public async Task<ActionResult<int>> GetReaccionCount(int idComentario, int idTipoReaccion)
+        {
+            if (_context.UsuariosComentarios == null)
+            {
+                return NotFound();
+            }
+            
+
+            return _context.UsuariosComentarios.Count(urc => urc.TipoReaccionId == idTipoReaccion && urc.Comentario.Id == idComentario); ;
+        }
 
         #endregion
 

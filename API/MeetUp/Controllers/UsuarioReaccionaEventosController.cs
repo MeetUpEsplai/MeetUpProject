@@ -111,6 +111,19 @@ namespace MeetUp.Controllers
             return await _context.UsuariosaEventos.ToListAsync();
         }
 
+
+        // GET: api/UsuarioReaccionaComentarios/5
+        [HttpGet("IdEvento{idEvento}IdTipoReaccion{idTipoReaccion}")]
+        public async Task<ActionResult<int>> GetReaccionCount(int idEvento, int idTipoReaccion)
+        {
+            if (_context.UsuariosaEventos == null)
+            {
+                return NotFound();
+            }
+
+            return _context.UsuariosaEventos.Count(urc => urc.TipoReaccionId == idTipoReaccion && urc.Evento.Id == idEvento); ;
+        }
+
         #endregion
 
 
