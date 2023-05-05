@@ -1,0 +1,46 @@
+@import url('https://fonts.cdnfonts.com/css/tt-commons');
+
+*{
+  font-family: 'TT Commons', sans-serif;
+}
+
+body {
+  background:url(../img/imgInicio.jpg) fixed center;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+label{
+  display: inline-block;
+  width: 90px;
+}
+
+.card {
+  color: white;
+  padding: 4rem 3rem;
+  
+  border-radius: 1.5rem;
+  border: 1px solid transparent;
+
+  backdrop-filter: blur(0.5rem);
+  
+}
+
+.blur-effect{
+  background-color: rgba(255,255,255, 0.1);
+}
+
+button{
+  height: 70%;
+}
+
+h1{
+  font-size: 50px;
+}
+
+i{
+  color: white;
+}
+
+
