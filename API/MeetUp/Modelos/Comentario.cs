@@ -26,9 +26,9 @@ namespace MeetUp.Modelos
         public int? ComentarioPadreId { get; set; }
         public Comentario? ComentarioPadre { get; set; }
         [InverseProperty("ComentarioPadre")]
-        public ICollection<Comentario>? ComentariosHijos { get; set; }
+        public List<Comentario>? ComentariosHijos { get; set; }
         [InverseProperty("Comentario")]
-        public ICollection<UsuarioReaccionaComentario>? Reacciones { get; set; }
+        public List<UsuarioReaccionaComentario>? Reacciones { get; set; }
 
         public void AddModelInfo(ComentarioViewModel model)
         {

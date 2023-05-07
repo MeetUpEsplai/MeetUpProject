@@ -28,12 +28,12 @@ namespace MeetUp.Modelos
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
 
-        public ICollection<Foto>? Fotos { get; set; }
-        public ICollection<Comentario>? Comentarios { get; set; }
-        public ICollection<UsuarioSuscribeEvento>? UsuariosSuscritos { get; set; }
+        public List<Foto>? Fotos { get; set; }
+        public List<Comentario>? Comentarios { get; set; }
+        public List<UsuarioSuscribeEvento>? UsuariosSuscritos { get; set; }
         [InverseProperty("Evento")]
-        public ICollection<UsuarioReaccionaEvento>? Reacciones { get; set; }
-        public ICollection<Etiqueta>? Etiquetas { get; set; }
+        public List<UsuarioReaccionaEvento>? Reacciones { get; set; }
+        public List<Etiqueta>? Etiquetas { get; set; }
 
 
         public void AddModelInfo(EventoViewModel model)

@@ -2,7 +2,6 @@
 {
     public class UsuarioSuscribeEventoViewModel
     {
-        public int Id { get; set; }
 
         public int EventoId { get; set; }
 

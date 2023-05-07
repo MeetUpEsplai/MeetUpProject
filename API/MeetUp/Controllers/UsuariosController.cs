@@ -110,6 +110,17 @@ namespace MeetUp.Controllers
             return await _context.Usuarios.ToListAsync();
         }
 
+
+        [HttpGet("search{nombre}")]
+        public async Task<ActionResult<List<Usuario>>> BuscarUsuarioPorNombre(string nombre)
+        {
+            var usuario = await _context.Usuarios
+                .Where(e => e.Nombre.Contains(nombre))
+                .ToListAsync();
+
+            return usuario;
+        }
+
         #endregion
 
 

@@ -38,6 +38,16 @@ namespace MeetUp.Controllers
             Evento evento = new Evento();
             evento.AddModelInfo(model);
 
+            if (model.IdsEtiquetas != null)
+            {
+                evento.Etiquetas = new List<Etiqueta>();
+
+                foreach (int id in model.IdsEtiquetas)
+                {
+                    evento.Etiquetas.Add(_context.Etiquetas.Find(id));
+                }
+            }
+
             _context.Events.Add(evento);
             await _context.SaveChangesAsync();
 
@@ -109,6 +119,74 @@ namespace MeetUp.Controllers
                 return NotFound();
             }
             return await _context.Events.ToListAsync();
+        }
+
+        // GET: api/Eventos
+        [HttpGet("etiquetaId{id}")]
+        public async Task<ActionResult<IEnumerable<Evento>>> GetEventsByEtiqueta(int id)
+        {
+            if (_context.Events == null)
+            {
+                return NotFound();
+            }
+
+            if (_context.Etiquetas == null)
+            {
+                return NotFound();
+            }
+
+            var etiqueta = await _context.Etiquetas.FindAsync(id);
+
+            List<Evento> todosLosEventos = await _context.Events.ToListAsync();
+            List<Evento> eventosConEtiquetaCorrecta = new List<Evento>();
+
+            foreach (Evento evento in todosLosEventos)
+            {
+                if (evento.Etiquetas.Contains(etiqueta))
+                {
+                    eventosConEtiquetaCorrecta.Add(evento);
+                }
+            }
+
+            return eventosConEtiquetaCorrecta;
+        }
+
+
+        // GET: api/Eventos
+        [HttpGet("usuarioId{id}")]
+        public async Task<ActionResult<IEnumerable<Evento>>> GetEventsByUsuarioSuscrito(int id)
+        {
+            if (_context.Events == null)
+            {
+                return NotFound();
+            }
+
+            if (_context.Usuarios == null)
+            {
+                return NotFound();
+            }
+
+            var usuario = await _context.Usuarios.FindAsync(id);
+
+            List<Evento> eventosSuscritosPorUser = new List<Evento>();
+
+            foreach (UsuarioSuscribeEvento subscripciones in usuario.EventosSuscritos)
+            {
+                eventosSuscritosPorUser.Add(subscripciones.Evento);
+            }
+
+            return eventosSuscritosPorUser;
+        }
+
+
+        [HttpGet("search{nombre}")]
+        public async Task<ActionResult<List<Evento>>> BuscarEventosPorNombre(string nombre)
+        {
+            var eventos = await _context.Events
+                .Where(e => e.Nombre.Contains(nombre))
+                .ToListAsync();
+
+            return eventos;
         }
 
         #endregion

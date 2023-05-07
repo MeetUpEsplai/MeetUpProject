@@ -2,7 +2,6 @@
 {
     public class UsuarioReaccionaMensajeViewModel
     {
-        public int Id { get; set; }
 
         public int MensajeId { get; set; }
 

@@ -15,9 +15,9 @@ namespace MeetUp.Modelos
         public DateTime FechaCreacion { get; set; }
 
         [InverseProperty("Chat")]
-        public ICollection<Mensaje>? Mensaje { get; set;}
+        public List<Mensaje>? Mensaje { get; set;}
         [InverseProperty("Chats")]
-        public ICollection<Usuario> Usuarios { get; set; }
+        public List<Usuario> Usuarios { get; set; }
 
         public void AddModelInfo(ChatViewModel model)
         {

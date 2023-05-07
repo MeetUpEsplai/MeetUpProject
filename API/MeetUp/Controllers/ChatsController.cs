@@ -36,6 +36,16 @@ namespace MeetUp.Controllers
             Chat chat = new Chat();
             chat.AddModelInfo(chatModel);
 
+            if (chatModel.IdsUsuarios != null)
+            {
+                chat.Usuarios = new List<Usuario>();
+
+                foreach (int id in chatModel.IdsUsuarios)
+                {
+                    chat.Usuarios.Add(_context.Usuarios.Find(id));
+                }
+            }
+
             _context.Chats.Add(chat);
             await _context.SaveChangesAsync();
 

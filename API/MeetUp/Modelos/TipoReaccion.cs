@@ -15,10 +15,10 @@ namespace MeetUp.Modelos
         [StringLength(250)]
         public string Emoji { get; set; }
 
-        public ICollection<UsuarioReaccionaMensaje>? ReaccionesMensajes { get; set; }
+        public List<UsuarioReaccionaMensaje>? ReaccionesMensajes { get; set; }
         [InverseProperty("TipoReaccion")]
-        public ICollection<UsuarioReaccionaEvento>? ReaccionesEventos { get; set; }
-        public ICollection<UsuarioReaccionaComentario>? ReaccionesComentarios { get; set; }
+        public List<UsuarioReaccionaEvento>? ReaccionesEventos { get; set; }
+        public List<UsuarioReaccionaComentario>? ReaccionesComentarios { get; set; }
 
 
         public void AddModelInfo(TipoReaccionViewModel model)

@@ -17,7 +17,7 @@ namespace MeetUp.Modelos
         public int UsuarioId { get; set; }
         public Usuario? Usuario { get; set; }
 
-        public ICollection<UsuarioReaccionaMensaje>? Reacciones { get; set; }
+        public List<UsuarioReaccionaMensaje>? Reacciones { get; set; }
 
         public void AddModelInfo(MensajeViewModel model)
         {

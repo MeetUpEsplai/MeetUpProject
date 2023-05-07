@@ -11,7 +11,7 @@ namespace MeetUp.Modelos
         [StringLength(50)]
         public string Nombre { get; set; }
 
-        public ICollection<Evento>? Eventos { get; set; }
+        public List<Evento>? Eventos { get; set; }
 
         public void AddModelInfo(EtiquetaViewModel model)
         {

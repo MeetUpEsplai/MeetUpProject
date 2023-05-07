@@ -22,15 +22,15 @@ namespace MeetUp.Modelos
         public string Password { get; set; }
         public DateTime FechaNacimiento { get; set; }
 
-        public ICollection<Mensaje>? Mensajes { get; set; }
-        public ICollection<Comentario>? Comentarios { get; set; }
-        public ICollection<Evento>? EventosCreados { get; set; }
-        public ICollection<UsuarioSuscribeEvento>? EventosSuscritos { get; set; }
-        public ICollection<Chat>? Chats { get; set; }
-        public ICollection<UsuarioReaccionaMensaje>? ReaccionesMensajes { get; set; }
+        public List<Mensaje>? Mensajes { get; set; }
+        public List<Comentario>? Comentarios { get; set; }
+        public List<Evento>? EventosCreados { get; set; }
+        public List<UsuarioSuscribeEvento>? EventosSuscritos { get; set; }
+        public List<Chat>? Chats { get; set; }
+        public List<UsuarioReaccionaMensaje>? ReaccionesMensajes { get; set; }
         [InverseProperty("Usuario")]
-        public ICollection<UsuarioReaccionaEvento>? ReaccionesEventos { get; set; }
-        public ICollection<UsuarioReaccionaComentario>? ReaccionesComentarios { get; set; }
+        public List<UsuarioReaccionaEvento>? ReaccionesEventos { get; set; }
+        public List<UsuarioReaccionaComentario>? ReaccionesComentarios { get; set; }
 
 
         public void AddModelInfo(UsuarioViewModel model)
