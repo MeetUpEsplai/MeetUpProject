@@ -2,6 +2,7 @@
 {
     public class UsuarioReaccionaEventoViewModel
     {
+        public int Id { get; set; }
 
         public int EventoId { get; set; }
 

@@ -26,7 +26,7 @@ namespace MeetUp.Controllers
 
         // POST: api/Comentarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost()]
         public async Task<ActionResult<Comentario>> PostComentario(ComentarioViewModel model)
         {
             if (_context.Comentarios == null)
@@ -45,7 +45,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/Comentarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id_{id}")]
         public async Task<IActionResult> PutComentario(int id, ComentarioViewModel model)
         {
             if (id != model.Id)
@@ -82,7 +82,7 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Comentarios/5
-        [HttpGet("{id}")]
+        [HttpGet("id_{id}")]
         public async Task<ActionResult<Comentario>> GetComentario(int id)
         {
             if (_context.Comentarios == null)
@@ -101,7 +101,7 @@ namespace MeetUp.Controllers
 
 
         // GET: api/Comentarios
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<IEnumerable<Comentario>>> GetComentarios()
         {
             if (_context.Comentarios == null)
@@ -117,7 +117,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Comentarios/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteComentario(int id)
         {
             if (_context.Comentarios == null)

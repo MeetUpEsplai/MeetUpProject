@@ -5,6 +5,7 @@ namespace MeetUp.Modelos.ViewModels
 {
     public class ComentarioViewModel
     {
+        public int Id { get; set; }
         public DateTime FechaCreacion { get; set; }
 
         public string Texto { get; set; }

@@ -27,7 +27,7 @@ namespace MeetUp.Controllers
 
         // POST: api/Eventos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost()]
         public async Task<ActionResult<Evento>> PostEvento(EventoViewModel model)
         {
             if (_context.Events == null)
@@ -57,7 +57,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/Eventos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id_{id}")]
         public async Task<IActionResult> PutEvento(int id, Evento evento)
         {
             if (id != evento.Id)
@@ -92,7 +92,7 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Eventos/5
-        [HttpGet("{id}")]
+        [HttpGet("id_{id}")]
         public async Task<ActionResult<Evento>> GetEvento(int id)
         {
             if (_context.Events == null)
@@ -111,7 +111,7 @@ namespace MeetUp.Controllers
 
 
         // GET: api/Eventos
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<IEnumerable<Evento>>> GetEvents()
         {
             if (_context.Events == null)
@@ -122,7 +122,7 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/Eventos
-        [HttpGet("etiquetaId{id}")]
+        [HttpGet("etiquetaId_{id}")]
         public async Task<ActionResult<IEnumerable<Evento>>> GetEventsByEtiqueta(int id)
         {
             if (_context.Events == null)
@@ -153,7 +153,7 @@ namespace MeetUp.Controllers
 
 
         // GET: api/Eventos
-        [HttpGet("usuarioId{id}")]
+        [HttpGet("usuarioId_{id}")]
         public async Task<ActionResult<IEnumerable<Evento>>> GetEventsByUsuarioSuscrito(int id)
         {
             if (_context.Events == null)
@@ -179,7 +179,7 @@ namespace MeetUp.Controllers
         }
 
 
-        [HttpGet("search{nombre}")]
+        [HttpGet("nombre_{nombre}")]
         public async Task<ActionResult<List<Evento>>> BuscarEventosPorNombre(string nombre)
         {
             var eventos = await _context.Events
@@ -195,7 +195,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Eventos/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteEvento(int id)
         {
             if (_context.Events == null)

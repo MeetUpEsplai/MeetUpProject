@@ -46,7 +46,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/Usuarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id_{id}")]
         public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
         {
             if (id != usuario.Id)
@@ -81,7 +81,7 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Usuarios/5
-        [HttpGet("{id}")]
+        [HttpGet("id_{id}")]
         public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
             if (_context.Usuarios == null)
@@ -111,7 +111,7 @@ namespace MeetUp.Controllers
         }
 
 
-        [HttpGet("search{nombre}")]
+        [HttpGet("nombre_{nombre}")]
         public async Task<ActionResult<List<Usuario>>> BuscarUsuarioPorNombre(string nombre)
         {
             var usuario = await _context.Usuarios
@@ -127,7 +127,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Usuarios/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteUsuario(int id)
         {
             if (_context.Usuarios == null)

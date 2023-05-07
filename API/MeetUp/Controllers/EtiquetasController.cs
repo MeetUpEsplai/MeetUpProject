@@ -26,7 +26,7 @@ namespace MeetUp.Controllers
 
         // POST: api/Etiquetas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost()]
         public async Task<ActionResult<Etiqueta>> PostEtiqueta(EtiquetaViewModel model)
         {
             if (_context.Etiquetas == null)
@@ -45,7 +45,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/Etiquetas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id_{id}")]
         public async Task<IActionResult> PutEtiqueta(int id, Etiqueta etiqueta)
         {
             if (id != etiqueta.Id)
@@ -80,7 +80,7 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Etiquetas/5
-        [HttpGet("{id}")]
+        [HttpGet("id_{id}")]
         public async Task<ActionResult<Etiqueta>> GetEtiqueta(int id)
         {
             if (_context.Etiquetas == null)
@@ -99,7 +99,7 @@ namespace MeetUp.Controllers
 
 
         // GET: api/Etiquetas
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<IEnumerable<Etiqueta>>> GetEtiquetas()
         {
             if (_context.Etiquetas == null)
@@ -115,7 +115,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Etiquetas/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteEtiqueta(int id)
         {
             if (_context.Etiquetas == null)

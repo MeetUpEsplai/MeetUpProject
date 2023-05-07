@@ -27,7 +27,7 @@ namespace MeetUp.Controllers
 
         // POST: api/TipoReacciones
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost()]
         public async Task<ActionResult<TipoReaccion>> PostTipoReaccion(TipoReaccionViewModel model)
         {
             if (_context.TipoReacciones == null)
@@ -46,7 +46,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/TipoReacciones/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id_{id}")]
         public async Task<IActionResult> PutTipoReaccion(int id, TipoReaccion tipoReaccion)
         {
             if (id != tipoReaccion.Id)
@@ -81,7 +81,7 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/TipoReacciones/5
-        [HttpGet("{id}")]
+        [HttpGet("id_{id}")]
         public async Task<ActionResult<TipoReaccion>> GetTipoReaccion(int id)
         {
             if (_context.TipoReacciones == null)
@@ -100,7 +100,7 @@ namespace MeetUp.Controllers
 
 
         // GET: api/TipoReacciones
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<IEnumerable<TipoReaccion>>> GetTipoReacciones()
         {
             if (_context.TipoReacciones == null)
@@ -116,7 +116,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/TipoReacciones/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteTipoReaccion(int id)
         {
             if (_context.TipoReacciones == null)

@@ -46,7 +46,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/UsuarioReaccionaMensajes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id_{id}")]
         public async Task<IActionResult> PutUsuarioReaccionaMensaje(int id, UsuarioReaccionaMensaje usuarioReaccionaMensaje)
         {
             if (id != usuarioReaccionaMensaje.Id)
@@ -81,7 +81,7 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/UsuarioReaccionaMensajes/5
-        [HttpGet("{id}")]
+        [HttpGet("id_{id}")]
         public async Task<ActionResult<UsuarioReaccionaMensaje>> GetUsuarioReaccionaMensaje(int id)
         {
             if (_context.UsuariosMensajes == null)
@@ -112,15 +112,31 @@ namespace MeetUp.Controllers
 
 
         // GET: api/UsuarioReaccionaComentarios/5
-        [HttpGet("IdMensaje{idMensaje}IdTipoReaccion{idTipoReaccion}")]
-        public async Task<ActionResult<int>> GetReaccionCount(int idMensaje, int idTipoReaccion)
+        [HttpGet("usuarioId_{usuarioId},mensajeId_{mensajeId},tipoReaccionId_{tipoReaccionId}")]
+        public async Task<ActionResult<UsuarioReaccionaMensaje>> GetUsuarioReaccionaMensaje(int usuarioId, int mensajeId, int tipoReaccionId)
+        {
+            var usuarioReaccionaEvento = await _context.UsuariosMensajes
+                .FirstOrDefaultAsync(u => u.UsuarioId == usuarioId && u.MensajeId == mensajeId && u.TipoReaccionId == tipoReaccionId);
+
+            if (usuarioReaccionaEvento == null)
+            {
+                return NotFound();
+            }
+
+            return usuarioReaccionaEvento;
+        }
+
+
+        // GET: api/UsuarioReaccionaComentarios/5
+        [HttpGet("mensajeId_{mensajeId},tipoReaccionId_{tipoReaccionId}")]
+        public async Task<ActionResult<int>> GetReaccionCount(int mensajeId, int tipoReaccionId)
         {
             if (_context.UsuariosMensajes == null)
             {
                 return NotFound();
             }
 
-            return _context.UsuariosMensajes.Count(urc => urc.TipoReaccionId == idTipoReaccion && urc.Mensaje.Id == idMensaje); ;
+            return _context.UsuariosMensajes.Count(urc => urc.TipoReaccionId == tipoReaccionId && urc.Mensaje.Id == mensajeId); ;
         }
 
         #endregion
@@ -130,7 +146,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/UsuarioReaccionaMensajes/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteUsuarioReaccionaMensaje(int id)
         {
             if (_context.UsuariosMensajes == null)

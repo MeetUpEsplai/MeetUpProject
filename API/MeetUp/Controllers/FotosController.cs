@@ -27,7 +27,7 @@ namespace MeetUp.Controllers
 
         // POST: api/Fotos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost()]
         public async Task<ActionResult<Foto>> PostFoto(FotoViewModel model)
         {
             if (_context.Fotos == null)
@@ -46,7 +46,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/Fotos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id_{id}")]
         public async Task<IActionResult> PutFoto(int id, Foto foto)
         {
             if (id != foto.Id)
@@ -81,7 +81,7 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Fotos/5
-        [HttpGet("{id}")]
+        [HttpGet("id_{id}")]
         public async Task<ActionResult<Foto>> GetFoto(int id)
         {
             if (_context.Fotos == null)
@@ -100,7 +100,7 @@ namespace MeetUp.Controllers
 
 
         // GET: api/Fotos
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<IEnumerable<Foto>>> GetFotos()
         {
             if (_context.Fotos == null)
@@ -116,7 +116,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Fotos/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteFoto(int id)
         {
             if (_context.Fotos == null)

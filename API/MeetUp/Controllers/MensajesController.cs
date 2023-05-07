@@ -27,7 +27,7 @@ namespace MeetUp.Controllers
 
         // POST: api/Mensajes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost()]
         public async Task<ActionResult<Mensaje>> PostMensaje(MensajeViewModel model)
         {
             if (_context.Mensajes == null)
@@ -46,7 +46,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/Mensajes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id_{id}")]
         public async Task<IActionResult> PutMensaje(int id, Mensaje mensaje)
         {
             if (id != mensaje.Id)
@@ -81,7 +81,7 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Mensajes/5
-        [HttpGet("{id}")]
+        [HttpGet("id_{id}")]
         public async Task<ActionResult<Mensaje>> GetMensaje(int id)
         {
             if (_context.Mensajes == null)
@@ -100,7 +100,7 @@ namespace MeetUp.Controllers
 
 
         // GET: api/Mensajes
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<IEnumerable<Mensaje>>> GetMensajes()
         {
             if (_context.Mensajes == null)
@@ -116,7 +116,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Mensajes/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteMensaje(int id)
         {
             if (_context.Mensajes == null)

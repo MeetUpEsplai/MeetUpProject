@@ -5,6 +5,7 @@ namespace MeetUp.Modelos.ViewModels
 {
     public class EventoViewModel
     {
+        public int Id { get; set; }
         [Required]
         [StringLength(250)]
         public string Nombre { get; set; }

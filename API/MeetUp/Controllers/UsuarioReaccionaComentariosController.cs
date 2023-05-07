@@ -48,7 +48,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/UsuarioReaccionaComentarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id_{id}")]
         public async Task<IActionResult> PutUsuarioReaccionaComentario(int id, UsuarioReaccionaComentario usuarioReaccionaComentario)
         {
             if (id != usuarioReaccionaComentario.Id)
@@ -83,7 +83,7 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/UsuarioReaccionaComentarios/5
-        [HttpGet("{id}")]
+        [HttpGet("id_{id}")]
         public async Task<ActionResult<UsuarioReaccionaComentario>> GetUsuarioReaccionaComentario(int id)
         {
             if (_context.UsuariosComentarios == null)
@@ -91,6 +91,22 @@ namespace MeetUp.Controllers
                 return NotFound();
             }
             var usuarioReaccionaComentario = await _context.UsuariosComentarios.FindAsync(id);
+
+            if (usuarioReaccionaComentario == null)
+            {
+                return NotFound();
+            }
+
+            return usuarioReaccionaComentario;
+        }
+
+
+        // GET: api/UsuarioReaccionaComentarios/5
+        [HttpGet("usuarioId_{usuarioId},comentarioId_{comentarioId},tipoReaccionId_{tipoReaccionId}")]
+        public async Task<ActionResult<UsuarioReaccionaComentario>> GetUsuarioReaccionaComentario(int usuarioId, int comentarioId, int tipoReaccionId)
+        {
+            var usuarioReaccionaComentario = await _context.UsuariosComentarios
+                .FirstOrDefaultAsync(u => u.UsuarioId == usuarioId && u.ComentarioId == comentarioId && u.TipoReaccionId == tipoReaccionId);
 
             if (usuarioReaccionaComentario == null)
             {
@@ -114,8 +130,8 @@ namespace MeetUp.Controllers
 
 
         // GET: api/UsuarioReaccionaComentarios/5
-        [HttpGet("IdComentario{idComentario}IdTipoReaccion{idTipoReaccion}")]
-        public async Task<ActionResult<int>> GetReaccionCount(int idComentario, int idTipoReaccion)
+        [HttpGet("comentarioId_{idComentario},tipoReaccionId_{tipoReaccionId}")]
+        public async Task<ActionResult<int>> GetReaccionCount(int idComentario, int tipoReaccionId)
         {
             if (_context.UsuariosComentarios == null)
             {
@@ -123,7 +139,7 @@ namespace MeetUp.Controllers
             }
             
 
-            return _context.UsuariosComentarios.Count(urc => urc.TipoReaccionId == idTipoReaccion && urc.Comentario.Id == idComentario); ;
+            return _context.UsuariosComentarios.Count(urc => urc.TipoReaccionId == tipoReaccionId && urc.Comentario.Id == idComentario); ;
         }
 
         #endregion
@@ -132,7 +148,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/UsuarioReaccionaComentarios/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteUsuarioReaccionaComentario(int id)
         {
             if (_context.UsuariosComentarios == null)

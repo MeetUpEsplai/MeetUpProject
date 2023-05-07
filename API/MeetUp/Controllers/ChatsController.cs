@@ -26,7 +26,7 @@ namespace MeetUp.Controllers
 
         // POST: api/Chats
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost()]
         public async Task<ActionResult<Chat>> PostChat(ChatViewModel chatModel)
         {
             if (_context.Chats == null)
@@ -55,7 +55,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/Chats/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id_{id}")]
         public async Task<IActionResult> PutChat(int id, Chat chat)
         {
             if (id != chat.Id)
@@ -90,7 +90,7 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Chats/5
-        [HttpGet("{id}")]
+        [HttpGet("id_{id}")]
         public async Task<ActionResult<Chat>> GetChat(int id)
         {
             if (_context.Chats == null)
@@ -109,7 +109,7 @@ namespace MeetUp.Controllers
 
 
         // GET: api/Chats
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<IEnumerable<Chat>>> GetChats()
         {
             if (_context.Chats == null)
@@ -126,7 +126,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Chats/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteChat(int id)
         {
             if (_context.Chats == null)

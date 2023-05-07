@@ -48,7 +48,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/UsuarioSuscribeEventos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id_{id}")]
         public async Task<IActionResult> PutUsuarioSuscribeEvento(int id, UsuarioSuscribeEvento usuarioSuscribeEvento)
         {
             if (id != usuarioSuscribeEvento.Id)
@@ -83,7 +83,7 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/UsuarioSuscribeEventos/5
-        [HttpGet("{id}")]
+        [HttpGet("id_{id}")]
         public async Task<ActionResult<UsuarioSuscribeEvento>> GetUsuarioSuscribeEvento(int id)
         {
             if (_context.UsuarioSuscribeEvento == null)
@@ -118,7 +118,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/UsuarioSuscribeEventos/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteUsuarioSuscribeEvento(int id)
         {
             if (_context.UsuarioSuscribeEvento == null)
