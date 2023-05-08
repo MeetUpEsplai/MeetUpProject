@@ -189,6 +189,21 @@ namespace MeetUp.Controllers
             return eventos;
         }
 
+
+        // GET: api/UsuarioReaccionaComentarios/5
+        [HttpGet("idEvento_{idEvento}")]
+        public async Task<ActionResult<int>> GetSuscritosCount(int idEvento)
+        {
+            var evento = _context.Events.FirstOrDefault(e => e.Id == idEvento);
+
+            if (evento == null)
+            {
+                return NotFound();
+            }
+
+            return evento.UsuariosSuscritos.Count;
+        }
+
         #endregion
 
 

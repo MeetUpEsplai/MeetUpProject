@@ -21,6 +21,8 @@ namespace MeetUp.Modelos
 
         [StringLength(100)]
         public string? Coordenadas { get; set; }
+        [StringLength(250)]
+        public string? ReferenciaFotoPrincipal { get; set; }
 
         [StringLength(50)]
         public string? CiudadProxima { get; set; } 
@@ -45,6 +47,7 @@ namespace MeetUp.Modelos
             Coordenadas = model.Coordenadas;
             CiudadProxima = model.CiudadProxima;
             UsuarioId = model.UsuarioId;
+            ReferenciaFotoPrincipal = model.ReferenciaFotoPrincipal;
         }
     }
 }

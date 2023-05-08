@@ -1,8 +1,9 @@
-export function GenerarEvetnos(arrayModelo) 
+export function GenerarEventos(arrayModelo) 
 {
     for (var i = 0; i < arrayModelo.length; i++) 
     {
-        modelo = arrayModelo[i];
+        modelo = arrayModelo[i].GetEvento();
+        count = arrayModelo[i].GetCount();
 
         var row = document.createElement("div"),
             containerImg = document.createElement("div"),
@@ -20,11 +21,11 @@ export function GenerarEvetnos(arrayModelo)
             containerData = "col-8 text-white";
 
             //Add Data
-            //Añadir imagen
+            img.src = modelo.GetFotoPrincipal();
             fecha = modelo.GetFechaEvento();
             titulo = modelo.GetNombre();
             descripcion = modelo.GetDescripcion();
-            //Num Asistentes
+            numAsistentes = count + " asistentes";
 
             //Asignar padre
             containerImg.appendChild(img);

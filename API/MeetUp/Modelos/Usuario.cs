@@ -21,6 +21,8 @@ namespace MeetUp.Modelos
         [StringLength(50)]
         public string Password { get; set; }
         public DateTime FechaNacimiento { get; set; }
+        [StringLength(250)]
+        public string? ReferenciaFoto { get; set; }
 
         public List<Mensaje>? Mensajes { get; set; }
         public List<Comentario>? Comentarios { get; set; }
@@ -40,6 +42,7 @@ namespace MeetUp.Modelos
             Email = model.Email;
             Password = model.Contrasena;
             FechaNacimiento = model.FechaNacimiento;
+            ReferenciaFoto = model.ReferenciaFoto;
         }
     }
 }

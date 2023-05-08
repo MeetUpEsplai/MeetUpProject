@@ -26,9 +26,9 @@ namespace MeetUp.Modelos.ViewModels
 
         [StringLength(50)]
         public string CiudadProxima { get; set; }
+        public string? ReferenciaFotoPrincipal { get; set; }
 
         public int UsuarioId { get; set; }
-
 
         public List<int>? IdsEtiquetas { get; set; }
     }

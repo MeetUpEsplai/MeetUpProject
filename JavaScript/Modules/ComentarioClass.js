@@ -1,7 +1,8 @@
 export class Comentario 
 {
-    constructor(fechaCreacion, texto, usuarioId, eventoId, comentarioPadreId) 
+    constructor(id, fechaCreacion, texto, usuarioId, eventoId, comentarioPadreId) 
     {
+        this.id = id;
         this.fechaCreacion = fechaCreacion;
         this.texto = texto;
         this.usuarioId = usuarioId;
@@ -9,6 +10,7 @@ export class Comentario
         this.comentarioPadreId = comentarioPadreId;
     }
 
+    GetId() { return this.id }
     GetTexto() { return this.texto; }
     GetFechaCreacion() { return this.fechaCreacion; }
     GetIdUsuario() { return this.usuarioId; }

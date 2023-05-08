@@ -121,6 +121,20 @@ namespace MeetUp.Controllers
             return usuario;
         }
 
+
+        [HttpGet("email_{email}")]
+        public async Task<ActionResult<Usuario>> BuscarUsuarioPorEmail(string email)
+        {
+            var usuarioEncontrado = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (usuarioEncontrado == null)
+            {
+                return NotFound();
+            }
+
+            return usuarioEncontrado;
+        }
+
         #endregion
 
 

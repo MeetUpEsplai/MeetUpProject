@@ -17,6 +17,7 @@ const SUSCRIPCION = "/UsuarioSuscribeEventos";
 
 const ID = "/id_";
 const NOMBRE = "nombre_"
+const EMAIL = "email_"
 const IDUSUARIO = "usuarioId_";
 const IDETIQUETA = "etiquetaId_";
 const IDEVENTO = "eventoId_";
@@ -55,6 +56,7 @@ export function GetAllEvento() { return GetAll(EVENTO); }
 export function GetEventoByUsuario(idUsuario) { return Get(EVENTO, IDUSUARIO + idUsuario); }
 export function GetEventoByEtiqueta(idEtiqueta) { return Get(EVENTO, IDETIQUETA + idEtiqueta); }
 export function GetEventoByNombre(nombre) { return Get(EVENTO, NOMBRE + nombre); }
+export function GetEventoCountSuscritos(idEvento) { return Get(EVENTO, IDEVENTO + idEvento); }
 export function DeleteEvento(idEvento) { return Delete(EVENTO, idEvento); }
 
 
@@ -99,6 +101,7 @@ export function PutUsuario(usuarioModel, idUsuario) { return Put(USUARIO, usuari
 export function GetUsuarioById(idUsuario) { return Get(USUARIO, ID + idUsuario); }
 export function GetAllUsuario() { return GetAll(USUARIO); }
 export function GetUsuarioByNombre(nombre) { return Get(USUARIO, NOMBRE + nombre); }
+export function GetUsuarioByEmail(email) { return Get(USUARIO, EMAIL + email); }
 export function DeleteUsuario(idUsuario) { return Delete(USUARIO, idUsuario); }
 
 

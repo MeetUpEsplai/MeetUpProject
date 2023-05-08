@@ -24,5 +24,6 @@ namespace MeetUp.Modelos.ViewModels
         [Required(ErrorMessage = "La fecha de nacimiento es obligatoria")]
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
+        public string? ReferenciaFoto { get; set; }
     }
 }
