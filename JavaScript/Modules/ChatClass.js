@@ -17,14 +17,16 @@ export class Chat
 
 export class ChatMini 
 {
-    constructor(chat, ultimoMensaje, userFoto) 
+    constructor(chatId, ultimoMensaje, userFoto, userName) 
     {
-        this.chat = chat;
+        this.chatId = chatId;
         this.ultimoMensaje = ultimoMensaje;
         this.userFoto = userFoto;
+        this.userName = userName;
     }
 
-    GetChat() { return this.chat; }
+    GetChatId() { return this.chatId; }
     GetUltimoMensaje() { return this.ultimoMensaje; }
     GetUserFoto() { return this.userFoto; }
+    GetUserName() { return this.userName; }
 }
