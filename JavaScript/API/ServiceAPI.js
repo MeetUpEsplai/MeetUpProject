@@ -15,7 +15,7 @@ const RMENSJAES = "/UsuarioReaccionaMensajes";
 const USUARIO = "/Usuarios";
 const SUSCRIPCION = "/UsuarioSuscribeEventos";
 
-const ID = "/id_";
+const ID = "id_";
 const NOMBRE = "nombre_"
 const EMAIL = "email_"
 const IDUSUARIO = "usuarioId_";
@@ -26,10 +26,10 @@ const IDCOMENTARIO = "comentarioId_";
 const IDMENSAJE = "mensajeId_";
 
 function Post(stringClase, modelo) { return setQuery(ROOT + stringClase, modelo); }
-function Put(stringClase, modelo, id) { return setQuery(ROOT + stringClase + ID + id, modelo); }
+function Put(stringClase, modelo, id) { return setQuery(ROOT + stringClase + "/" + ID + id, modelo); }
 function Get(stringClase, criterio) { return getQuery(ROOT + stringClase + "/" + criterio); }
 function GetAll(stringClase) { return getQuery(ROOT + stringClase); }
-function Delete(stringClase, id) { return getQuery(ROOT + stringClase + ID + id); }
+function Delete(stringClase, id) { return getQuery(ROOT + stringClase + "/" + ID + id); }
 
 
 //Crud Chat

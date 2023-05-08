@@ -1,9 +1,10 @@
-export function GenerarEventos(arrayModelo) 
+export function GenerarChats(arrayModelo) 
 {
     for (var i = 0; i < arrayModelo.length; i++) 
     {
-        var modelo = arrayModelo[i].GetEvento();
-        var count = arrayModelo[i].GetCount();
+        chat = arrayModelo[i].GetChat();
+        mensaje = arrayModelo[i].GetUltimoMensaje();
+        imgUserUrl = arrayModelo[i].GetUserFoto();
 
         var row = document.createElement("div"),
             containerImg = document.createElement("div"),
@@ -18,18 +19,17 @@ export function GenerarEventos(arrayModelo)
             row.className = "row";
             containerImg.className = "col-4";
             img.className = "rounded-3";
-            containerData.className  = "col-8 text-white";
+            containerData = "col-8 text-white";
 
             //Add Data
             if (modelo.GetFotoPrincipal() != null)
                 img.src = modelo.GetFotoPrincipal();
-            else 
+            else
                 img.src = "";
-                
-            fecha.innerHTML = modelo.GetFechaEvento();
-            titulo.innerHTML = modelo.GetNombre();
-            descripcion.innerHTML = modelo.GetDescripcion();
-            numAsistentes.innerHTML = count + " asistentes";
+            fecha = modelo.GetFechaEvento();
+            titulo = modelo.GetNombre();
+            descripcion = modelo.GetDescripcion();
+            numAsistentes = count + " asistentes";
 
             //Asignar padre
             containerImg.appendChild(img);

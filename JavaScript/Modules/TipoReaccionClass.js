@@ -1,4 +1,4 @@
-export class Tipo 
+export class TipoReaccion 
 {
     constructor(id, nombre, emoji) 
     {

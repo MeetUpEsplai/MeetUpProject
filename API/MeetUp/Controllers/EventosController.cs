@@ -145,9 +145,12 @@ namespace MeetUp.Controllers
 
             foreach (Evento evento in todosLosEventos)
             {
-                if (evento.Etiquetas.Contains(etiqueta))
+                if (evento.Etiquetas != null)
                 {
-                    eventosConEtiquetaCorrecta.Add(evento);
+                    if (evento.Etiquetas.Contains(etiqueta))
+                    {
+                        eventosConEtiquetaCorrecta.Add(evento);
+                    }
                 }
             }
 
@@ -194,8 +197,8 @@ namespace MeetUp.Controllers
 
 
         // GET: api/UsuarioReaccionaComentarios/5
-        [HttpGet("idEvento_{idEvento}")]
-        public async Task<ActionResult<int>> GetSuscritosCount(int idEvento)
+        [HttpGet("eventoId_{idEvento}")]
+        public async Task<ActionResult<int>>? GetSuscritosCount(int idEvento)
         {
             var evento = _context.Events.FirstOrDefault(e => e.Id == idEvento);
 
@@ -204,7 +207,10 @@ namespace MeetUp.Controllers
                 return NotFound();
             }
 
-            return evento.UsuariosSuscritos.Count;
+            if (evento.UsuariosSuscritos != null)
+                return evento.UsuariosSuscritos.Count;
+            else
+                return 0;
         }
 
         #endregion

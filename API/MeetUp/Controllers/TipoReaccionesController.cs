@@ -34,6 +34,7 @@ namespace MeetUp.Controllers
             {
                 return Problem("Entity set 'ApplicationDbContext.TipoReacciones'  is null.");
             }
+
             TipoReaccion tipoReaccion = new TipoReaccion();
             tipoReaccion.AddModelInfo(model);
 
