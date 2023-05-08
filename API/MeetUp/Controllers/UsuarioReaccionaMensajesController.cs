@@ -47,12 +47,15 @@ namespace MeetUp.Controllers
         // PUT: api/UsuarioReaccionaMensajes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutUsuarioReaccionaMensaje(int id, UsuarioReaccionaMensaje usuarioReaccionaMensaje)
+        public async Task<IActionResult> PutUsuarioReaccionaMensaje(int id, UsuarioReaccionaMensajeViewModel model)
         {
-            if (id != usuarioReaccionaMensaje.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
+
+            UsuarioReaccionaMensaje? usuarioReaccionaMensaje = _context.UsuariosMensajes.Find(id);
+            usuarioReaccionaMensaje.AddModelInfo(model);
 
             _context.Entry(usuarioReaccionaMensaje).State = EntityState.Modified;
 

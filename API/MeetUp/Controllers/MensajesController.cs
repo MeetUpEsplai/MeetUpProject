@@ -47,12 +47,16 @@ namespace MeetUp.Controllers
         // PUT: api/Mensajes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutMensaje(int id, Mensaje mensaje)
+        public async Task<IActionResult> PutMensaje(int id, MensajeViewModel model)
         {
-            if (id != mensaje.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
+
+            Mensaje? mensaje = _context.Mensajes.Find(id);
+            mensaje.AddModelInfo(model);
+
 
             _context.Entry(mensaje).State = EntityState.Modified;
 

@@ -47,12 +47,14 @@ namespace MeetUp.Controllers
         // PUT: api/Fotos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutFoto(int id, Foto foto)
+        public async Task<IActionResult> PutFoto(int id, FotoViewModel model)
         {
-            if (id != foto.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
+            Foto? foto = _context.Fotos.Find(id);
+            foto.AddModelInfo(model);
 
             _context.Entry(foto).State = EntityState.Modified;
 

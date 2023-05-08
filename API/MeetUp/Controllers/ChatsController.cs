@@ -56,12 +56,14 @@ namespace MeetUp.Controllers
         // PUT: api/Chats/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutChat(int id, Chat chat)
+        public async Task<IActionResult> PutChat(int id, ChatViewModel model)
         {
-            if (id != chat.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
+            Chat? chat = _context.Chats.Find(id);
+            chat.AddModelInfo(model);
 
             _context.Entry(chat).State = EntityState.Modified;
 

@@ -58,12 +58,15 @@ namespace MeetUp.Controllers
         // PUT: api/Eventos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutEvento(int id, Evento evento)
+        public async Task<IActionResult> PutEvento(int id, EventoViewModel model)
         {
-            if (id != evento.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
+
+            Evento? evento = _context.Events.Find(id);
+            evento.AddModelInfo(model);
 
             _context.Entry(evento).State = EntityState.Modified;
 

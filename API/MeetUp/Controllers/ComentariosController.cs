@@ -52,7 +52,7 @@ namespace MeetUp.Controllers
             {
                 return BadRequest();
             }
-            Comentario? comentario = GetComentario(id).Result.Value;
+            Comentario? comentario = _context.Comentarios.Find(id);
             comentario.AddModelInfo(model);
 
             _context.Entry(comentario).State = EntityState.Modified;

@@ -46,12 +46,14 @@ namespace MeetUp.Controllers
         // PUT: api/Etiquetas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutEtiqueta(int id, Etiqueta etiqueta)
+        public async Task<IActionResult> PutEtiqueta(int id, EtiquetaViewModel model)
         {
-            if (id != etiqueta.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
+            Etiqueta? etiqueta = _context.Etiquetas.Find(id);
+            etiqueta.AddModelInfo(model);
 
             _context.Entry(etiqueta).State = EntityState.Modified;
 

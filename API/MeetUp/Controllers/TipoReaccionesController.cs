@@ -47,12 +47,15 @@ namespace MeetUp.Controllers
         // PUT: api/TipoReacciones/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutTipoReaccion(int id, TipoReaccion tipoReaccion)
+        public async Task<IActionResult> PutTipoReaccion(int id, TipoReaccionViewModel model)
         {
-            if (id != tipoReaccion.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
+
+            TipoReaccion? tipoReaccion = _context.TipoReacciones.Find(id);
+            tipoReaccion.AddModelInfo(model);
 
             _context.Entry(tipoReaccion).State = EntityState.Modified;
 
