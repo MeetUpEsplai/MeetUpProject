@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
-using MeetUp.Modelos;
+using MeetUp.Modelos.Entidades;
 using MeetUp.Modelos.ViewModels;
 
 namespace MeetUp.Controllers
@@ -22,28 +22,47 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
+        #region Get
 
-        #region Post and Put
-
-        // POST: api/TipoReacciones
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost()]
-        public async Task<ActionResult<TipoReaccion>> PostTipoReaccion(TipoReaccionViewModel model)
+        // GET: api/TipoReacciones
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TipoReaccion>>> GetTipoReacciones()
         {
-            if (_context.TipoReacciones == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.TipoReacciones'  is null.");
-            }
-
-            TipoReaccion tipoReaccion = new TipoReaccion();
-            tipoReaccion.AddModelInfo(model);
-
-            _context.TipoReacciones.Add(tipoReaccion);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTipoReaccion", new { id = tipoReaccion.Id }, tipoReaccion);
+          if (_context.TipoReacciones == null)
+          {
+              return NotFound();
+          }
+            return await _context.TipoReacciones
+                .Include(x => x.UsuarioReaccionaComentarios)
+                .Include(x => x.UsuarioReaccionaEventos)
+                .ToListAsync();
         }
 
+        // GET: api/TipoReacciones/5
+        [HttpGet("id_{id}")]
+        public async Task<ActionResult<TipoReaccion>> GetTipoReaccion(int id)
+        {
+          if (_context.TipoReacciones == null)
+          {
+              return NotFound();
+          }
+            var tipoReaccion = await _context.TipoReacciones
+                .Include(x => x.UsuarioReaccionaComentarios)
+                .Include(x => x.UsuarioReaccionaEventos)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (tipoReaccion == null)
+            {
+                return NotFound();
+            }
+
+            return tipoReaccion;
+        }
+
+        #endregion
+
+        #region Post and Put
 
         // PUT: api/TipoReacciones/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -55,7 +74,7 @@ namespace MeetUp.Controllers
                 return BadRequest();
             }
 
-            TipoReaccion? tipoReaccion = _context.TipoReacciones.Find(id);
+            TipoReaccion tipoReaccion = await _context.TipoReacciones.Where(x => x.Id != id).FirstOrDefaultAsync();
             tipoReaccion.AddModelInfo(model);
 
             _context.Entry(tipoReaccion).State = EntityState.Modified;
@@ -79,39 +98,23 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        #endregion
-
-
-        #region Get
-
-        // GET: api/TipoReacciones/5
-        [HttpGet("id_{id}")]
-        public async Task<ActionResult<TipoReaccion>> GetTipoReaccion(int id)
+        // POST: api/TipoReacciones
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<TipoReaccion>> PostTipoReaccion(TipoReaccionViewModel model)
         {
-            if (_context.TipoReacciones == null)
-            {
-                return NotFound();
-            }
-            var tipoReaccion = await _context.TipoReacciones.FindAsync(id);
+          if (_context.TipoReacciones == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.TipoReacciones'  is null.");
+          }
 
-            if (tipoReaccion == null)
-            {
-                return NotFound();
-            }
+            TipoReaccion tipoReaccion = new TipoReaccion();
+            tipoReaccion.AddModelInfo(model);
 
-            return tipoReaccion;
-        }
+            _context.TipoReacciones.Add(tipoReaccion);
+            await _context.SaveChangesAsync();
 
-
-        // GET: api/TipoReacciones
-        [HttpGet()]
-        public async Task<ActionResult<IEnumerable<TipoReaccion>>> GetTipoReacciones()
-        {
-            if (_context.TipoReacciones == null)
-            {
-                return NotFound();
-            }
-            return await _context.TipoReacciones.ToListAsync();
+            return CreatedAtAction("GetTipoReaccion", new { id = tipoReaccion.Id }, tipoReaccion);
         }
 
         #endregion
@@ -140,7 +143,6 @@ namespace MeetUp.Controllers
         }
 
         #endregion
-
 
         private bool TipoReaccionExists(int id)
         {

@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
-using MeetUp.Modelos;
-using MeetUp.Modelos.ViewModels;
+using MeetUp.Modelos.Entidades;
 
 namespace MeetUp.Controllers
 {
@@ -22,41 +21,50 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
+        #region Get
 
-        #region Post and Put
-
-        // POST: api/Mensajes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost()]
-        public async Task<ActionResult<Mensaje>> PostMensaje(MensajeViewModel model)
+        // GET: api/Mensajes
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Mensaje>>> GetMensajes()
         {
-            if (_context.Mensajes == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Mensajes'  is null.");
-            }
-            Mensaje mensaje = new Mensaje();
-            mensaje.AddModelInfo(model);
-
-            _context.Mensajes.Add(mensaje);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetMensaje", new { id = mensaje.Id }, mensaje);
+          if (_context.Mensajes == null)
+          {
+              return NotFound();
+          }
+            return await _context.Mensajes.ToListAsync();
         }
 
+        // GET: api/Mensajes/5
+        [HttpGet("id_{id}")]
+        public async Task<ActionResult<Mensaje>> GetMensaje(int id)
+        {
+          if (_context.Mensajes == null)
+          {
+              return NotFound();
+          }
+            var mensaje = await _context.Mensajes.FindAsync(id);
+
+            if (mensaje == null)
+            {
+                return NotFound();
+            }
+
+            return mensaje;
+        }
+
+        #endregion
+
+        #region Post and Put
 
         // PUT: api/Mensajes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutMensaje(int id, MensajeViewModel model)
+        public async Task<IActionResult> PutMensaje(int id, Mensaje mensaje)
         {
-            if (id != model.Id)
+            if (id != mensaje.Id)
             {
                 return BadRequest();
             }
-
-            Mensaje? mensaje = _context.Mensajes.Find(id);
-            mensaje.AddModelInfo(model);
-
 
             _context.Entry(mensaje).State = EntityState.Modified;
 
@@ -79,39 +87,19 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        #endregion
-
-
-        #region Get
-
-        // GET: api/Mensajes/5
-        [HttpGet("id_{id}")]
-        public async Task<ActionResult<Mensaje>> GetMensaje(int id)
+        // POST: api/Mensajes
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Mensaje>> PostMensaje(Mensaje mensaje)
         {
-            if (_context.Mensajes == null)
-            {
-                return NotFound();
-            }
-            var mensaje = await _context.Mensajes.FindAsync(id);
+          if (_context.Mensajes == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.Mensajes'  is null.");
+          }
+            _context.Mensajes.Add(mensaje);
+            await _context.SaveChangesAsync();
 
-            if (mensaje == null)
-            {
-                return NotFound();
-            }
-
-            return mensaje;
-        }
-
-
-        // GET: api/Mensajes
-        [HttpGet()]
-        public async Task<ActionResult<IEnumerable<Mensaje>>> GetMensajes()
-        {
-            if (_context.Mensajes == null)
-            {
-                return NotFound();
-            }
-            return await _context.Mensajes.ToListAsync();
+            return CreatedAtAction("GetMensaje", new { id = mensaje.Id }, mensaje);
         }
 
         #endregion
@@ -140,7 +128,6 @@ namespace MeetUp.Controllers
         }
 
         #endregion
-
 
         private bool MensajeExists(int id)
         {

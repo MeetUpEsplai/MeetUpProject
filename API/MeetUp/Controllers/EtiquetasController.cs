@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
-using MeetUp.Modelos;
+using MeetUp.Modelos.Entidades;
 using MeetUp.Modelos.ViewModels;
 
 namespace MeetUp.Controllers
@@ -22,26 +22,46 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
-        #region Post and Put
+        #region Get
 
-        // POST: api/Etiquetas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost()]
-        public async Task<ActionResult<Etiqueta>> PostEtiqueta(EtiquetaViewModel model)
+        // GET: api/Etiquetas
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Etiqueta>>> GetEtiquetas()
         {
-            if (_context.Etiquetas == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Etiquetas'  is null.");
-            }
-            Etiqueta etiqueta = new Etiqueta();
-            etiqueta.AddModelInfo(model);
-
-            _context.Etiquetas.Add(etiqueta);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEtiqueta", new { id = etiqueta.Id }, etiqueta);
+          if (_context.Etiquetas == null)
+          {
+              return NotFound();
+          }
+            return await _context.Etiquetas
+                .Include(x => x.EventoEtiquetas)
+                .ToListAsync();
         }
 
+        // GET: api/Etiquetas/5
+        [HttpGet("id_{id}")]
+        public async Task<ActionResult<Etiqueta>> GetEtiqueta(int id)
+        {
+          if (_context.Etiquetas == null)
+          {
+              return NotFound();
+          }
+            var etiqueta = await _context.Etiquetas
+                .Include(x => x.EventoEtiquetas)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (etiqueta == null)
+            {
+                return NotFound();
+            }
+
+            return etiqueta;
+        }
+
+        #endregion
+
+
+        #region Post and Put
 
         // PUT: api/Etiquetas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -52,7 +72,8 @@ namespace MeetUp.Controllers
             {
                 return BadRequest();
             }
-            Etiqueta? etiqueta = _context.Etiquetas.Find(id);
+
+            Etiqueta etiqueta = _context.Etiquetas.Where(x => x.Id == id).FirstOrDefault();
             etiqueta.AddModelInfo(model);
 
             _context.Entry(etiqueta).State = EntityState.Modified;
@@ -76,39 +97,22 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        #endregion
-
-
-        #region Get
-
-        // GET: api/Etiquetas/5
-        [HttpGet("id_{id}")]
-        public async Task<ActionResult<Etiqueta>> GetEtiqueta(int id)
+        // POST: api/Etiquetas
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Etiqueta>> PostEtiqueta(EtiquetaViewModel model)
         {
-            if (_context.Etiquetas == null)
-            {
-                return NotFound();
-            }
-            var etiqueta = await _context.Etiquetas.FindAsync(id);
+          if (_context.Etiquetas == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.Etiquetas'  is null.");
+          }
+            Etiqueta etiqueta = new Etiqueta();
+            etiqueta.AddModelInfo(model);
 
-            if (etiqueta == null)
-            {
-                return NotFound();
-            }
+            _context.Etiquetas.Add(etiqueta);
+            await _context.SaveChangesAsync();
 
-            return etiqueta;
-        }
-
-
-        // GET: api/Etiquetas
-        [HttpGet()]
-        public async Task<ActionResult<IEnumerable<Etiqueta>>> GetEtiquetas()
-        {
-            if (_context.Etiquetas == null)
-            {
-                return NotFound();
-            }
-            return await _context.Etiquetas.ToListAsync();
+            return CreatedAtAction("GetEtiqueta", new { id = etiqueta.Id }, etiqueta);
         }
 
         #endregion
@@ -137,7 +141,6 @@ namespace MeetUp.Controllers
         }
 
         #endregion
-
 
         private bool EtiquetaExists(int id)
         {

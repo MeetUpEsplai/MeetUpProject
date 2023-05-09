@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
-using MeetUp.Modelos;
+using MeetUp.Modelos.Entidades;
 using MeetUp.Modelos.ViewModels;
-using System.Reflection.PortableExecutable;
 
 namespace MeetUp.Controllers
 {
@@ -23,76 +22,25 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
-
-        #region Post and Put
-
-        // POST: api/UsuarioSuscribeEventos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<UsuarioSuscribeEvento>> PostUsuarioSuscribeEvento(UsuarioSuscribeEventoViewModel model)
+        // GET: api/UsuarioSuscribeEventos
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UsuarioSuscribeEvento>>> GetUsuarioSuscribeEvento()
         {
-            if (_context.UsuarioSuscribeEvento == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.UsuarioSuscribeEvento'  is null.");
-            }
-
-            UsuarioSuscribeEvento suscripcion = new UsuarioSuscribeEvento();
-            suscripcion.AddModelInfo(model);
-
-            _context.UsuarioSuscribeEvento.Add(suscripcion);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUsuarioSuscribeEvento", new { id = suscripcion.Id }, suscripcion);
+          if (_context.UsuarioSuscribeEvento == null)
+          {
+              return NotFound();
+          }
+            return await _context.UsuarioSuscribeEvento.ToListAsync();
         }
-
-
-        // PUT: api/UsuarioSuscribeEventos/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutUsuarioSuscribeEvento(int id, UsuarioSuscribeEventoViewModel model)
-        {
-            if (id != model.Id)
-            {
-                return BadRequest();
-            }
-
-            UsuarioSuscribeEvento? usuarioSuscribeEvento = _context.UsuarioSuscribeEvento.Find(id);
-            usuarioSuscribeEvento.AddModelInfo(model);
-
-            _context.Entry(usuarioSuscribeEvento).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsuarioSuscribeEventoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        #endregion
-
-
-        #region Get
 
         // GET: api/UsuarioSuscribeEventos/5
         [HttpGet("id_{id}")]
         public async Task<ActionResult<UsuarioSuscribeEvento>> GetUsuarioSuscribeEvento(int id)
         {
-            if (_context.UsuarioSuscribeEvento == null)
-            {
-                return NotFound();
-            }
+          if (_context.UsuarioSuscribeEvento == null)
+          {
+              return NotFound();
+          }
             var usuarioSuscribeEvento = await _context.UsuarioSuscribeEvento.FindAsync(id);
 
             if (usuarioSuscribeEvento == null)
@@ -104,21 +52,36 @@ namespace MeetUp.Controllers
         }
 
 
-        // GET: api/UsuarioSuscribeEventos
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuarioSuscribeEvento>>> GetUsuarioSuscribeEvento()
+        // POST: api/UsuarioSuscribeEventos
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<UsuarioSuscribeEvento>> PostUsuarioSuscribeEvento(UsuarioSuscribeEvento usuarioSuscribeEvento)
         {
-            if (_context.UsuarioSuscribeEvento == null)
+          if (_context.UsuarioSuscribeEvento == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.UsuarioSuscribeEvento'  is null.");
+          }
+
+
+            _context.UsuarioSuscribeEvento.Add(usuarioSuscribeEvento);
+            try
             {
-                return NotFound();
+                await _context.SaveChangesAsync();
             }
-            return await _context.UsuarioSuscribeEvento.ToListAsync();
+            catch (DbUpdateException)
+            {
+                if (UsuarioSuscribeEventoExists(usuarioSuscribeEvento.UsuarioId))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetUsuarioSuscribeEvento", new { id = usuarioSuscribeEvento.UsuarioId }, usuarioSuscribeEvento);
         }
-
-        #endregion
-
-
-        #region Delete
 
         // DELETE: api/UsuarioSuscribeEventos/5
         [HttpDelete("id_{id}")]
@@ -140,12 +103,9 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        #endregion
-
-
         private bool UsuarioSuscribeEventoExists(int id)
         {
-            return (_context.UsuarioSuscribeEvento?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.UsuarioSuscribeEvento?.Any(e => e.UsuarioId == id)).GetValueOrDefault();
         }
     }
 }

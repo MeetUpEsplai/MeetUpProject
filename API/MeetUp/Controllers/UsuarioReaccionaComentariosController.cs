@@ -6,9 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
-using MeetUp.Modelos;
-using MeetUp.Modelos.ViewModels;
-using Microsoft.Extensions.Logging;
+using MeetUp.Modelos.Entidades;
 
 namespace MeetUp.Controllers
 {
@@ -23,41 +21,60 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
+        #region Get
 
-        #region Post and Put
+        // GET: api/UsuarioReaccionaComentarios
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UsuarioReaccionaComentario>>> GetUsuariosComentarios()
+        {
+          if (_context.UsuariosComentarios == null)
+          {
+              return NotFound();
+          }
+            return await _context.UsuariosComentarios.ToListAsync();
+        }
 
-        // POST: api/UsuarioReaccionaComentarios
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<UsuarioReaccionaComentario>> PostUsuarioReaccionaComentario(UsuarioReaccionaComentarioViewModel modelo)
+        // GET: api/UsuarioReaccionaComentarios/5
+        [HttpGet("usuarioId_{usuarioId},comentarioId_{comentarioId},tipoReaccionId_{tipoReaccionId}")]
+        public async Task<ActionResult<UsuarioReaccionaComentario>> GetUsuarioReaccionaComentario(int usuarioId, int comentarioId, int tipoReaccionId)
+        {
+            var usuarioReaccionaComentario = await _context.UsuariosComentarios
+                .FirstOrDefaultAsync(u => u.UsuarioId == usuarioId && u.ComentarioId == comentarioId && u.TipoReaccionId == tipoReaccionId);
+
+            if (usuarioReaccionaComentario == null)
+            {
+                return NotFound();
+            }
+
+            return usuarioReaccionaComentario;
+        }
+
+        // GET: api/UsuarioReaccionaComentarios/5
+        [HttpGet("comentarioId_{idComentario},tipoReaccionId_{tipoReaccionId}")]
+        public async Task<ActionResult<int>> GetReaccionCount(int idComentario, int tipoReaccionId)
         {
             if (_context.UsuariosComentarios == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.UsuariosComentarios'  is null.");
+                return NotFound();
             }
-            
-            UsuarioReaccionaComentario reaccion = new UsuarioReaccionaComentario();
-            reaccion.AddModelInfo(modelo);
 
-            _context.UsuariosComentarios.Add(reaccion);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuarioReaccionaComentario", new { id = reaccion.Id }, reaccion);
+            return _context.UsuariosComentarios.Count(urc => urc.TipoReaccionId == tipoReaccionId && urc.ComentarioId == idComentario); ;
         }
 
+        #endregion
+
+        #region Post and Put
 
         // PUT: api/UsuarioReaccionaComentarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutUsuarioReaccionaComentario(int id, UsuarioReaccionaComentarioViewModel model)
+        public async Task<IActionResult> PutUsuarioReaccionaComentario(int id, UsuarioReaccionaComentario usuarioReaccionaComentario)
         {
-            if (id != model.Id)
+            if (id != usuarioReaccionaComentario.UsuarioId)
             {
                 return BadRequest();
             }
-
-            UsuarioReaccionaComentario? usuarioReaccionaComentario = _context.UsuariosComentarios.Find(id);
-            usuarioReaccionaComentario.AddModelInfo(model);
 
             _context.Entry(usuarioReaccionaComentario).State = EntityState.Modified;
 
@@ -80,73 +97,36 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        #endregion
-
-
-        #region Get
-
-        // GET: api/UsuarioReaccionaComentarios/5
-        [HttpGet("id_{id}")]
-        public async Task<ActionResult<UsuarioReaccionaComentario>> GetUsuarioReaccionaComentario(int id)
+        // POST: api/UsuarioReaccionaComentarios
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<UsuarioReaccionaComentario>> PostUsuarioReaccionaComentario(UsuarioReaccionaComentario usuarioReaccionaComentario)
         {
-            if (_context.UsuariosComentarios == null)
+          if (_context.UsuariosComentarios == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.UsuariosComentarios'  is null.");
+          }
+            _context.UsuariosComentarios.Add(usuarioReaccionaComentario);
+            try
             {
-                return NotFound();
+                await _context.SaveChangesAsync();
             }
-            var usuarioReaccionaComentario = await _context.UsuariosComentarios.FindAsync(id);
-
-            if (usuarioReaccionaComentario == null)
+            catch (DbUpdateException)
             {
-                return NotFound();
-            }
-
-            return usuarioReaccionaComentario;
-        }
-
-
-        // GET: api/UsuarioReaccionaComentarios/5
-        [HttpGet("usuarioId_{usuarioId},comentarioId_{comentarioId},tipoReaccionId_{tipoReaccionId}")]
-        public async Task<ActionResult<UsuarioReaccionaComentario>> GetUsuarioReaccionaComentario(int usuarioId, int comentarioId, int tipoReaccionId)
-        {
-            var usuarioReaccionaComentario = await _context.UsuariosComentarios
-                .FirstOrDefaultAsync(u => u.UsuarioId == usuarioId && u.ComentarioId == comentarioId && u.TipoReaccionId == tipoReaccionId);
-
-            if (usuarioReaccionaComentario == null)
-            {
-                return NotFound();
+                if (UsuarioReaccionaComentarioExists(usuarioReaccionaComentario.UsuarioId))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
-            return usuarioReaccionaComentario;
-        }
-
-
-        // GET: api/UsuarioReaccionaComentarios
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuarioReaccionaComentario>>> GetUsuariosComentarios()
-        {
-            if (_context.UsuariosComentarios == null)
-            {
-                return NotFound();
-            }
-            return await _context.UsuariosComentarios.ToListAsync();
-        }
-
-
-        // GET: api/UsuarioReaccionaComentarios/5
-        [HttpGet("comentarioId_{idComentario},tipoReaccionId_{tipoReaccionId}")]
-        public async Task<ActionResult<int>> GetReaccionCount(int idComentario, int tipoReaccionId)
-        {
-            if (_context.UsuariosComentarios == null)
-            {
-                return NotFound();
-            }
-            
-
-            return _context.UsuariosComentarios.Count(urc => urc.TipoReaccionId == tipoReaccionId && urc.Comentario.Id == idComentario); ;
+            return CreatedAtAction("GetUsuarioReaccionaComentario", new { id = usuarioReaccionaComentario.UsuarioId }, usuarioReaccionaComentario);
         }
 
         #endregion
-
 
         #region Delete
 
@@ -172,10 +152,9 @@ namespace MeetUp.Controllers
 
         #endregion
 
-
         private bool UsuarioReaccionaComentarioExists(int id)
         {
-            return (_context.UsuariosComentarios?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.UsuariosComentarios?.Any(e => e.UsuarioId == id)).GetValueOrDefault();
         }
     }
 }

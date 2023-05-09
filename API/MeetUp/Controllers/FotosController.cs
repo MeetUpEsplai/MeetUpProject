@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
-using MeetUp.Modelos;
-using MeetUp.Modelos.ViewModels;
+using MeetUp.Modelos.Entidades;
 
 namespace MeetUp.Controllers
 {
@@ -22,39 +21,53 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
+        #region Get
 
-        #region Post and Put
-
-        // POST: api/Fotos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost()]
-        public async Task<ActionResult<Foto>> PostFoto(FotoViewModel model)
+        // GET: api/Fotos
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Foto>>> GetFotos()
         {
-            if (_context.Fotos == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Fotos'  is null.");
-            }
-            Foto foto = new Foto();
-            foto.AddModelInfo(model);
-
-            _context.Fotos.Add(foto);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetFoto", new { id = foto.Id }, foto);
+          if (_context.Fotos == null)
+          {
+              return NotFound();
+          }
+            return await _context.Fotos.ToListAsync();
         }
 
+       
+
+        // GET: api/Fotos/5
+        [HttpGet("id_{id}")]
+        public async Task<ActionResult<Foto>> GetFoto(int id)
+        {
+          if (_context.Fotos == null)
+          {
+              return NotFound();
+          }
+            var foto = await _context.Fotos.FindAsync(id);
+
+            if (foto == null)
+            {
+                return NotFound();
+            }
+
+            return foto;
+        }
+
+        #endregion
+
+
+        #region Post and Put
 
         // PUT: api/Fotos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutFoto(int id, FotoViewModel model)
+        public async Task<IActionResult> PutFoto(int id, Foto foto)
         {
-            if (id != model.Id)
+            if (id != foto.Id)
             {
                 return BadRequest();
             }
-            Foto? foto = _context.Fotos.Find(id);
-            foto.AddModelInfo(model);
 
             _context.Entry(foto).State = EntityState.Modified;
 
@@ -76,40 +89,21 @@ namespace MeetUp.Controllers
 
             return NoContent();
         }
+        
 
-        #endregion
-
-
-        #region Get
-
-        // GET: api/Fotos/5
-        [HttpGet("id_{id}")]
-        public async Task<ActionResult<Foto>> GetFoto(int id)
+        // POST: api/Fotos
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Foto>> PostFoto(Foto foto)
         {
-            if (_context.Fotos == null)
-            {
-                return NotFound();
-            }
-            var foto = await _context.Fotos.FindAsync(id);
+          if (_context.Fotos == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.Fotos'  is null.");
+          }
+            _context.Fotos.Add(foto);
+            await _context.SaveChangesAsync();
 
-            if (foto == null)
-            {
-                return NotFound();
-            }
-
-            return foto;
-        }
-
-
-        // GET: api/Fotos
-        [HttpGet()]
-        public async Task<ActionResult<IEnumerable<Foto>>> GetFotos()
-        {
-            if (_context.Fotos == null)
-            {
-                return NotFound();
-            }
-            return await _context.Fotos.ToListAsync();
+            return CreatedAtAction("GetFoto", new { id = foto.Id }, foto);
         }
 
         #endregion
@@ -138,7 +132,6 @@ namespace MeetUp.Controllers
         }
 
         #endregion
-
 
         private bool FotoExists(int id)
         {

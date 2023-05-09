@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeetUp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230508080645_v2")]
-    partial class v2
+    [Migration("20230509152602_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,37 +25,7 @@ namespace MeetUp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ChatUsuario", b =>
-                {
-                    b.Property<int>("ChatsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsuariosId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ChatsId", "UsuariosId");
-
-                    b.HasIndex("UsuariosId");
-
-                    b.ToTable("ChatUsuario");
-                });
-
-            modelBuilder.Entity("EtiquetaEvento", b =>
-                {
-                    b.Property<int>("EtiquetasId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EventosId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EtiquetasId", "EventosId");
-
-                    b.HasIndex("EventosId");
-
-                    b.ToTable("EtiquetaEvento");
-                });
-
-            modelBuilder.Entity("MeetUp.Modelos.Chat", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Chat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,7 +46,22 @@ namespace MeetUp.Migrations
                     b.ToTable("Chats");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.Comentario", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.ChatUsuarios", b =>
+                {
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ChatId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UsuarioId", "ChatId");
+
+                    b.HasIndex("ChatId");
+
+                    b.ToTable("ChatUsuarios");
+                });
+
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Comentario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,11 +69,13 @@ namespace MeetUp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ComentarioId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ComentarioPadreId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EventoId")
-                        .IsRequired()
+                    b.Property<int>("EventoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FechaCreacion")
@@ -104,7 +91,7 @@ namespace MeetUp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ComentarioPadreId");
+                    b.HasIndex("ComentarioId");
 
                     b.HasIndex("EventoId");
 
@@ -113,7 +100,7 @@ namespace MeetUp.Migrations
                     b.ToTable("Comentarios");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.Etiqueta", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Etiqueta", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -131,7 +118,7 @@ namespace MeetUp.Migrations
                     b.ToTable("Etiquetas");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.Evento", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Evento", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -178,7 +165,22 @@ namespace MeetUp.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.Foto", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.EventoEtiquetas", b =>
+                {
+                    b.Property<int>("EtiquetaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EventoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EtiquetaId", "EventoId");
+
+                    b.HasIndex("EventoId");
+
+                    b.ToTable("EventoEtiquetas");
+                });
+
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Foto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -201,7 +203,7 @@ namespace MeetUp.Migrations
                     b.ToTable("Fotos");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.Mensaje", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Mensaje", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -232,7 +234,7 @@ namespace MeetUp.Migrations
                     b.ToTable("Mensajes");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.TipoReaccion", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.TipoReaccion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -255,7 +257,7 @@ namespace MeetUp.Migrations
                     b.ToTable("TipoReacciones");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.Usuario", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -294,200 +296,69 @@ namespace MeetUp.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.UsuarioReaccionaComentario", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.UsuarioReaccionaComentario", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("TipoReaccionId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ComentarioId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoReaccionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ComentarioId");
+                    b.HasKey("UsuarioId", "TipoReaccionId", "ComentarioId");
 
                     b.HasIndex("TipoReaccionId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("UsuariosComentarios");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.UsuarioReaccionaEvento", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.UsuarioReaccionaEvento", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EventoId")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.Property<int>("TipoReaccionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<int>("EventoId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("UsuarioId", "TipoReaccionId", "EventoId");
 
                     b.HasIndex("EventoId");
 
                     b.HasIndex("TipoReaccionId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("UsuariosaEventos");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.UsuarioReaccionaMensaje", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.UsuarioSuscribeEvento", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("MensajeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoReaccionId")
-                        .HasColumnType("int");
-
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MensajeId");
-
-                    b.HasIndex("TipoReaccionId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("UsuariosMensajes");
-                });
-
-            modelBuilder.Entity("MeetUp.Modelos.UsuarioSuscribeEvento", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("EventoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("UsuarioId", "EventoId");
 
                     b.HasIndex("EventoId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("UsuarioSuscribeEvento");
                 });
 
-            modelBuilder.Entity("ChatUsuario", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.ChatUsuarios", b =>
                 {
-                    b.HasOne("MeetUp.Modelos.Chat", null)
-                        .WithMany()
-                        .HasForeignKey("ChatsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MeetUp.Modelos.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EtiquetaEvento", b =>
-                {
-                    b.HasOne("MeetUp.Modelos.Etiqueta", null)
-                        .WithMany()
-                        .HasForeignKey("EtiquetasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MeetUp.Modelos.Evento", null)
-                        .WithMany()
-                        .HasForeignKey("EventosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MeetUp.Modelos.Comentario", b =>
-                {
-                    b.HasOne("MeetUp.Modelos.Comentario", "ComentarioPadre")
-                        .WithMany("ComentariosHijos")
-                        .HasForeignKey("ComentarioPadreId");
-
-                    b.HasOne("MeetUp.Modelos.Evento", "Evento")
-                        .WithMany("Comentarios")
-                        .HasForeignKey("EventoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
-                        .WithMany("Comentarios")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("ComentarioPadre");
-
-                    b.Navigation("Evento");
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("MeetUp.Modelos.Evento", b =>
-                {
-                    b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
-                        .WithMany("EventosCreados")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("MeetUp.Modelos.Foto", b =>
-                {
-                    b.HasOne("MeetUp.Modelos.Evento", "Evento")
-                        .WithMany("Fotos")
-                        .HasForeignKey("EventoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Evento");
-                });
-
-            modelBuilder.Entity("MeetUp.Modelos.Mensaje", b =>
-                {
-                    b.HasOne("MeetUp.Modelos.Chat", "Chat")
-                        .WithMany("Mensaje")
+                    b.HasOne("MeetUp.Modelos.Entidades.Chat", "Chat")
+                        .WithMany("ChatUsuarios")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
-                        .WithMany("Mensajes")
+                    b.HasOne("MeetUp.Modelos.Entidades.Usuario", "Usuario")
+                        .WithMany("ChatUsuarios")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -497,158 +368,184 @@ namespace MeetUp.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.UsuarioReaccionaComentario", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Comentario", b =>
                 {
-                    b.HasOne("MeetUp.Modelos.Comentario", "Comentario")
-                        .WithMany("Reacciones")
-                        .HasForeignKey("ComentarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("MeetUp.Modelos.Entidades.Comentario", null)
+                        .WithMany("ComentariosHijos")
+                        .HasForeignKey("ComentarioId");
 
-                    b.HasOne("MeetUp.Modelos.TipoReaccion", "TipoReaccion")
-                        .WithMany("ReaccionesComentarios")
-                        .HasForeignKey("TipoReaccionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
-                        .WithMany("ReaccionesComentarios")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Comentario");
-
-                    b.Navigation("TipoReaccion");
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("MeetUp.Modelos.UsuarioReaccionaEvento", b =>
-                {
-                    b.HasOne("MeetUp.Modelos.Evento", "Evento")
-                        .WithMany("Reacciones")
+                    b.HasOne("MeetUp.Modelos.Entidades.Evento", null)
+                        .WithMany("Comentarios")
                         .HasForeignKey("EventoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MeetUp.Modelos.TipoReaccion", "TipoReaccion")
-                        .WithMany("ReaccionesEventos")
-                        .HasForeignKey("TipoReaccionId")
+                    b.HasOne("MeetUp.Modelos.Entidades.Usuario", null)
+                        .WithMany("Comentarios")
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
 
-                    b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
-                        .WithMany("ReaccionesEventos")
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Evento", b =>
+                {
+                    b.HasOne("MeetUp.Modelos.Entidades.Usuario", null)
+                        .WithMany("Eventos")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.EventoEtiquetas", b =>
+                {
+                    b.HasOne("MeetUp.Modelos.Entidades.Etiqueta", "Etiqueta")
+                        .WithMany("EventoEtiquetas")
+                        .HasForeignKey("EtiquetaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MeetUp.Modelos.Entidades.Evento", "Evento")
+                        .WithMany("EventoEtiquetas")
+                        .HasForeignKey("EventoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Etiqueta");
+
+                    b.Navigation("Evento");
+                });
+
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Foto", b =>
+                {
+                    b.HasOne("MeetUp.Modelos.Entidades.Evento", null)
+                        .WithMany("Fotos")
+                        .HasForeignKey("EventoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Mensaje", b =>
+                {
+                    b.HasOne("MeetUp.Modelos.Entidades.Chat", null)
+                        .WithMany("Mensajes")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MeetUp.Modelos.Entidades.Usuario", null)
+                        .WithMany("Mensajes")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.UsuarioReaccionaComentario", b =>
+                {
+                    b.HasOne("MeetUp.Modelos.Entidades.TipoReaccion", null)
+                        .WithMany("UsuarioReaccionaComentarios")
+                        .HasForeignKey("TipoReaccionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MeetUp.Modelos.Entidades.Usuario", null)
+                        .WithMany("UsuarioReaccionaComentarios")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.UsuarioReaccionaEvento", b =>
+                {
+                    b.HasOne("MeetUp.Modelos.Entidades.Evento", null)
+                        .WithMany("UsuarioReaccionaEventos")
+                        .HasForeignKey("EventoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MeetUp.Modelos.Entidades.TipoReaccion", null)
+                        .WithMany("UsuarioReaccionaEventos")
+                        .HasForeignKey("TipoReaccionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MeetUp.Modelos.Entidades.Usuario", null)
+                        .WithMany("UsuarioReaccionaEventos")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.UsuarioSuscribeEvento", b =>
+                {
+                    b.HasOne("MeetUp.Modelos.Entidades.Evento", "Evento")
+                        .WithMany("UsuarioSuscribeEventos")
+                        .HasForeignKey("EventoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MeetUp.Modelos.Entidades.Usuario", "Usuario")
+                        .WithMany("UsuarioSuscribeEventos")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Evento");
 
-                    b.Navigation("TipoReaccion");
-
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.UsuarioReaccionaMensaje", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Chat", b =>
                 {
-                    b.HasOne("MeetUp.Modelos.Mensaje", "Mensaje")
-                        .WithMany("Reacciones")
-                        .HasForeignKey("MensajeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ChatUsuarios");
 
-                    b.HasOne("MeetUp.Modelos.TipoReaccion", "TipoReaccion")
-                        .WithMany("ReaccionesMensajes")
-                        .HasForeignKey("TipoReaccionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
-                        .WithMany("ReaccionesMensajes")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Mensaje");
-
-                    b.Navigation("TipoReaccion");
-
-                    b.Navigation("Usuario");
+                    b.Navigation("Mensajes");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.UsuarioSuscribeEvento", b =>
-                {
-                    b.HasOne("MeetUp.Modelos.Evento", "Evento")
-                        .WithMany("UsuariosSuscritos")
-                        .HasForeignKey("EventoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MeetUp.Modelos.Usuario", "Usuario")
-                        .WithMany("EventosSuscritos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Evento");
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("MeetUp.Modelos.Chat", b =>
-                {
-                    b.Navigation("Mensaje");
-                });
-
-            modelBuilder.Entity("MeetUp.Modelos.Comentario", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Comentario", b =>
                 {
                     b.Navigation("ComentariosHijos");
-
-                    b.Navigation("Reacciones");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.Evento", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Etiqueta", b =>
+                {
+                    b.Navigation("EventoEtiquetas");
+                });
+
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Evento", b =>
                 {
                     b.Navigation("Comentarios");
+
+                    b.Navigation("EventoEtiquetas");
 
                     b.Navigation("Fotos");
 
-                    b.Navigation("Reacciones");
+                    b.Navigation("UsuarioReaccionaEventos");
 
-                    b.Navigation("UsuariosSuscritos");
+                    b.Navigation("UsuarioSuscribeEventos");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.Mensaje", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.TipoReaccion", b =>
                 {
-                    b.Navigation("Reacciones");
+                    b.Navigation("UsuarioReaccionaComentarios");
+
+                    b.Navigation("UsuarioReaccionaEventos");
                 });
 
-            modelBuilder.Entity("MeetUp.Modelos.TipoReaccion", b =>
+            modelBuilder.Entity("MeetUp.Modelos.Entidades.Usuario", b =>
                 {
-                    b.Navigation("ReaccionesComentarios");
+                    b.Navigation("ChatUsuarios");
 
-                    b.Navigation("ReaccionesEventos");
-
-                    b.Navigation("ReaccionesMensajes");
-                });
-
-            modelBuilder.Entity("MeetUp.Modelos.Usuario", b =>
-                {
                     b.Navigation("Comentarios");
 
-                    b.Navigation("EventosCreados");
-
-                    b.Navigation("EventosSuscritos");
+                    b.Navigation("Eventos");
 
                     b.Navigation("Mensajes");
 
-                    b.Navigation("ReaccionesComentarios");
+                    b.Navigation("UsuarioReaccionaComentarios");
 
-                    b.Navigation("ReaccionesEventos");
+                    b.Navigation("UsuarioReaccionaEventos");
 
-                    b.Navigation("ReaccionesMensajes");
+                    b.Navigation("UsuarioSuscribeEventos");
                 });
 #pragma warning restore 612, 618
         }

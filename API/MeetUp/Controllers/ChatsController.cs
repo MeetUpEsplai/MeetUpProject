@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
-using MeetUp.Modelos;
+using MeetUp.Modelos.Entidades;
 using MeetUp.Modelos.ViewModels;
 
 namespace MeetUp.Controllers
@@ -22,48 +22,62 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
-        #region Post and Put
+        #region Get
 
-        // POST: api/Chats
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost()]
-        public async Task<ActionResult<Chat>> PostChat(ChatViewModel chatModel)
+        // GET: api/Chats
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Chat>>> GetChats()
         {
-            if (_context.Chats == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Chats'  is null.");
-            }
-            Chat chat = new Chat();
-            chat.AddModelInfo(chatModel);
-
-            if (chatModel.IdsUsuarios != null)
-            {
-                chat.Usuarios = new List<Usuario>();
-
-                foreach (int id in chatModel.IdsUsuarios)
-                {
-                    chat.Usuarios.Add(_context.Usuarios.Find(id));
-                }
-            }
-
-            _context.Chats.Add(chat);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetChat", new { id = chat.Id }, chat);
+          if (_context.Chats == null)
+          {
+              return NotFound();
+          }
+            return await _context.Chats
+                .Include(x => x.ChatUsuarios)
+                .Include(x => x.Mensajes)
+                .ToListAsync();
         }
 
+
+        // GET: api/Chats/5
+        [HttpGet("id_{id}")]
+        public async Task<ActionResult<Chat>> GetChat(int id)
+        {
+          if (_context.Chats == null)
+          {
+              return NotFound();
+          }
+            var chat = _context.Chats
+                .Include(x => x.ChatUsuarios)
+                .Include(x => x.Mensajes)
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            if (chat == null)
+            {
+                return NotFound();
+            }
+
+            return chat;
+        }
+
+        #endregion
+
+
+        #region Post and Put
 
         // PUT: api/Chats/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("id_{id}")]
-        public async Task<IActionResult> PutChat(int id, ChatViewModel model)
+        public async Task<IActionResult> PutChat(int id, ChatViewModel modelo)
         {
-            if (id != model.Id)
+            if (id != modelo.Id)
             {
                 return BadRequest();
             }
-            Chat? chat = _context.Chats.Find(id);
-            chat.AddModelInfo(model);
+
+            Chat chat = _context.Chats.Find(id);
+            chat.AddModelInfo(modelo);
 
             _context.Entry(chat).State = EntityState.Modified;
 
@@ -86,41 +100,24 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        #endregion
 
-
-        #region Get
-
-        // GET: api/Chats/5
-        [HttpGet("id_{id}")]
-        public async Task<ActionResult<Chat>> GetChat(int id)
+        // POST: api/Chats
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Chat>> PostChat(ChatViewModel model)
         {
-            if (_context.Chats == null)
-            {
-                return NotFound();
-            }
-            var chat = await _context.Chats.FindAsync(id);
+          if (_context.Chats == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.Chats'  is null.");
+          }
+            Chat chat = new Chat();
+            chat.AddModelInfo(model);
 
-            if (chat == null)
-            {
-                return NotFound();
-            }
+            _context.Chats.Add(chat);
+            await _context.SaveChangesAsync();
 
-            return chat;
+            return CreatedAtAction("GetChat", new { id = chat.Id }, chat);
         }
-
-
-        // GET: api/Chats
-        [HttpGet()]
-        public async Task<ActionResult<IEnumerable<Chat>>> GetChats()
-        {
-            if (_context.Chats == null)
-            {
-                return NotFound();
-            }
-            return await _context.Chats.ToListAsync();
-        }
-
 
         #endregion
 
@@ -148,7 +145,6 @@ namespace MeetUp.Controllers
         }
 
         #endregion
-
 
         private bool ChatExists(int id)
         {

@@ -11,7 +11,7 @@ namespace MeetUp.Modelos.ViewModels
         public string Texto { get; set; }
 
         public int UsuarioId { get; set; }
-        public int? EventoId { get; set; }
+        public int EventoId { get; set; }
 
         public int? ComentarioPadreId { get; set; }
     }

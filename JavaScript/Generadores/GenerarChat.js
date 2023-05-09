@@ -51,7 +51,7 @@ function AddToHtml(arrayModelo)
 
         //Declaracion de clases e ids
         contenedorGeneral.id = "chat_" + chatMini.GetChatId();
-        contenedorGeneral.className = "row";
+        contenedorGeneral.className = "row chat";
         contenedorImg.className = "col-3";
         img.className = "imgProfileUsers";
         contenedorData.className = "col-9";

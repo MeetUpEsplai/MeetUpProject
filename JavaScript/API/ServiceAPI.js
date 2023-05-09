@@ -3,15 +3,16 @@ import { getQuery, setQuery } from "./ConsultorAPI.js"
 const ROOT = "https://localhost:7009/api";
 
 const CHAT = "/Chats";
+const CHATUSUARIOS = "/ChatUsuarios";
 const COMENTARIO = "/Comentarios";
 const ETIQUETA = "/Etiquetas";
+const EVENTOETIQUETAS = "/EventoEtiquetas";
 const EVENTO = "/Eventos";
 const FOTOS = "/Fotos";
 const MENSJAES = "/Mensajes";
 const TIPOREACCION ="/TipoReacciones";
 const RCOMENTARIOS = "/UsuarioReaccionaComentarios";
-const REVENTOS = "/UsuarioReaccionaEventos";
-const RMENSJAES = "/UsuarioReaccionaMensajes";
+const REVENTOS = "/UsuarioReaccionaEventoes";
 const USUARIO = "/Usuarios";
 const SUSCRIPCION = "/UsuarioSuscribeEventos";
 
@@ -36,6 +37,10 @@ function Delete(stringClase, id) { return getQuery(ROOT + stringClase + "/" + ID
 export function PostChat(chatModel) { return Post(CHAT, chatModel); }
 
 
+//Crud ChatUsuario
+export function PostChatUsuario(chatUsuarioModel) { return Post(CHATUSUARIOS, chatUsuarioModel); }
+
+
 //Crud Comentario
 export function PostComentario(comentarioModel) { return Post(COMENTARIO, comentarioModel); }
 export function PutComentario(comentarioModel, idComentario) { return Put(COMENTARIO, comentarioModel, idComentario); }
@@ -46,6 +51,11 @@ export function DeleteComentario(idComentario) { return Delete(COMENTARIO, idCom
 //Crud Etiqueta
 export function PostEtiqueta(etiquetaModel) { return Post(ETIQUETA, etiquetaModel); }
 export function GetAllEtiquetas() { return GetAll(ETIQUETA) } 
+
+
+//Crud EventoEtiqueta
+export function PostEventoEtiqueta(eventoEtiquetaModel) { return Post(EVENTOETIQUETAS, eventoEtiquetaModel); }
+//export function DeleteEventoEtiqueta(idEventoEtiqueta) { return Delete(EVENTOETIQUETAS, idEventoEtiqueta); }
 
 
 //Crud Eventos
@@ -88,13 +98,6 @@ export function GetCountReaccionesEvento(idEventos, idTipoReaccion) { return Get
 export function DeleteReaccionEvento(idReaccionEventos) { return Delete(REVENTOS, idReaccionEventos); }
 
 
-//Crud UsuarioReaccionaMensaje
-export function PostReaccionMensaje(reaccionMensajeModel) { return Post(RMENSJAES, reaccionMensajeModel); }
-export function GetReaccionMensaje(idUsuario, idMensaje, idTipoReaccion) { return Get(REVENTOS, IDUSUARIO + idUsuario + "," + IDMENSAJE + idMensaje + "," + IDTIPOREACCION +  idTipoReaccion); }
-export function GetCountReaccionesMensaje(idMensaje, idTipoReaccion) { return Get(REVENTOS, IDMENSAJE + idMensaje + "," + IDTIPOREACCION +  idTipoReaccion); }
-export function DeleteReaccionMensaje(idReaccionMensaje) { return Delete(REVENTOS, idReaccionMensaje); }
-
-
 //Crud Usuario
 export function PostUsuario(usuarioModel) { return Post(USUARIO, usuarioModel); }
 export function PutUsuario(usuarioModel, idUsuario) { return Put(USUARIO, usuarioModel, idUsuario); }
@@ -107,5 +110,4 @@ export function DeleteUsuario(idUsuario) { return Delete(USUARIO, idUsuario); }
 
 //Cud UsuarioSuscritoEvento
 export function PostSuscripcion(suscripcionModel) { return Post(SUSCRIPCION, suscripcionModel); }
-//GET
 export function DeleteSuscripciono(idSuscripcion) { return Delete(SUSCRIPCION, idSuscripcion); }

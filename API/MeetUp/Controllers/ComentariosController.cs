@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
-using MeetUp.Modelos;
+using MeetUp.Modelos.Entidades;
 using MeetUp.Modelos.ViewModels;
 
 namespace MeetUp.Controllers
@@ -22,26 +22,46 @@ namespace MeetUp.Controllers
             _context = context;
         }
 
-        #region Post and Put
+        #region Get
 
-        // POST: api/Comentarios
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost()]
-        public async Task<ActionResult<Comentario>> PostComentario(ComentarioViewModel model)
+        // GET: api/Comentarios
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Comentario>>> GetComentarios()
         {
-            if (_context.Comentarios == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Comentarios'  is null.");
-            }
-            Comentario comentario = new Comentario();
-            comentario.AddModelInfo(model);
-
-            _context.Comentarios.Add(comentario);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetComentario", new { id = comentario.Id }, comentario);
+          if (_context.Comentarios == null)
+          {
+              return NotFound();
+          }
+            return await _context.Comentarios
+                .Include(x => x.ComentariosHijos)
+                .ToListAsync();
         }
 
+        // GET: api/Comentarios/5
+        [HttpGet("id_{id}")]
+        public async Task<ActionResult<Comentario>> GetComentario(int id)
+        {
+          if (_context.Comentarios == null)
+          {
+              return NotFound();
+          }
+            var comentario = await _context.Comentarios
+                .Include(x => x.ComentariosHijos)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (comentario == null)
+            {
+                return NotFound();
+            }
+
+            return comentario;
+        }
+
+        #endregion
+
+
+        #region Post and Put
 
         // PUT: api/Comentarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -52,7 +72,8 @@ namespace MeetUp.Controllers
             {
                 return BadRequest();
             }
-            Comentario? comentario = _context.Comentarios.Find(id);
+
+            Comentario comentario = _context.Comentarios.Where(x => x.Id == id).FirstOrDefault();
             comentario.AddModelInfo(model);
 
             _context.Entry(comentario).State = EntityState.Modified;
@@ -76,39 +97,22 @@ namespace MeetUp.Controllers
             return NoContent();
         }
 
-        #endregion
-
-
-        #region Get
-
-        // GET: api/Comentarios/5
-        [HttpGet("id_{id}")]
-        public async Task<ActionResult<Comentario>> GetComentario(int id)
+        // POST: api/Comentarios
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Comentario>> PostComentario(ComentarioViewModel model)
         {
-            if (_context.Comentarios == null)
-            {
-                return NotFound();
-            }
-            var comentario = await _context.Comentarios.FindAsync(id);
+          if (_context.Comentarios == null)
+          {
+              return Problem("Entity set 'ApplicationDbContext.Comentarios'  is null.");
+          }
+            Comentario comentario = new Comentario();
+            comentario.AddModelInfo(model);
 
-            if (comentario == null)
-            {
-                return NotFound();
-            }
+            _context.Comentarios.Add(comentario);
+            await _context.SaveChangesAsync();
 
-            return comentario;
-        }
-
-
-        // GET: api/Comentarios
-        [HttpGet()]
-        public async Task<ActionResult<IEnumerable<Comentario>>> GetComentarios()
-        {
-            if (_context.Comentarios == null)
-            {
-                return NotFound();
-            }
-            return await _context.Comentarios.ToListAsync();
+            return CreatedAtAction("GetComentario", new { id = comentario.Id }, comentario);
         }
 
         #endregion
@@ -137,7 +141,6 @@ namespace MeetUp.Controllers
         }
 
         #endregion
-
 
         private bool ComentarioExists(int id)
         {

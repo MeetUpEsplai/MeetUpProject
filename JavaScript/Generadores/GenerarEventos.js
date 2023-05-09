@@ -47,7 +47,7 @@ function AddToHtml(arrayModelo)
 
             //Declaracion de clases y ids html
             row.id = "evento_" + modelo.GetId();
-            row.className = "row";
+            row.className = "row evento";
             containerImg.className = "col-4";
             img.className = "rounded-3";
             containerData.className  = "col-8 text-white";

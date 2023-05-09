@@ -1,4 +1,4 @@
-﻿using MeetUp.Modelos;
+﻿using MeetUp.Modelos.Entidades;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeetUp.Context
@@ -15,11 +15,19 @@ namespace MeetUp.Context
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<UsuarioReaccionaComentario> UsuariosComentarios { get; private set; }
         public DbSet<UsuarioReaccionaEvento> UsuariosaEventos { get; set; }
-        public DbSet<UsuarioReaccionaMensaje> UsuariosMensajes { get; set; }
+        public DbSet<UsuarioSuscribeEvento> UsuarioSuscribeEvento { get; set; }
+        public DbSet<EventoEtiquetas> EventoEtiquetas { get; set; }
+        public DbSet<ChatUsuarios> ChatUsuarios { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public DbSet<MeetUp.Modelos.UsuarioSuscribeEvento>? UsuarioSuscribeEvento { get; set; }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UsuarioSuscribeEvento>().HasKey(x => new { x.UsuarioId, x.EventoId });
+            modelBuilder.Entity<UsuarioReaccionaComentario>().HasKey(x => new { x.UsuarioId, x.TipoReaccionId, x.ComentarioId });
+            modelBuilder.Entity<UsuarioReaccionaEvento>().HasKey(x => new { x.UsuarioId, x.TipoReaccionId, x.EventoId });
+            modelBuilder.Entity<ChatUsuarios>().HasKey(x => new { x.UsuarioId, x.ChatId });
+            modelBuilder.Entity<EventoEtiquetas>().HasKey(x => new { x.EtiquetaId, x.EventoId });
+        }
     }
 }

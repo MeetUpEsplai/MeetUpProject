@@ -29,7 +29,5 @@ namespace MeetUp.Modelos.ViewModels
         public string? ReferenciaFotoPrincipal { get; set; }
 
         public int UsuarioId { get; set; }
-
-        public List<int>? IdsEtiquetas { get; set; }
     }
 }
