@@ -1,13 +1,13 @@
 export class UsuarioSuscribeEvento 
 {
-    constructor(id, idUsuario, idEvento) 
+    constructor(id, usuarioId, eventoId) 
     {
         this.id = id;
-        this.idUsuario = idUsuario;
-        this.idEvento = idEvento;
+        this.usuarioId = usuarioId;
+        this.eventoId = eventoId;
     }
 
     GetId() { return this.id }
-    GetIdUsuario() { return this.idUsuario; }
-    GetIdEvento() { return this.idEvento; }
+    GetIdUsuario() { return this.usuarioId; }
+    GetIdEvento() { return this.eventoId; }
 }
