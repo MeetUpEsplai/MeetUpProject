@@ -1,5 +1,6 @@
 import { GetUsuarioByNombre, GetEventoByNombre } from "../API/ServiceAPI.js";
 import { CambiarPagina } from "./PageChanger.js"
+import { show, showUser } from "./LocalStorage.js"
 
 const searchInput = document.querySelector('.search-container input[type="text"]');
 const searchResults = document.querySelector('.search-container .search-results');
@@ -50,4 +51,21 @@ searchResults.addEventListener('click', event => {
         else
             CambiarPagina("../../evento/evento.html", resultId);
     }
+});
+
+
+document.getElementById("tituloMeetUp").addEventListener('click', event => {
+    CambiarPagina("../../aplicacion/aplicacion.html", showUser(), null)
+});
+
+document.getElementById("btnInicio").addEventListener('click', event => {
+    CambiarPagina("../../aplicacion/aplicacion.html", showUser(), null)
+});
+
+document.getElementById("btnPerfil").addEventListener('click', event => {
+    CambiarPagina("../../perfil/perfil.html", showUser(), showUser())
+});
+
+document.getElementById("btnChat").addEventListener('click', event => {
+    CambiarPagina("../../chat/chat.html", showUser(), showUser())
 });

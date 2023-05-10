@@ -127,5 +127,4 @@ function AddToHtmlChat(arrayModelo)
         contenedorGeneral.appendChild(contenedorImg);
 
         document.getElementById("listChat").appendChild(contenedorGeneral);
-
 }
