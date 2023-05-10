@@ -1,0 +1,233 @@
+@import url('https://fonts.cdnfonts.com/css/tt-commons');
+
+/* Estilos generales */
+.navbar-brand {
+  margin-left: 20px;
+  
+}
+.profile-image {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.profile-image:hover {
+  opacity: 0.5;
+}
+
+nav{
+  padding: 5%;
+  background-color: #252627;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+.input {
+  box-sizing: border-box;
+  color: #191919;
+  padding: 15px 15px 15px 35px;
+  width: 100%;
+  height: 20px;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 3%;
+}
+
+.input-icon {
+color: #191919;
+position: absolute;
+width: 20px;
+height: 20px;
+left: 12px;
+top: 50%;
+transform: translateY(-50%);
+
+margin-left: 3%;
+}
+
+/*tengo que hacer que al pasar el cursor por la imagen esta se oscurezca, con "hover css"*/
+/*overflow html, el tipico "ver más pero con tres puntitos",. es el contenedor el que tiene que tener el text-overflow*/
+
+*{
+  font-family: 'TT Commons', sans-serif;
+}
+
+body {
+  background-color: #18191B;
+  font-family: "TT Commons Pro Expand", sans-serif;
+  font-size: 16px;
+}
+
+
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: "TT Commons Pro", sans-serif;
+  color: #ffffff;
+}
+h1{
+  font-family: "TT Commons Pro Expand", sans-serif;
+  color: #ffffff;
+  font-size: 30px;
+}
+
+.profile Image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 10px;
+}
+img:hover{
+  background-color: white;
+}
+img{
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 10%;
+}
+
+/* Estilos de los contenedores */
+.contenidoTotal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  margin-top: 50px;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 5%;
+  background-color: #373838; /* cambia el color de fondo */
+  color: #f0f0f0; /* cambia el color del texto */
+  border-color: #373838; /* cambia el color del borde */
+  min-height: 250px;
+}
+
+.container h1 {
+  margin-left: 20px;
+  
+}
+
+.bi-chat-left-dots-fill{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 12%;
+  margin-top: 12%;
+  font-size: larger;
+}
+.bi-cloud-plus-fill{  
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 12%;
+  margin-top: 12%;
+  font-size: larger;
+}
+.bi-hand-thumbs-up{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 12%;
+  margin-top: 12%;
+  font-size: larger;
+}
+.bi-plus-lg{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 12%;
+  margin-top: 12%;
+  font-size: larger;
+  
+}
+
+.row {
+  align-items: center;
+}
+/*--------ESTO LO VOY A TENER QUE MODIFICAR, ES PARA EL TEXTO Y LAS IMAGENES DEL ACTIVIDAD--------*/
+
+.col-md-4{
+  margin-right: 50px;
+
+ 
+}
+.md-6{
+  margin-right: 50px;
+  padding-inline: 10px;
+  padding-top: 5%;
+  padding-bottom: 5%; 
+}
+.image-container .bi-camera-fill {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+.col-md-12{
+  margin-right: 50px;
+  padding-inline: 10px;
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
+/* Estilos de la seccion de actividad */
+.actividad {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Estilos para pantallas de menor tamaño */
+@media (max-width: 767px) {
+  .container {
+    max-width: 90%;
+  }
+
+  .col-md-4 {
+    margin-right: 20px;
+  }
+}
+
+  
+.status{
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background-color: green; /* Cambiar a "darkgreen" si deseas un color oscuro */
+  border: 2px solid #18191B; /* Cambiar a un color adecuado para el borde */
+  margin-left: 11%;
+  margin-top: -5%;
+  
+  
+}
+.expandir-contenido {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.expandir-contenido.expandir {
+  height: auto;
+  transition: height 0.3s ease;
+}
+
