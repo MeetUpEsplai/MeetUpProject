@@ -98,6 +98,37 @@ namespace MeetUp.Controllers
             return eventosConUsuarioCorrecto;
         }
 
+        // GET: api/Eventos
+        [HttpGet("etiquetaId_{id}")]
+        public async Task<ActionResult<IEnumerable<Evento>>> GetEventsByEtiqueta(int id)
+        {
+            if (_context.EventoEtiquetas == null)
+            {
+                return NotFound();
+            }
+
+            if (_context.Usuarios == null)
+            {
+                return NotFound();
+            }
+
+            List<Evento> eventosConUsuarioCorrecto = null;
+
+            if (_context.Usuarios.Where(x => x.Id == id).Any())
+            {
+                eventosConUsuarioCorrecto = _context.Events
+                    .Include(x => x.Fotos)
+                    .Include(x => x.Comentarios)
+                    .Include(x => x.UsuarioReaccionaEventos)
+                    .Include(x => x.UsuarioSuscribeEventos)
+                    .Include(e => e.EventoEtiquetas)
+                    .Where(e => e.EventoEtiquetas.Any(ee => ee.EventoId == id))
+                    .ToList();
+            }
+
+            return eventosConUsuarioCorrecto;
+        }
+
         [HttpGet("nombre_{nombre}")]
         public async Task<ActionResult<List<Evento>>> BuscarEventosPorNombre(string nombre)
         {
@@ -113,11 +144,15 @@ namespace MeetUp.Controllers
             return eventos;
         }
 
+
+
         // GET: api/UsuarioReaccionaComentarios/5
         [HttpGet("eventoId_{idEvento}")]
         public async Task<ActionResult<int>>? GetSuscritosCount(int idEvento)
         {
-            var evento = _context.Events.FirstOrDefault(e => e.Id == idEvento);
+            var evento = _context.Events
+                .Include(x => x.UsuarioSuscribeEventos)
+                .FirstOrDefault(e => e.Id == idEvento);
 
             if (evento == null)
             {
