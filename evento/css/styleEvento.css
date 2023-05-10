@@ -4,6 +4,8 @@
   font-family: 'TT Commons', sans-serif;
 }
 
+
+
 body{
     background-color: #18191B;
 }
@@ -57,12 +59,76 @@ img{
 }
 
 .divFlotante{
+    position: fixed;
+    width: 318px;
+    min-height: 200px;
+    max-height: 300px;
+    overflow: auto;
+    border-radius: 5%;
+}
+
+.divBtnFlotante{
+    position: fixed;
+    width: 318px;
+    margin-top: 15%;
+    margin-left: 4.5%;
+}
+
+.btnInscripcion{
+    width: 190px;
+    height: 60px;
+    background-color: #73d957;
+}
+
+/*Asistentes*/
+.cardAsistente{
     display: flex;
-    flex-direction: row-reverse;
-    position: absolute;
-    top: 55%;
-    left: 80%;
-    width: auto;
-    height: 200px;
-    z-index: 9999;
+    justify-content: center;
+    height: 170px;
+    width: 170px;
+    border-radius: 5%;
+
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.divOverflow{
+    max-height: 400px;
+    overflow-x: scroll;
+}
+
+.centrarContenidoCarta{
+    margin-left: 10%;
+}
+
+.scrolldivMin{
+    min-width: 999px;
+}
+
+.cardFoto{
+    height: 170px;
+    width: 200px;
+    border-radius: 15%;
+
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.imgPredeterminada{
+    display: flex;
+    justify-content: center;
+    border-radius: 15%;
+
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.marginLogoPhoto{
+    margin-top: 2em;
+}
+
+/*Comentarios*/
+.cartaComentario{
+    min-height: 120px;
+    border-radius: 20px 20px;
 }
