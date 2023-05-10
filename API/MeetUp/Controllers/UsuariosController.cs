@@ -85,13 +85,6 @@ namespace MeetUp.Controllers
         public async Task<ActionResult<List<Usuario>>> BuscarUsuarioPorNombre(string nombre)
         {
             var usuario = await _context.Usuarios
-                .Include(x => x.Mensajes)
-                .Include(x => x.Eventos)
-                .Include(x => x.Comentarios)
-                .Include(x => x.UsuarioSuscribeEventos)
-                .Include(x => x.UsuarioReaccionaComentarios)
-                .Include(x => x.UsuarioReaccionaEventos)
-                .Include(x => x.ChatUsuarios)
                 .Where(e => e.Nombre.Contains(nombre))
                 .ToListAsync();
 
@@ -124,7 +117,7 @@ namespace MeetUp.Controllers
         }
 
         #endregion
-
+        
 
         #region Post and Put
 

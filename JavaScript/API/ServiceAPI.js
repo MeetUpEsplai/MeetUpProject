@@ -27,7 +27,9 @@ const IDCOMENTARIO = "comentarioId_";
 
 function Post(stringClase, modelo) { return setQuery(ROOT + stringClase, modelo); }
 function Put(stringClase, modelo, id) { return setQuery(ROOT + stringClase + "/" + ID + id, modelo); }
-function Get(stringClase, criterio) { return getQuery(ROOT + stringClase + "/" + criterio); }
+function Get(stringClase, criterio) { 
+    console.log(ROOT + stringClase + "/" + criterio);
+    return getQuery(ROOT + stringClase + "/" + criterio); }
 function GetAll(stringClase) { return getQuery(ROOT + stringClase); }
 function Delete(stringClase, id) { return getQuery(ROOT + stringClase + "/" + ID + id); }
 
