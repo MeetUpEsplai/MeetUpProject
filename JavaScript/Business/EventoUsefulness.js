@@ -2,6 +2,7 @@ import { GetEventoById, GetEventoCountSuscritos, GetUsuarioById } from "../API/S
 import { show } from "./LocalStorage.js"
 import { GenerarUsuarios } from "../Generadores/GeneradorUsuarios.js"
 import { GenerarComentarios } from "../Generadores/GenerarComentarios.js";
+import { GenerarFotos } from "../Generadores/GeneradorFotos.js";
 
 var idEvento = show();
 var idEvento = 2; //Para Test
@@ -13,7 +14,9 @@ GetEventoById(idEvento).then(evento => {
     document.getElementById("parrafoUbicacion").innerText = evento.coordenadas;
     
     GenerarComentarios(evento);
+    GenerarFotos(evento);
 
+    //Informacion dependiente del usuarioCreador
     GetUsuarioById(evento.usuarioId).then(usuario => {
 
         document.getElementById("nombreCreadora").innerText = usuario.nombre;
@@ -23,6 +26,7 @@ GetEventoById(idEvento).then(evento => {
         else
             document.getElementById("imgCreadoPor").src = "../../imgEventDefault/fotoPerfilDefaul.png";
 
+        //Informacion dependiente del usuarios Suscritos
         GetEventoCountSuscritos(idEvento).then(count => {
             document.getElementById("tituloAsistentes").innerText = "Asistentes (" + count + ")";
         
@@ -37,6 +41,6 @@ GetEventoById(idEvento).then(evento => {
         });
 
     }); 
-
+    
 });
 

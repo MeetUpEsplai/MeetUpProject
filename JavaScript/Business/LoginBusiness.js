@@ -57,7 +57,7 @@ document.getElementById("btnEnviar").addEventListener('click', event =>
                 await PostUsuario(new Usuario(0, nombre, apellido, email, psswrd, fecha, null))
                 GetUsuarioByEmail(email).then(user => 
                 {
-                    CambiarPagina("../../aplicacion/aplicacion.html", user.id);
+                    CambiarPagina("../../aplicacion/aplicacion.html", user.id, null);
                 });
             }
         }

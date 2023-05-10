@@ -1,10 +1,10 @@
 import { Foto } from "../Modules/FotoClass.js"
 
-export function GenerarFotos(fotos) 
+export function GenerarFotos(evento) 
 {
     var fotosModel = []
 
-    fotos.comentarios.forEach(element => {
+    evento.fotos.forEach(element => {
         fotosModel.push(new Foto(
             element.id,
             element.referencia,
@@ -25,12 +25,12 @@ function AddToHtml(arrayModelo)
         var img  = document.createElement("img");
 
         //Declaracion de clases e ids
-        img.class = "cardFoto";
+        img.className = "cardFoto";
 
         //Add Data
         img.src = imgModelo.GetReferencia();
 
         //Asignar padre
-        document.getElementById("divRow_contenidoFotos").appendChild(contenedorGeneral);
+        document.getElementById("divRow_contenidoFotos").appendChild(img);
     }
 }
