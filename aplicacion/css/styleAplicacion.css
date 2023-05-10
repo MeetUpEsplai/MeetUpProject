@@ -8,14 +8,14 @@ body{
     background-color: #18191B;
 }
 
-a{
-    text-decoration: none;
-    color: white;
-}
-
 nav{
     padding: 5%;
     background-color: #252627;
+}
+
+a{
+    text-decoration: none;
+    color: white;
 }
 
 /*Apartado mensaje*/
@@ -72,9 +72,7 @@ nav{
 }
 
 
-button{
-    width: 80px;
-}
+
 
 .backgroundPastel{
     background-color: #fcf6db;
@@ -90,4 +88,8 @@ img{
 }
 
 
-
+/*Boton crear evento*/
+label{
+    display: inline-block;
+    width: 90px;
+  }

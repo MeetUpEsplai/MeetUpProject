@@ -16,30 +16,39 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--Iconos-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!--Calendario-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="css/classic.css">
+    <link rel="stylesheet" href="css/classic.date.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script nonce="eb613c4f-7423-4ab4-84b5-de4bc8c2bb53">(function(w,d){!function(dk,dl,dm,dn){dk[dm]=dk[dm]||{};dk[dm].executed=[];dk.zaraz={deferred:[],listeners:[]};dk.zaraz.q=[];dk.zaraz._f=function(dp){return function(){var dq=Array.prototype.slice.call(arguments);dk.zaraz.q.push({m:dp,a:dq})}};for(const dr of["track","set","debug"])dk.zaraz[dr]=dk.zaraz._f(dr);dk.zaraz.init=()=>{var ds=dl.getElementsByTagName(dn)[0],dt=dl.createElement(dn),du=dl.getElementsByTagName("title")[0];du&&(dk[dm].t=dl.getElementsByTagName("title")[0].text);dk[dm].x=Math.random();dk[dm].w=dk.screen.width;dk[dm].h=dk.screen.height;dk[dm].j=dk.innerHeight;dk[dm].e=dk.innerWidth;dk[dm].l=dk.location.href;dk[dm].r=dl.referrer;dk[dm].k=dk.screen.colorDepth;dk[dm].n=dl.characterSet;dk[dm].o=(new Date).getTimezoneOffset();if(dk.dataLayer)for(const dy of Object.entries(Object.entries(dataLayer).reduce(((dz,dA)=>({...dz[1],...dA[1]})))))zaraz.set(dy[0],dy[1],{scope:"page"});dk[dm].q=[];for(;dk.zaraz.q.length;){const dB=dk.zaraz.q.shift();dk[dm].q.push(dB)}dt.defer=!0;for(const dC of[localStorage,sessionStorage])Object.keys(dC||{}).filter((dE=>dE.startsWith("_zaraz_"))).forEach((dD=>{try{dk[dm]["z_"+dD.slice(7)]=JSON.parse(dC.getItem(dD))}catch{dk[dm]["z_"+dD.slice(7)]=dC.getItem(dD)}}));dt.referrerPolicy="origin";dt.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(dk[dm])));ds.parentNode.insertBefore(dt,ds)};["complete","interactive"].includes(dl.readyState)?zaraz.init():dk.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
     <!--Estilos personalizados con css-->
     <link rel="stylesheet" href="css/styleAplicacion.css">
   </head>
 
   <body>
     <!--Barra navegación-->
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid text-white">
-        <div class="col-2">
-          <a href="#">MeetUp</a>
+    <nav class="navbar navbar-expand-lg" id="barraNavegacion">
+      <div class="container-fluid text-white" id="divNavegacion">
+        <div class="col-2" id="divCol_MeetUp">
+          <a href="#" id="tituloMeetUp">MeetUp</a>
         </div>
-        <div class="col-6">
-          <div class="input-wrapper">
-            <input type="search" class="input" placeholder="Buscar">
-            <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor">
+
+        <div class="col-6" id="divCol_buscar">
+          <div class="input-wrapper" id="divBuscar">
+            <input type="search" class="input" placeholder="Buscar" id="inputBuscar">
+            <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor" id="iconoBuscar">
               <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
             </svg>
           </div>
         </div>
-        
-        <div class="col-4 d-flex justify-content-around">
-          <button class="btn rounded-pill backgroundPastel"><i class="bi bi-house-door"></i> Inicio</button>
-          <button class="btn bg-white rounded-pill"><i class="bi bi-chat-dots"></i> Chat</button>
-          <button class="btn bg-white rounded-pill"><i class="bi bi-person"></i> Perfil</button>
+
+        <div class="col-4 d-flex justify-content-around" id="divCol_InicioChatPerfil">
+          <button class="btn rounded-pill backgroundPastel" id="btnInicio"><i class="bi bi-house-door" id="iconoInicio"></i> Inicio</button>
+          <button class="btn bg-white rounded-pill" id="btnChat"><i class="bi bi-chat-dots" id="iconoChat"></i> Chat</button>
+          <button class="btn bg-white rounded-pill" id="btnPerfil"><i class="bi bi-person" id="iconoPerfil"></i> Perfil</button>
         </div>
       </div>
     </nav>
@@ -49,9 +58,56 @@
       <div class="row">
         <div class="col-7">
           <div class="row">
-            <button type="button" class="btn fw-bold backgroundPastel">Crear Evento</button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn fw-bold backgroundPastel"
+            data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnRegistrarse">
+                Crear Evento
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1"
+              aria-labelledby="modalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title ms-3" id="modalLabel">Crear evento</h5>
+                    <button type="button" class="btn-close"
+                      data-bs-dismiss="modal" aria-label="Close" id="btnCloseIcono"></button>
+                  </div>
+                  <div class="modal-body ms-3" id="divFormulario">
+                    <form action="#" id="formularioRegister">
+                      <label for="nombreEvento" class="form-label">Nombre del evento: </label>
+                      <input type="text" id="nombreEvento"><br><br>
+                      <label for="descripcionEvento">Descripción: </label>
+                      <input type="text" id="descripcionEvento"><br><br>
+                      <label for="fotoPerfilEvento">Foto perfil evento: </label>
+                      <input type="text" id="fotoPerfilEvento"><br><br>
+                      <label for="ubicacion">Ubicación: </label>
+                      <input type="text" id="ubicacion"><br><br>
+                      <!--Calendario-->
+                      <label for="fechaInicio">Fecha Inicio de enveto: </label>
+                      <div class="content mt-4" id="divGeneralCalendario">
+                        <div class="row" id="divRow_Calendario">
+                          <div class="col-lg-6" id="divCol_Calendario">
+                              <form action="#" id="formCalendario">
+                                <div class="form-group" id="divFormCalendario">
+                                  <input type="text" class="form-control" id="pick-date" placeholder="Feha de nacimiento">
+                                </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer" id="divBotonesFormulario">
+                    <button type="button" class="btn btn-secondary"
+                      data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btnEnviar">Enviar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="row text-white">
+          <div class="row text-white mt-2">
             <div class="col-3">
               <h2 class="fw-bolder">Eventos</h2>
             </div>
@@ -62,18 +118,17 @@
           <div class="row">
 
             <!--Seccion filtros-->
-            <div class="felx flex-col flex-row">
-              <div class="rounded-pill bg-white col-2">&nbsp;&nbsp;Cualquier dia <i class="bi bi-x-lg"></i></div>
-              <i class="bi bi-funnel iconoFiltro"></i>
-              
-              
-              
-              <i class="bi bi-funnel iconoFiltro"></i>
-              <hr class="iconoFiltro mw-100"> <!-- Línea de separación -->
+            <div class="col-2">
+              <div class="rounded-pill bg-white col-12 divFiltro">&nbsp;&nbsp;Cualquier dia <i class="bi bi-x-lg"></i></div>
             </div>
-            
+            <div class="col-3">
+              <div class="rounded-pill bg-white divFiltro">&nbsp;&nbsp;Cualquier dia <i class="bi bi-x-lg"></i></div>
+            </div>
+            <div class="col-1">
+              <i class="bi bi-funnel iconoFiltro"></i>
+            </div>
           </div>
-
+          <hr class="iconoFiltro"> <!-- Línea de separación -->
           <!--Seccion publicaciones de Eventos-->
           <div class="eventosList">
             <div class="row">
@@ -124,6 +179,7 @@
             </svg>
           </div>
           <hr> <!-- Línea de separación -->
+          <!--Buscador-->
           <div class="row">
             <div class="input-wrapper">
               <input type="search" class="input" placeholder="Buscar">
@@ -183,6 +239,14 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous">
     </script>
+    <!--Calendario-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/picker.js"></script>
+    <script src="js/picker.date.js"></script>
+    <script src="js/main.js"></script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816" integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw==" data-cf-beacon='{"rayId":"7c4921888894385d","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.4.0","si":100}' crossorigin="anonymous"></script>
   </body>
 
 </html>
