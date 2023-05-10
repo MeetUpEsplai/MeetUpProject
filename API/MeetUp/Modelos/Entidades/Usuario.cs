@@ -18,7 +18,7 @@ namespace MeetUp.Modelos.Entidades
         public string Email { get; set; }
         [StringLength(50)]
         public string Password { get; set; }
-        public DateTime FechaNacimiento { get; set; }
+        public string FechaNacimiento { get; set; }
         [StringLength(250)]
         public string? ReferenciaFoto { get; set; }
 

@@ -22,8 +22,7 @@ namespace MeetUp.Modelos.ViewModels
         public string Contrasena { get; set; }
 
         [Required(ErrorMessage = "La fecha de nacimiento es obligatoria")]
-        [DataType(DataType.Date)]
-        public DateTime FechaNacimiento { get; set; }
+        public string FechaNacimiento { get; set; }
         public string? ReferenciaFoto { get; set; }
     }
 }

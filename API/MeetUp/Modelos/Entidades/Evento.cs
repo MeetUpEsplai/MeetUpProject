@@ -11,7 +11,7 @@ namespace MeetUp.Modelos.Entidades
         public int Id { get; set; }
         [StringLength(250)]
         public string Nombre { get; set; }
-        public DateTime FechaEvento { get; set; }
+        public string FechaEvento { get; set; }
         [Precision(10, 2)]
         public decimal Precio { get; set; }
         [StringLength(500)]

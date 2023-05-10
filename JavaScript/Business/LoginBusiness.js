@@ -1,13 +1,8 @@
 import { GetUsuarioByEmail, PostUsuario } from "../API/ServiceAPI.js";
 import { Usuario } from "../Modules/UsuarioClass.js"
+import { CambiarPagina } from "../Business/PageChanger.js"
 
-console.log("pasa");
 
-function CambiarPagina(userId) 
-{
-    console.log("CambiarPagina");
-    //Cambiar pagina con user id
-}
 
 function CheckRegisterOk(nombre, apellido, psswrd, psswrdRepetida, fecha) 
 {
@@ -26,7 +21,7 @@ document.getElementById("btnLogin").addEventListener('click', event =>
         {
             var contrasena = document.getElementById("pswPrincipal").value;
             if (user.password == contrasena)
-                CambiarPagina(user.id);
+                CambiarPagina("../../aplicacion/aplicacion.html", user.id);
             else
             {
                 //Mensaje Error
@@ -38,12 +33,15 @@ document.getElementById("btnLogin").addEventListener('click', event =>
 
 
 
-document.getElementById("btnRegistrarse").addEventListener('click', event => 
+document.getElementById("btnEnviar").addEventListener('click', event => 
 {
     var email = document.getElementById("emailSecundario").value;
-    GetUsuarioByEmail().then(async user => 
+
+    console.log(email);
+
+    GetUsuarioByEmail(email).then(async user => 
     {
-        if (user == null)
+        if (user.status == "404")
         {
             var nombre = document.getElementById("nombre").value;
             var apellido = document.getElementById("apellido").value;
@@ -59,8 +57,7 @@ document.getElementById("btnRegistrarse").addEventListener('click', event =>
                 await PostUsuario(new Usuario(0, nombre, apellido, email, psswrd, fecha, null))
                 GetUsuarioByEmail(email).then(user => 
                 {
-                    
-                    CambiarPagina(user.id);
+                    CambiarPagina("../../aplicacion/aplicacion.html", user.id);
                 });
             }
         }

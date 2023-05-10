@@ -9,7 +9,7 @@ namespace MeetUp.Modelos.Entidades
     {
         [Key]
         public int Id { get; set; }
-        public DateTime FechaCreacion { get; set; }
+        public string FechaCreacion { get; set; }
         [StringLength(500)]
         public string Texto { get; set; }
 

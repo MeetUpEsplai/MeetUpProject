@@ -11,7 +11,7 @@ namespace MeetUp.Modelos.ViewModels
         public string Nombre { get; set; }
 
         [Required]
-        public DateTime FechaEvento { get; set; }
+        public string FechaEvento { get; set; }
 
         [Required]
         [Range(0, Double.MaxValue)]

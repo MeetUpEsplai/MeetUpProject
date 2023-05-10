@@ -11,7 +11,7 @@ namespace MeetUp.Modelos.Entidades
         public int Id { get; set; }
         [StringLength(50)]
         public string Nombre { get; set; }
-        public DateTime FechaCreacion { get; set; }
+        public string FechaCreacion { get; set; }
 
 
         public List<Mensaje> Mensajes { get; set; } = new List<Mensaje>();
