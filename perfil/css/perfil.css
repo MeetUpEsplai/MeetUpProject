@@ -1,0 +1,349 @@
+@import url('https://fonts.cdnfonts.com/css/tt-commons');
+
+/* Estilos generales */
+.navbar-brand {
+  margin-left: 20px;
+  
+}
+.profile-image {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.profile-image:hover {
+  opacity: 0.5;
+}
+
+nav{
+  padding: 5%;
+  background-color: #252627;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+.input {
+  box-sizing: border-box;
+  color: #191919;
+  padding: 15px 15px 15px 35px;
+  width: 100%;
+  height: 20px;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 3%;
+}
+
+.input-icon {
+color: #191919;
+position: absolute;
+width: 20px;
+height: 20px;
+left: 12px;
+top: 50%;
+transform: translateY(-50%);
+
+margin-left: 3%;
+}
+
+/*tengo que hacer que al pasar el cursor por la imagen esta se oscurezca, con "hover css"*/
+/*overflow html, el tipico "ver más pero con tres puntitos",. es el contenedor el que tiene que tener el text-overflow*/
+
+*{
+  font-family: 'TT Commons', sans-serif;
+}
+
+body {
+  background-color: #18191B;
+  font-family: "TT Commons Pro Expand", sans-serif;
+  font-size: 16px;
+}
+
+
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: "TT Commons Pro", sans-serif;
+  color: #ffffff;
+}
+h1{
+  font-family: "TT Commons Pro Expand", sans-serif;
+  color: #ffffff;
+  font-size: 30px;
+}
+
+.profile Image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 10px;
+}
+img:hover{
+  background-color: white;
+}
+img{
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Estilos de los contenedores */
+.contenidoTotal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  margin-top: 50px;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 5%;
+  background-color: #373838; /* cambia el color de fondo */
+  color: #f0f0f0; /* cambia el color del texto */
+  border-color: #373838; /* cambia el color del borde */
+  min-height: 250px;
+}
+
+.container h1 {
+  margin-left: 20px;
+  
+}
+
+.bi-chat-left-dots{
+  position: absolute;
+  bottom: -365px;
+  right: 1000px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  right: 940px;
+  font-size: larger;
+}
+.bi-cloud-plus-fill{
+  position: absolute;
+  bottom: -590px;
+  right: 1000px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  right: 940px;
+  font-size: larger;
+}
+.bi-hand-thumbs-up{
+  position: absolute;
+  bottom: -1030px;
+  right: 1000px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  right: 940px;
+  font-size: larger;
+}
+.bi-plus-lg{
+  position: absolute;
+  bottom: -1250px;
+  right: 1000px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  right: 950px;
+  font-size: larger;
+  
+}
+
+.row {
+  align-items: center;
+}
+/*--------ESTO LO VOY A TENER QUE MODIFICAR, ES PARA EL TEXTO Y LAS IMAGENES DEL ACTIVIDAD--------*/
+
+.col-md-4{
+  margin-right: 50px;
+  
+ 
+}
+.image-container .bi-camera-fill {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+.col-md-12{
+  margin-right: 50px;
+  padding-inline: 10px;
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
+/* Estilos de la seccion de actividad */
+.actividad {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Estilos para pantallas de menor tamaño */
+@media (max-width: 767px) {
+  .container {
+    max-width: 90%;
+  }
+
+  .col-md-4 {
+    margin-right: 20px;
+  }
+}
+
+  
+.status{
+  position: absolute;
+  bottom: 150px;
+  right: 1000px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: green; /* Cambiar a "darkgreen" si deseas un color oscuro */
+  border: 2px solid #18191B; /* Cambiar a un color adecuado para el borde */
+  right: 975px;
+}
+.expandir-contenido {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.expandir-contenido.expandir {
+  height: auto;
+  transition: height 0.3s ease;
+}
+
+
+/*
+Esto lo dejo aqui por si acaso.
+ 
+.status{
+  position: absolute;
+  bottom: 0;
+  right: 1000px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: green;  Cambiar a "darkgreen" si deseas un color oscuro 
+  border: 2px solid #18191B;  Cambiar a un color adecuado para el borde 
+}
+.actividad h3 {
+  margin-bottom: 0;
+}
+
+.actividad p {
+  margin-top: 0;
+}
+
+.-actividad {
+  margin-right: 50px;
+}imagen
+
+
+Para hacer todo el tema del overflow:
+div{
+        width:150px;
+        height:100px;
+        border:1px solid red;
+        padding:1%;
+        }
+            
+        div{
+        overflow:visible;
+/*
+        overflow:hidden;
+        overflow:scroll;
+        
+
+.col-md-12:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+.col-md-12 {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Estilos de la barra de navegacion 
+.navbar {
+  background-color: rgba(43, 44, 44, 0.8);
+  font-family: "TT Commons Pro", sans-serif;
+  
+}
+
+.navbar-brand {
+  font-family: "TT Commons Pro", sans-serif;
+  
+}
+
+.navbar-nav .nav-link {
+  position: relative;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  color: #fff;
+  border-radius: 50px;
+}
+
+.navbar-nav .nav-link::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  opacity: 0.2;
+  border-radius: 50px;
+  top: 0;
+  left: 0;
+  transform: scale(0);
+}
+*/
+/* Estilos del fondo oscuro y del texto del navbar cuando se despliega 
+.dark-bg {
+  background-color: #353536 !important;
+}
+
+.dark-bg .navbar-brand,
+.dark-bg .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.dark-bg .navbar-toggler-icon {
+  filter: invert(1);
+}*/
+/* Estilos del fondo oscuro y del texto del navbar cuando se despliega 
+.dark-bg {
+  background-color: #353536 !important;
+}
+
+.dark-bg .navbar-brand,
+.dark-bg .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.dark-bg .navbar-toggler-icon {
+  filter: invert(1);
+}*/
+/*
+.navbar-dark .navbar-nav .nav-link {
+  color: #000 !important;
+  background-color: #fdf9f9 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+  color: #080808 !important;
+  background-color: #fdf9f9 !important;
+}*/
