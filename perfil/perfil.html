@@ -32,107 +32,64 @@
         </div>
       </div>
     </nav>
-    <div class="contenidoTotal">
-        <div class="container mt-5 paddingDivs">
-            <h1 class="ms-3">Informacion Personal</h1>
-          <div class="row">
-            <div class="col-md-4">
-              <img src="img/gatete.jpg" alt="Profile Image" class="profile-image rounded-circle" id="fotoUser">
-              <div class="status"></div>
+    <div class="contenidoTotal" id="ContenidoTotal">
+        <div class="container mt-5 paddingDivs" id="containerInformacionPersonal">
+            <h1 class="ms-3" id="tituloInformacionPersonal">Informacion Personal</h1>
+          <!--Esto es el ejemplo de Informacion Personal-->
+          <div class="row" id="divRowInformacionPersonal">
+            <div class="col-md-4" id="divColImgPerfilInformacionPersonal">
+              <img src="img/gatete.jpg" alt="Profile Image" class="profile-image rounded-circle"id="imgPerfilInformacionPersonal">
+              <div class="status" id="divStatus"></div>
             </div>
-            <div class="col-md-6">
-                <h2>Gato Naranja</h2>
-                <strong>Nombre:</strong><p id="nombreUser"> Gato</p>
-                <strong>Apellido:</strong><p id="appelidoUSer"> Naranja</p>
-                <strong>Fecha de nacimiento:</strong><p id="fechaUser"> 4 de Julio, 1999</p>
-                <strong>Teléfono:</strong><p id="telUser"> 123456789</p>
-                <strong>Email:</strong><p id="emailUser"> gato.naranja@hehe.com</p>
+            <div class="col-md-6" id="divColInfoPerfil">
+                <h2 id="nombreCompleto">Gato Naranja</h2>
+                <strong>Nombre:</strong><p id="pNombre"> Gato</p>
+                <strong>Apellido:</strong><p id="pApellido"> Naranja</p>
+                <strong>Fecha de nacimiento:</strong><p id="pNacimiento"> 4 de Julio, 1999</p>
+                <strong>Teléfono:</strong><p id="pTelefono"> 123456789</p>
+                <strong>Email:</strong><p id="pEmail"> gato.naranja@hehe.com</p>
             </div>
           </div>
+          <!--Hasta aqui(Informacion Personal)-->
         </div>
 
-        <div class="container mt-5 paddingDivs">
-          <h1 class="ms-3">Actividad</h1>
-          <div class="text-end">
-            <button class="btn btn-outline-secondary ms-3">Ver más</button>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <i class="bi bi-chat-left-dots"></i>
-              <img src="img/gatete.jpg" alt="Profile Image" class="profile-image rounded-circle mb-5">
-
-              <i class="bi bi-cloud-plus-fill"></i>
-              <img src="img/gatete.jpg" alt="Profile Image" class="profile-image rounded-circle">
-            </div>
-            
-            <div class="col-md-6">
-              <div class="row mb-2">
-                <div class="col-md-12">
-                  <h3>Has comentado en el evento: Quedadita Barcelona</h3>
-                  <p><strong>Tiempo:</strong> Hace 2 horas</p>
-                </div>
-                <div class="col-md-12">
-                  <h3>Has creado un evento: Salida de fiesta en la playa</h3>
-                  <p><strong>Tiempo:</strong> Hace 5 horas</p>
-                </div>
-              </div>
-                      
-            </div>
-          </div>
-        </div>
-
-        <div class="container mt-5 paddingDivs ">
-          <h1 class="ms-3">Historial</h1>
-          <div class="row">
-            <div class="col-md-4">
-              <i class="bi bi-hand-thumbs-up"></i>
-              <img src="img/gatete.jpg" alt="Profile Image" class="profile-image rounded-circle mb-5">
-
-              <i class="bi bi-plus-lg"></i>
-              <img src="img/gatete.jpg" alt="Profile Image" class="profile-image rounded-circle">
-            </div>
-            <div class="col-md-6">
-              <div class="row mb-2">
-                <div class="col-md-12">
-                  <h3>Has reaccionado en el evento: Quedadita Barcelona</h3>
-                  <p><strong>Tiempo:</strong> Hace 1 horas</p>
-                </div>
-                <div class="col-md-12">
-                  <h3>Te has inscrito a un evento: Salida de fiesta en la playa</h3>
-                  <p><strong>Tiempo:</strong> Hace 5 horas</p>
-                </div>
-               
+    
           
-              </div>
-            </div>
+
+        <div class="container mt-5 paddingDivs" id="divContainerHistorial">
+          <h1 class="ms-3" id="tituloHistorial">Actividad</h1>
+
+          <!--Esto es el ejemplo de un Historial-->
+          <div class="row" id="divRowHistorial"> 
+            <div class="col-md-4" id="divColImgHistorial1">
+              <i class="bi bi-hand-thumbs-up" id="iPulgarArribaHistorial"></i>
+              <img src="img/gatete.jpg" alt="Profile Image" class="profile-image rounded-circle mb-5" id="imgPerfilHistorial1">
+            </div>     
+            <div class="col-md-6" id="divColInfoHistorial1" id="imgper">
+              <h3 id="h3EventoComentarioHistorial1">Has reaccionado en el evento: Quedadita Barcelona</h3>
+              <p id="pEventoTiempoHistorial1"><strong>Tiempo:</strong> Hace 1 horas</p>
+            </div>         
           </div>
+          <!--Aqui termina el primero-->
+
+          <!--Aqui empieza el segundo(Historial)-->
+          <div class="row" id="divRowHistorial"> 
+            <div class="col-md-4" id="divColImgHistorial2">
+              <i class="bi bi-plus-lg"></i>
+                <img src="img/gatete.jpg" alt="Profile Image" class="profile-image rounded-circle" id ="imgPerfilHistorial2">
+            </div>     
+            <div class="col-md-6" id="divColInfoHistorial2">
+              <h3 id="h3EventoComentarioHistorial2">Te has inscrito a un evento: Salida de fiesta en la playa</h3>
+              <p id="pEventoTiempoHistorial2"><strong>Tiempo:</strong> Hace 5 horas</p>  
+            </div>         
+          </div>
+          <!--Aqui termina el segundo-->
+
         </div>
-
-
-
-
-
-    </div>
+  </div>
 
 
     <script src="../JavaScript/Business/PerfilUsefulness.js" type="module"></script>
-    <script src="../JavaScript/Business/Buscador.js" type="module"></script>
+    
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!--<script src="<URL>" integrity="<URL>" crossorigin="<URL>"></script>
-    <script src="<URL>" integrity="<URL>" crossorigin="<URL>"></script>
-    <script src="<URL>" integrity="<URL>" crossorigin="<URL>"></script>-->
-
-      

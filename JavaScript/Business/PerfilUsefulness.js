@@ -6,14 +6,14 @@ var idUser = showUser();
 var idUser = 1;
 
 GetEventoById(idUser).then(user => {
-    document.getElementById("nombreUser").innerHTML = user.nombre;
-    document.getElementById("appelidoUSer").innerHTML = user.apellido;
-    document.getElementById("fechaUser").innerHTML = user.fechaNacimiento;
-    document.getElementById("telUser").innerHTML = "722890009";
-    document.getElementById("emailUser").innerHTML = user.email;
+    document.getElementById("pNombre").innerHTML = user.nombre;
+    document.getElementById("pApellido").innerHTML = user.apellido;
+    document.getElementById("pNacimiento").innerHTML = user.fechaNacimiento;
+    document.getElementById("pTelefono").innerHTML = "722890009";
+    document.getElementById("pEmail").innerHTML = user.email;
 
     if (user.referenciaFoto != null)
-        document.getElementById("fotoUser").src = user.referenciaFoto;
+        document.getElementById("imgPerfilInformacionPersonal").src = user.referenciaFoto;
     else 
-        document.getElementById("fotoUser").src = "../../imgEventDefault/fotoPerfilDefaul.png";   
+        document.getElementById("imgPerfilInformacionPersonal").src = "../../imgEventDefault/fotoPerfilDefaul.png";   
 });
