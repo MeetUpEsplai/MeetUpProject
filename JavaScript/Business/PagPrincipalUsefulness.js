@@ -5,7 +5,7 @@ import { showUser } from "./LocalStorage.js"
 import { CambiarPagina } from "./PageChanger.js"
 
 var idUsuario = showUser();
-var idUsuario = 2; //Para Test
+var idUsuario = 1; //Para Test
 
 function AddClickCambiarPagina(listDivs, isChat) {
     listDivs.forEach(div => {

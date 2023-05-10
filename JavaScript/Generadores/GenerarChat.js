@@ -82,10 +82,9 @@ function AddToHtmlPrincipal(arrayModelo)
 
 function AddToHtmlChat(arrayModelo) 
 {
-    for (var i = 0; i < arrayModelo.length; i++) 
-    {
-        var ultimoMensaje = arrayModelo[i].GetUltimoMensaje();
-        var chatMini = arrayModelo[i];
+
+        var ultimoMensaje = arrayModelo.GetUltimoMensaje();
+        var chatMini = arrayModelo;
 
         var contenedorGeneral = document.createElement("a"),
             contenedorImg = document.createElement("div"),
@@ -98,9 +97,9 @@ function AddToHtmlChat(arrayModelo)
         
         //Declaracion de clases e ids
         contenedorGeneral.id = "chat_" + chatMini.GetChatId();
-        contenedorGeneral.className = "list-group-item list-group-item-action active text-white rounded-0";
+        contenedorGeneral.className = "list-group-item list-group-item-action active text-white rounded-0 chat";
         contenedorImg.className = "media";
-        imgRecibido.className = "rounded-circle";
+        img.className = "rounded-circle";
         body.className = "media-body ml-4";
         contenedorUser.className = "d-flex align-items-center justify-content-between mb-1";
         nombre.className = "mb-0";
@@ -108,14 +107,14 @@ function AddToHtmlChat(arrayModelo)
         mensaje.className = "font-italic mb-0 text-small";
 
         //Add Data
-        imgRecibido.alt = "user";
-        imgRecibido.width = "50";
+        img.alt = "user";
+        img.width = "50";
         fecha.innerHTML = ultimoMensaje.fecha;
         nombre.innerHTML = chatMini.GetUserName();
         mensaje.innerHTML = chatMini.texto;
 
-        if (modelo.GetUserFoto() != null)
-                img.src = chatMini.GetUserFoto();
+        if (chatMini.GetUserFoto() != null)
+            img.src = chatMini.GetUserFoto();
         else 
             img.src = "../../imgEventDefault/fotoPerfilDefaul.png";
 
@@ -127,6 +126,6 @@ function AddToHtmlChat(arrayModelo)
         contenedorImg.appendChild(body);
         contenedorGeneral.appendChild(contenedorImg);
 
-        document.getElementById("").appendChild(contenedorGeneral);
-    }
+        document.getElementById("listChat").appendChild(contenedorGeneral);
+
 }

@@ -1,11 +1,11 @@
 import { Mensaje } from "../Modules/MensajeClass.js"
 import { GetUsuarioById } from "../API/ServiceAPI.js"
 
-export function GenerarMensajes(mensajes, idUserReg) 
+export function GenerarMensajes(chat, idUserReg) 
 {
     var mensajesModel = []
 
-    mensajes.comentarios.forEach(element => {
+    chat.mensajes.forEach(element => {
         mensajesModel.push(new Mensaje(
             element.id,
             element.fecha,
@@ -27,7 +27,7 @@ function AddToHtml(arrayModelo, idUserReg)
     }
 }
 
-export function AddUnoToHtml(modelo, idUserReg) 
+export async function AddUnoToHtml(modelo, idUserReg) 
 {
     var contenedorGeneral  = document.createElement("div"),
         body  = document.createElement("div"),
@@ -37,7 +37,7 @@ export function AddUnoToHtml(modelo, idUserReg)
         imgRecibido  = document.createElement("img");
 
     //Declaracion de clases y ids html
-    contenedorGeneral.className = "media w-50 mb-3";
+    contenedorGeneral.className = "media w-50 mb-3 ";
     body.className = "media-body";
     contentData.className = "rounded py-2 px-3 mb-2";
     mensaje.className = "text-small mb-0";
@@ -50,22 +50,28 @@ export function AddUnoToHtml(modelo, idUserReg)
     //Data Dependiente de si es un mensaje recibido o enviado
     if (modelo.GetUsuarioId() != idUserReg)
     {
-        contenedorGeneral.className += " ml-auto";
-        contentData.className += " bg-primary";
-        mensaje.className += " text-white";
+        body.className += " ml-3";
+        contentData.className += " bg-light";
+        mensaje.className += " text-muted";
         imgRecibido.className = "rounded-circle";
 
         imgRecibido.alt = "user";
         imgRecibido.width = "50";
 
-        GetUsuarioById(modelo.GetUsuarioId()).then(x => {
+        await GetUsuarioById(modelo.GetUsuarioId()).then(x => {
             if (x.referenciaFoto != null)
-                img.src = x.referenciaFoto ;
+                imgRecibido.src = x.referenciaFoto ;
             else 
-                img.src = "";
+                imgRecibido.src = "../../imgEventDefault/fotoPerfilDefaul.png";
         })
 
         contenedorGeneral.appendChild(imgRecibido);
+    }
+    else
+    {
+        contenedorGeneral.className += "ml-auto";
+        contentData.className += " bg-primary";
+        mensaje.className += " text-white";
     }
 
     contentData.appendChild(mensaje);
@@ -73,5 +79,5 @@ export function AddUnoToHtml(modelo, idUserReg)
     body.appendChild(fecha);
     contenedorGeneral.appendChild(body);
 
-    document.getElementById("").appendChild(contenedorGeneral);
+    document.getElementById("listaMensajes").appendChild(contenedorGeneral);
 }
