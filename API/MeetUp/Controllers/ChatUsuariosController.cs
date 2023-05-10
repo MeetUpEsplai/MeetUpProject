@@ -24,6 +24,9 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/ChatUsuarios
+        /// <summary>
+        /// Recoge todos los objetos ChatUsuarios de la base de datos
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ChatUsuarios>>> GetChatUsuarios()
         {
@@ -35,6 +38,10 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/ChatUsuarios/5
+        /// <summary>
+        /// Recoge un objeto ChatUsuarios por id
+        /// </summary>
+        /// <param name="id">Id del objeto ChatUsuarios</param>
         [HttpGet("id_{id}")]
         public async Task<ActionResult<ChatUsuarios>> GetChatUsuarios(int id)
         {
@@ -59,6 +66,10 @@ namespace MeetUp.Controllers
 
         // PUT: api/ChatUsuarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Actualiza un objeto ChatUsuario por id
+        /// </summary>
+        /// <param name="id">Id del objeto ChatUsuarios a cambiar</param>
         [HttpPut("id_{id}")]
         public async Task<IActionResult> PutChatUsuarios(int id, ChatUsuarios chatUsuarios)
         {
@@ -90,6 +101,10 @@ namespace MeetUp.Controllers
 
         // POST: api/ChatUsuarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade un objeto ChatUsuarios por id
+        /// </summary>
+        /// <param name="id">Id del objeto ChatUsuarios a añadir</param>
         [HttpPost]
         public async Task<ActionResult<ChatUsuarios>> PostChatUsuarios(ChatUsuarios chatUsuarios)
         {
@@ -123,6 +138,10 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/ChatUsuarios/5
+        /// <summary>
+        /// Elimina un objeto ChatUsuarios por id
+        /// </summary>
+        /// <param name="id">Id del objeto ChatUsuarios a eliminar</param>
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteChatUsuarios(int id)
         {

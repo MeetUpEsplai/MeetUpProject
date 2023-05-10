@@ -144,11 +144,11 @@ namespace MeetUp.Controllers
             return eventosConUsuarioCorrecto;
         }
 
-        [HttpGet("nombre_{nombre}")]
         /// <summary>
         /// Recoge todos los eventos que tengan ese nombre
         /// </summary>
         /// <param name="nombre">Nombre del evento</param>
+        [HttpGet("nombre_{nombre}")]
         public async Task<ActionResult<List<Evento>>> BuscarEventosPorNombre(string nombre)
         {
             var eventos = await _context.Events

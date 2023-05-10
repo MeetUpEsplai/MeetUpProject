@@ -130,6 +130,7 @@ namespace MeetUp.Controllers
 
         // PUT: api/Usuarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         /// <summary>
         /// Actualiza el usuario por la id 
         /// </summary>
@@ -169,6 +170,7 @@ namespace MeetUp.Controllers
 
         // POST: api/Usuarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         /// <summary>
         /// Añade un usuario a la base de datos
         /// </summary>
@@ -196,6 +198,7 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Usuarios/5
+
         /// <summary>
         /// Elimina un usuario por la id 
         /// </summary>

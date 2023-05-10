@@ -24,6 +24,9 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/UsuarioReaccionaEventoes
+        /// <summary>
+        /// Recoge todos los objetos UsuarioReaccionaEvento de la base de datos
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UsuarioReaccionaEvento>>> GetUsuariosaEventos()
         {
@@ -35,6 +38,9 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/UsuarioReaccionaComentarios/5
+        /// <summary>
+        /// Recoge un objeto UsuarioReaccionaEvento por los id de usuario, evento y tipo de reacción
+        /// </summary>
         [HttpGet("usuarioId_{usuarioId},eventoId_{eventoId},tipoReaccionId_{tipoReaccionId}")]
         public async Task<ActionResult<UsuarioReaccionaEvento>> GetUsuarioReaccionaEvento(int usuarioId, int eventoId, int tipoReaccionId)
         {
@@ -49,6 +55,9 @@ namespace MeetUp.Controllers
             return usuarioReaccionaEvento;
         }
 
+        /// <summary>
+        /// Recoge el numero de cada tipo de reacciones que tiene un evento
+        /// </summary>
         [HttpGet("eventoId_{eventoId},tipoReaccionId_{tipoReaccionId}")]
         public async Task<ActionResult<int>> GetReaccionCount(int eventoId, int tipoReaccionId)
         {
@@ -67,6 +76,9 @@ namespace MeetUp.Controllers
 
         // PUT: api/UsuarioReaccionaEventoes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Actualiza un objeto UsuarioReaccionaEvento por id
+        /// </summary>
         [HttpPut("id_{id}")]
         public async Task<IActionResult> PutUsuarioReaccionaEvento(int id, UsuarioReaccionaEvento usuarioReaccionaEvento)
         {
@@ -98,6 +110,9 @@ namespace MeetUp.Controllers
 
         // POST: api/UsuarioReaccionaEventoes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade un objeto UsuarioReaccionaEvento
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<UsuarioReaccionaEvento>> PostUsuarioReaccionaEvento(UsuarioReaccionaEvento usuarioReaccionaEvento)
         {
@@ -130,6 +145,9 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/UsuarioReaccionaEventoes/5
+        /// <summary>
+        /// Elimina un objeto UsuarioReaccionaEvento por id
+        /// </summary>
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteUsuarioReaccionaEvento(int id)
         {
