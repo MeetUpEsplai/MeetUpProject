@@ -24,6 +24,7 @@ const IDETIQUETA = "etiquetaId_";
 const IDEVENTO = "eventoId_";
 const IDTIPOREACCION = "tipoReaccionId";
 const IDCOMENTARIO = "comentarioId_";
+const IDCHAT  = "chatId_";
 
 function Post(stringClase, modelo) { return setQuery(ROOT + stringClase, modelo); }
 function Put(stringClase, modelo, id) { return setQuery(ROOT + stringClase + "/" + ID + id, modelo); }
@@ -36,10 +37,12 @@ function Delete(stringClase, id) { return getQuery(ROOT + stringClase + "/" + ID
 
 //Crud Chat
 export function PostChat(chatModel) { return Post(CHAT, chatModel); }
+export function GetChatById(idChat) { return Get(CHAT, ID + idChat); }
 
 
 //Crud ChatUsuario
 export function PostChatUsuario(chatUsuarioModel) { return Post(CHATUSUARIOS, chatUsuarioModel); }
+export function GetUsuarioChats(idUsuario) { return Get(CHATUSUARIOS, IDUSUARIO + idUsuario)}
 
 
 //Crud Comentario
@@ -106,6 +109,7 @@ export function GetUsuarioById(idUsuario) { return Get(USUARIO, ID + idUsuario);
 export function GetAllUsuario() { return GetAll(USUARIO); }
 export function GetUsuarioByNombre(nombre) { return Get(USUARIO, NOMBRE + nombre); }
 export function GetUsuarioByEmail(email) { return Get(USUARIO, EMAIL + email); }
+export function GetUsuarioByChat(idChat, idUsuario) { return Get(USUARIO, IDCHAT + idChat + "," + IDUSUARIO + idUsuario); }
 export function DeleteUsuario(idUsuario) { return Delete(USUARIO, idUsuario); }
 
 

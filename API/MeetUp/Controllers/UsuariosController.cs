@@ -31,10 +31,10 @@ namespace MeetUp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
         {
-          if (_context.Usuarios == null)
-          {
-              return NotFound();
-          }
+            if (_context.Usuarios == null)
+            {
+                return NotFound();
+            }
             return await _context.Usuarios
                 .Include(x => x.Mensajes)
                 .Include(x => x.Eventos)
@@ -54,10 +54,10 @@ namespace MeetUp.Controllers
         [HttpGet("id_{id}")]
         public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
-          if (_context.Usuarios == null)
-          {
-              return NotFound();
-          }
+            if (_context.Usuarios == null)
+            {
+                return NotFound();
+            }
             var usuario = await _context.Usuarios
                 .Include(x => x.Mensajes)
                 .Include(x => x.Eventos)
@@ -93,7 +93,7 @@ namespace MeetUp.Controllers
                 return NotFound();
             }
 
-            return usuario; 
+            return usuario;
         }
 
         /// <summary>
@@ -119,6 +119,28 @@ namespace MeetUp.Controllers
             }
 
             return usuarioEncontrado;
+
+        }
+        [HttpGet("chatId_{idChat},usuarioId_{idUsuario}")]
+        public async Task<ActionResult<List<Usuario>>> GetUsuariosByChat(int idChat, int idUsuario)
+        {
+            List<Chat> chats = _context.Chats.Where(x => x.Id == idChat).ToList();
+            List<Usuario> usuarios = new List<Usuario>();
+
+            foreach (Chat chat in chats)
+            {
+                ChatUsuarios cu = _context.ChatUsuarios.Where(x => x.ChatId == chat.Id).FirstOrDefault();
+                usuarios.Add(_context.Usuarios.Where(x => x.Id != idUsuario && x.Id == cu.UsuarioId).FirstOrDefault());
+            }
+
+                
+
+            if (usuarios == null)
+            {
+                return NotFound();
+           }
+        
+            return usuarios;
         }
 
         #endregion

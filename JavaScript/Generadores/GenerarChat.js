@@ -1,58 +1,39 @@
 import { ChatMini } from "../Modules/ChatClass.js"
 
-export function GenerarChatsPrincipal(usuario) 
+export function GenerarChatsPrincipal(usuarios, chat) 
 {
-    content = ApiToModelo(usuario)
+    var content = ApiToModelo(usuarios, chat)
     AddToHtmlPrincipal(content);
 }
 
-export function GenerarChatsPagChat(usuario) 
+export function GenerarChatsPagChat(usuarios, chat) 
 {
-    content = ApiToModelo(usuario)
+    var content = ApiToModelo(usuarios, chat)
     AddToHtmlChat(content);
 }
 
-function ApiToModelo(usuario)
+function ApiToModelo(usuarios, chat)
 {
-    var chats = usuario.chats;
-    var chatContent = [];
+    var ultimoMensaje = "";
 
-    for (var i = 0; i < chats.length; i++) 
-    {
-        var usuarioschat = chats.usuarios
-        var nombreUsuario;
-        var fotoUsuario;
-        var numMensajes = chats.mensajes.length;
-        var ultimoMensaje = chats.mensajes[numMensajes - 1];
+    if (chat.mensajes.length != 0)
+        ultimoMensaje = chat.mensajes[chat.mensajes.length - 1]
 
-        for (var j = 0; j < usuarioschat.length; j++)
-        {
-            if (usuarioschat[i].id != usuario.id)
-            {
-                nombreUsuario = usuarioschat[i].referenciaFoto;
-                fotoUsuario = usuarioschat[i].referenciaFoto;
-            }
-        }
-
-        chatContent.push(new ChatMini(chats[i].id, ultimoMensaje, fotoUsuario, nombreUsuario));
-    }
-
-    return chatContent;
+    var chatMini = new ChatMini(chat.id, ultimoMensaje, usuarios[0].referenciaFoto, usuarios[0].nombre);
+        
+    return chatMini;
 }
 
 function AddToHtmlPrincipal(arrayModelo) 
 {
-    for (var i = 0; i < arrayModelo.length; i++) 
-    {
-        var ultimoMensaje = arrayModelo[i].GetUltimoMensaje();
-        var chatMini = arrayModelo[i];
+        var ultimoMensaje = arrayModelo.GetUltimoMensaje();
+        var chatMini = arrayModelo;
 
         var contenedorGeneral = document.createElement("div"),
             contenedorImg = document.createElement("div"),
             img  = document.createElement("img"),
             contenedorData = document.createElement("div"),
             rowData = document.createElement("div"),
-            colData = document.createElement("div"),
             contenedorNombre = document.createElement("div"),
             nombre = document.createElement("h5"),
             contenedorFecha = document.createElement("div"),
@@ -62,41 +43,41 @@ function AddToHtmlPrincipal(arrayModelo)
 
         //Declaracion de clases e ids
         contenedorGeneral.id = "chat_" + chatMini.GetChatId();
-        contenedorGeneral.className = "row chat";
+        contenedorGeneral.className = "row chat d-flex";
         contenedorImg.className = "col-3";
         img.className = "imgProfileUsers";
         contenedorData.className = "col-9";
-        rowData.className = "row";
-        contenedorNombre.className = "col-9";
+        rowData.className = "row justify-content-between";
+        contenedorNombre.className = "col-8";
         nombre.className = "fw-bolder";
-        contenedorFecha.className = "col-1";
+        contenedorFecha.className = "col-4";
         contenedorMensaje.className = "row";
 
         //Add Data
-        if (modelo.GetUserFoto() != null)
+        if (chatMini.GetUserFoto() != null)
                 img.src = chatMini.GetUserFoto();
         else 
             img.src = "";
                 
-        fecha.innerHTML = ultimoMensaje.GetFecha();
-        nombre.innerHTML = modelo.GetUserName();
-        mensaje.innerHTML = modelo.GetTexto();
+        fecha.innerHTML = ultimoMensaje.fecha;
+        nombre.innerHTML = chatMini.GetUserName();
+        mensaje.innerHTML = chatMini.texto;
 
         //Asignar padre
         contenedorImg.appendChild(img);
         contenedorNombre.appendChild(nombre);
         contenedorFecha.appendChild(fecha);
         contenedorMensaje.appendChild(mensaje);
-        colData.appendChild(contenedorNombre);
-        colData.appendChild(contenedorFecha);
-        colData.appendChild(contenedorMensaje);
-        rowData.appendChild(colData);
+        rowData.appendChild(contenedorNombre);
+        rowData.appendChild(contenedorFecha);
         contenedorData.appendChild(rowData);
+        contenedorData.appendChild(contenedorMensaje);
         contenedorGeneral.appendChild(contenedorImg);
         contenedorGeneral.appendChild(contenedorData);
 
         document.getElementById("chatList").appendChild(contenedorGeneral);
-    }
+        document.getElementById("chatList").appendChild(document.createElement("hr"));
+    
 }
 
 function AddToHtmlChat(arrayModelo) 
@@ -129,9 +110,9 @@ function AddToHtmlChat(arrayModelo)
         //Add Data
         imgRecibido.alt = "user";
         imgRecibido.width = "50";
-        fecha.innerHTML = ultimoMensaje.GetFecha();
-        nombre.innerHTML = modelo.GetUserName();
-        mensaje.innerHTML = modelo.GetTexto();
+        fecha.innerHTML = ultimoMensaje.fecha;
+        nombre.innerHTML = chatMini.GetUserName();
+        mensaje.innerHTML = chatMini.texto;
 
         if (modelo.GetUserFoto() != null)
                 img.src = chatMini.GetUserFoto();

@@ -1,31 +1,44 @@
-import { GenerarChats } from "../Generadores/GenerarChat.js"
+import { GenerarChatsPrincipal } from "../Generadores/GenerarChat.js"
 import { GenerarEventos } from "../Generadores/GenerarEventos.js"
-import { GetAllEvento, GetUsuarioById } from "../API/ServiceAPI.js"
+import { GetAllEvento, GetUsuarioById, GetUsuarioChats, GetChatById, GetUsuarioByChat } from "../API/ServiceAPI.js"
+import { show } from "./LocalStorage.js"
+import { CambiarPagina } from "./PageChanger.js"
 
-function AddClickCambiarPagina(listDivs, tipoPag) {
-    listDivs.forEach(chat => {
-        evento.addEventListener('click', () => {
-            const id = chat.id.split('_')[1];
-            //Cambiar pagina chat con id
+function AddClickCambiarPagina(listDivs, isChat) {
+    listDivs.forEach(div => {
+        div.addEventListener('click', () => {
+            const id = div.id.split('_')[1];
+            if (isChat)
+                CambiarPagina("../../chat/chat.html", id);
+            else
+                CambiarPagina("../../perfil/perfil.html", id);
         });
     });
 }
 
+GetUsuarioChats(2).then(async chatUsuarios => {
+    chatUsuarios.forEach(cu => {
+        GetChatById(cu.chatId).then(chat => {
+            GetUsuarioByChat(chat.id, 2).then(async users => {
 
-GetUsuarioById(1).then(async user =>{
-    await GenerarChats(user);
-
-    const eventos = document.querySelectorAll('.chat');
-
-    AddClickCambiarPagina(eventos, "evento");
+                await GenerarChatsPrincipal(users, chat);
+    
+                const eventos = document.querySelectorAll('.chat');
+    
+                AddClickCambiarPagina(eventos, true);
+            });
+        });
+    });
+    
 });
 
 GetAllEvento().then(async eventos => {
+
     await GenerarEventos(eventos);
 
     const chats = document.querySelectorAll('.evento');
 
-    AddClickCambiarPagina(chats, "chat");
+    AddClickCambiarPagina(chats, false);
 });
 
 

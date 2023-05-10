@@ -59,6 +59,26 @@ namespace MeetUp.Controllers
             return chatUsuarios;
         }
 
+
+        [HttpGet("usuarioId_{id}")]
+        public async Task<ActionResult<IEnumerable<ChatUsuarios>>> GetUsuarioChats(int id)
+        {
+            if (_context.ChatUsuarios == null)
+            {
+                return NotFound();
+            }
+            List<ChatUsuarios> chatUsuarios = await _context.ChatUsuarios
+                .Where(x => x.UsuarioId == id)
+                .ToListAsync();
+
+            if (chatUsuarios == null)
+            {
+                return NotFound();
+            }
+
+            return chatUsuarios;
+        }
+
         #endregion
 
 

@@ -1,4 +1,5 @@
 import { GetAllEvento, GetEventoCountSuscritos } from "../API/ServiceAPI.js";
+import { Evento, EventoContent } from "../Modules/EventoClass.js";
 
 export async function GenerarEventos(listEventos) 
 {
@@ -6,7 +7,7 @@ export async function GenerarEventos(listEventos)
 
     for (var i = 0; i < listEventos.length; i++) 
     {
-    var actual = result[i];
+    var actual = listEventos[i];
     
         var evento = new Evento(
             actual.id, 
@@ -56,7 +57,7 @@ function AddToHtml(arrayModelo)
         if (modelo.GetFotoPrincipal() != null)
             img.src = modelo.GetFotoPrincipal();
         else 
-            img.src = "";
+            img.src = "../../imgEventDefault/imgDefault.PNG";
                 
         fecha.innerHTML = modelo.GetFechaEvento();
         titulo.innerHTML = modelo.GetNombre();
