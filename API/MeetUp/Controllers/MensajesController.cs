@@ -24,6 +24,9 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Mensajes
+        /// <summary>
+        /// Recoge todos los mensajes de la base de datos
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Mensaje>>> GetMensajes()
         {
@@ -35,6 +38,10 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/Mensajes/5
+        /// <summary>
+        /// Recoge un mensaje por id
+        /// </summary>
+        /// <param name="id">Id del mensaje</param>
         [HttpGet("id_{id}")]
         public async Task<ActionResult<Mensaje>> GetMensaje(int id)
         {
@@ -58,6 +65,11 @@ namespace MeetUp.Controllers
 
         // PUT: api/Mensajes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Actualiza un mensaje por id
+        /// </summary>
+        /// <param name="id">Id del mensaje a cambiar</param>
+        /// <param name="mensaje">Objeto mensaje a añadir</param>
         [HttpPut("id_{id}")]
         public async Task<IActionResult> PutMensaje(int id, Mensaje mensaje)
         {
@@ -89,6 +101,10 @@ namespace MeetUp.Controllers
 
         // POST: api/Mensajes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade un mensaje
+        /// </summary>
+        /// <param name="mensaje">Mensaje a añadir</param>
         [HttpPost]
         public async Task<ActionResult<Mensaje>> PostMensaje(Mensaje mensaje)
         {
@@ -108,6 +124,10 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Mensajes/5
+        /// <summary>
+        /// Elimina un mensaje por id
+        /// </summary>
+        /// <param name="id">Id del mensaje a eliminar</param>
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteMensaje(int id)
         {

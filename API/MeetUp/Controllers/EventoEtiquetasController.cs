@@ -24,6 +24,9 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/EventoEtiquetas
+        /// <summary>
+        /// Recoge todos los objetos EventoEtiqueta de la base de datos
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventoEtiquetas>>> GetEventoEtiquetas()
         {
@@ -36,6 +39,9 @@ namespace MeetUp.Controllers
 
 
         // GET: api/EventoEtiquetas/5
+        /// <summary>
+        /// Recoge un objeto EventoEtiqueta por id
+        /// </summary>
         [HttpGet("id_{id}")]
         public async Task<ActionResult<EventoEtiquetas>> GetEventoEtiquetas(int id)
         {
@@ -60,6 +66,9 @@ namespace MeetUp.Controllers
 
         // PUT: api/EventoEtiquetas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Actualiza un objeto EventoEtiqueta por id
+        /// </summary>
         [HttpPut("id_{id}")]
         public async Task<IActionResult> PutEventoEtiquetas(int id, EventoEtiquetas eventoEtiquetas)
         {
@@ -91,6 +100,9 @@ namespace MeetUp.Controllers
 
         // POST: api/EventoEtiquetas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade un objeto EventoEtiquetas
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<EventoEtiquetas>> PostEventoEtiquetas(EventoEtiquetas eventoEtiquetas)
         {
@@ -124,6 +136,9 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/EventoEtiquetas/5
+        /// <summary>
+        /// Elimina un objeto EventoEtiquetas por id
+        /// </summary>
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteEventoEtiquetas(int id)
         {

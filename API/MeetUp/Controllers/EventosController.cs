@@ -25,6 +25,9 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Eventos
+        /// <summary>
+        /// Recoge todos los eventos de la base de datos
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Evento>>> GetEvents()
         {
@@ -42,6 +45,10 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/Eventos/5
+        /// <summary>
+        /// Recoge un evento por id
+        /// </summary>
+        /// <param name="id">Id del evento a recoger</param>
         [HttpGet("id_{id}")]
         public async Task<ActionResult<Evento>> GetEvento(int id)
         {
@@ -68,6 +75,10 @@ namespace MeetUp.Controllers
 
 
         // GET: api/Eventos
+        /// <summary>
+        /// Recoge todos los eventos que tenga el usuario con ese id
+        /// </summary>
+        /// <param name="id">Id del usuario</param>
         [HttpGet("usuarioId_{id}")]
         public async Task<ActionResult<IEnumerable<Evento>>> GetEventsByUser(int id)
         {
@@ -99,6 +110,10 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/Eventos
+        /// <summary>
+        /// Recoge todos los eventos que tengan la etiqueta con ese id
+        /// </summary>
+        /// <param name="id">Id de la etiqueta</param>
         [HttpGet("etiquetaId_{id}")]
         public async Task<ActionResult<IEnumerable<Evento>>> GetEventsByEtiqueta(int id)
         {
@@ -130,6 +145,10 @@ namespace MeetUp.Controllers
         }
 
         [HttpGet("nombre_{nombre}")]
+        /// <summary>
+        /// Recoge todos los eventos que tengan ese nombre
+        /// </summary>
+        /// <param name="nombre">Nombre del evento</param>
         public async Task<ActionResult<List<Evento>>> BuscarEventosPorNombre(string nombre)
         {
             var eventos = await _context.Events
@@ -147,6 +166,10 @@ namespace MeetUp.Controllers
 
 
         // GET: api/UsuarioReaccionaComentarios/5
+        /// <summary>
+        /// Recoge el numero de usuarios suscritos al evento con ese id
+        /// </summary>
+        /// <param name="idEvento">Id del evento a contar</param>
         [HttpGet("eventoId_{idEvento}")]
         public async Task<ActionResult<int>>? GetSuscritosCount(int idEvento)
         {
@@ -172,6 +195,11 @@ namespace MeetUp.Controllers
 
         // PUT: api/Eventos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Actualiza un evento por id
+        /// </summary>
+        /// <param name="id">Id del evento a cambiar</param>
+        /// <param name="model">Objeto evento a añadir</param>
         [HttpPut("id_{id}")]
         public async Task<IActionResult> PutEvento(int id, EventoViewModel model)
         {
@@ -207,6 +235,10 @@ namespace MeetUp.Controllers
 
         // POST: api/Eventos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade un evento
+        /// </summary>
+        /// <param name="model">Evento a añadir</param>
         [HttpPost]
         public async Task<ActionResult<Evento>> PostEvento(EventoViewModel model)
         {
@@ -229,6 +261,11 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Eventos/5
+        /// <summary>
+        /// Elimina un evento por id
+        /// </summary>
+        /// <param name="id">Id del evento a eliminar</param>
+
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteEvento(int id)
         {

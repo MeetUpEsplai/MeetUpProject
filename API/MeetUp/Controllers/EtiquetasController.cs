@@ -25,6 +25,9 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Etiquetas
+        /// <summary>
+        /// Recoge todas las etiquetas de la base de datos
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Etiqueta>>> GetEtiquetas()
         {
@@ -38,6 +41,10 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/Etiquetas/5
+        /// <summary>
+        /// Recoge una etiqueta por id
+        /// </summary>
+        /// <param name="id">Id de la etiqueta</param>
         [HttpGet("id_{id}")]
         public async Task<ActionResult<Etiqueta>> GetEtiqueta(int id)
         {
@@ -65,6 +72,10 @@ namespace MeetUp.Controllers
 
         // PUT: api/Etiquetas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Actualiza una etiqueta por id
+        /// </summary>
+        /// <param name="id">Id de la etiqueta a cambiar</param>
         [HttpPut("id_{id}")]
         public async Task<IActionResult> PutEtiqueta(int id, EtiquetaViewModel model)
         {
@@ -99,6 +110,9 @@ namespace MeetUp.Controllers
 
         // POST: api/Etiquetas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade una etiqueta
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<Etiqueta>> PostEtiqueta(EtiquetaViewModel model)
         {
@@ -121,6 +135,10 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Etiquetas/5
+        /// <summary>
+        /// Elimina una etiqueta por id
+        /// </summary>
+        /// <param name="id">Id de la etiqueta</param>
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteEtiqueta(int id)
         {

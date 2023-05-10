@@ -25,6 +25,9 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Usuarios
+        /// <summary>
+        /// Recoge todos los usuarios de la base de datos
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
         {
@@ -44,6 +47,10 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/Usuarios/5
+        /// <summary>
+        /// Recoge un usuario por id
+        /// </summary>
+        /// <param name="id">Id del usuario</param>
         [HttpGet("id_{id}")]
         public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
@@ -70,6 +77,10 @@ namespace MeetUp.Controllers
             return usuario;
         }
 
+        /// <summary>
+        /// Recoge un usuario por su nombre
+        /// </summary>
+        /// <param name="nombre">Nombre del usuario</param>
         [HttpGet("nombre_{nombre}")]
         public async Task<ActionResult<List<Usuario>>> BuscarUsuarioPorNombre(string nombre)
         {
@@ -87,7 +98,10 @@ namespace MeetUp.Controllers
             return usuario;
         }
 
-
+        /// <summary>
+        /// Recoge un usuario por su correo
+        /// </summary>
+        /// <param name="email">Correo del usuario</param>
         [HttpGet("email_{email}")]
         public async Task<ActionResult<Usuario>> BuscarUsuarioPorEmail(string email)
         {
@@ -116,6 +130,11 @@ namespace MeetUp.Controllers
 
         // PUT: api/Usuarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Actualiza el usuario por la id 
+        /// </summary>
+        /// <param name="id">Id del usuario</param>
+        /// <param name="model">Objeto usuario nuevo</param>
         [HttpPut("id_{id}")]
         public async Task<IActionResult> PutUsuario(int id, UsuarioViewModel model)
         {
@@ -150,6 +169,10 @@ namespace MeetUp.Controllers
 
         // POST: api/Usuarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade un usuario a la base de datos
+        /// </summary>
+        /// <param name="model">Usuario nuevo</param>
         [HttpPost]
         public async Task<ActionResult<Usuario>> PostUsuario(UsuarioViewModel model)
         {
@@ -173,6 +196,10 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Usuarios/5
+        /// <summary>
+        /// Elimina un usuario por la id 
+        /// </summary>
+        /// <param name="id">Id del usuario</param>
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteUsuario(int id)
         {

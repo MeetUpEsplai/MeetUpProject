@@ -24,6 +24,9 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Fotos
+        /// <summary>
+        /// Recoge todas las fotos de la base de datos
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Foto>>> GetFotos()
         {
@@ -34,9 +37,13 @@ namespace MeetUp.Controllers
             return await _context.Fotos.ToListAsync();
         }
 
-       
+
 
         // GET: api/Fotos/5
+        /// <summary>
+        /// Recoge una foto por id
+        /// </summary>
+        /// <param name="id">Id de la foto</param>
         [HttpGet("id_{id}")]
         public async Task<ActionResult<Foto>> GetFoto(int id)
         {
@@ -61,6 +68,11 @@ namespace MeetUp.Controllers
 
         // PUT: api/Fotos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Actualiza una foto por id 
+        /// </summary>
+        /// <param name="id">Id de la foto a cambiar</param>
+        /// <param name="foto">Objeto foto a añadir</param>
         [HttpPut("id_{id}")]
         public async Task<IActionResult> PutFoto(int id, Foto foto)
         {
@@ -89,10 +101,14 @@ namespace MeetUp.Controllers
 
             return NoContent();
         }
-        
+
 
         // POST: api/Fotos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade una foto 
+        /// </summary>
+        /// <param name="foto">Objeto foto a añadir</param>
         [HttpPost]
         public async Task<ActionResult<Foto>> PostFoto(Foto foto)
         {
@@ -112,6 +128,10 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Fotos/5
+        /// <summary>
+        /// Elimina una foto por id
+        /// </summary>
+        /// <param name="id">Id de la foto a eliminar</param>
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteFoto(int id)
         {

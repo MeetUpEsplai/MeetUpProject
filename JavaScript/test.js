@@ -1,11 +1,10 @@
-import { PostFoto, GetAllEvento, GetEventoById, GetEventoByUsuario, GetEventoCountSuscritos, PostChat, PostEtiqueta, PostEvento, PostSuscripcion, PostTipoReaccion } from "./API/ServiceAPI.js";
+import { GetEventoByEtiqueta, GetAllEvento, GetEventoById, GetEventoByUsuario, GetEventoCountSuscritos, PostChat, PostEtiqueta, PostEvento, PostSuscripcion, PostTipoReaccion } from "./API/ServiceAPI.js";
 import { Evento, EventoContent } from "./Modules/EventoClass.js"
 import { GenerarEventos } from "./Generadores/GenerarEventos.js";
 import { TipoReaccion } from "./Modules/TipoReaccionClass.js";
 import { Etiqueta } from "./Modules/EtiquetaClass.js";
 import { UsuarioSuscribeEvento } from "./Modules/UsuarioSuscribeEventoClass.js";
-import { Foto } from "./Modules/FotoClass.js";
+import { EventoEtiqueta } from "./Modules/EventoEtiqueta.js";
 
 
-console.log(PostFoto(new Foto(1, "a", 2)));
-
+console.log(GetEventoByEtiqueta(1));
