@@ -1,4 +1,5 @@
 import { GetUsuarioByNombre, GetEventoByNombre } from "../API/ServiceAPI.js";
+import { CambiarPagina } from "./PageChanger.js"
 
 const searchInput = document.querySelector('.search-container input[type="text"]');
 const searchResults = document.querySelector('.search-container .search-results');
@@ -6,7 +7,6 @@ const searchResults = document.querySelector('.search-container .search-results'
 searchInput.addEventListener('input', async () => {
     const searchTerm = searchInput.value.trim();
     
-    console.log("pasa");
     // Si no hay término de búsqueda, ocultar los resultados
     if (!searchTerm) {
         searchResults.style.display = 'none';
@@ -43,8 +43,11 @@ searchInput.addEventListener('input', async () => {
 searchResults.addEventListener('click', event => {
     const clickedResult = event.target.closest('li');
     if (clickedResult) {
-    const resultId = clickedResult.dataset.id;
-    console.log('Resultado seleccionado:', resultId);
-    // Aquí puedes hacer algo con el ID del resultado, como redirigir a una página de detalles
+        const resultId = clickedResult.dataset.id;
+        var isUser = clickedResult.innerHTML.split(":")[0] == "Usuario";
+        if (isUser)
+            CambiarPagina("../../perfil/perfil.html", resultId);
+        else
+            CambiarPagina("../../evento/evento.html", resultId);
     }
 });

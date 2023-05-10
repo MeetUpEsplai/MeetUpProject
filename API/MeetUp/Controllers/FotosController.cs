@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Context;
 using MeetUp.Modelos.Entidades;
+using Microsoft.Extensions.Logging;
 
 namespace MeetUp.Controllers
 {
@@ -80,6 +81,8 @@ namespace MeetUp.Controllers
             {
                 return BadRequest();
             }
+            
+            
 
             _context.Entry(foto).State = EntityState.Modified;
 
@@ -116,7 +119,14 @@ namespace MeetUp.Controllers
           {
               return Problem("Entity set 'ApplicationDbContext.Fotos'  is null.");
           }
-            _context.Fotos.Add(foto);
+
+            Foto fotoPro = new Foto
+            {
+                Referencia = foto.Referencia,
+                EventoId = foto.EventoId
+            };
+
+            _context.Fotos.Add(fotoPro);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetFoto", new { id = foto.Id }, foto);

@@ -57,7 +57,7 @@ function AddToHtmlPrincipal(arrayModelo)
         if (chatMini.GetUserFoto() != null)
                 img.src = chatMini.GetUserFoto();
         else 
-            img.src = "";
+            img.src = "../../imgEventDefault/fotoPerfilDefaul.png";
                 
         fecha.innerHTML = ultimoMensaje.fecha;
         nombre.innerHTML = chatMini.GetUserName();
@@ -117,7 +117,7 @@ function AddToHtmlChat(arrayModelo)
         if (modelo.GetUserFoto() != null)
                 img.src = chatMini.GetUserFoto();
         else 
-            img.src = "";
+            img.src = "../../imgEventDefault/fotoPerfilDefaul.png";
 
         contenedorUser.appendChild(nombre);
         contenedorUser.appendChild(fecha);

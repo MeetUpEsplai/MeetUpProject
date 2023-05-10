@@ -112,6 +112,15 @@ namespace MeetUp.Controllers
           {
               return Problem("Entity set 'ApplicationDbContext.Mensajes'  is null.");
           }
+
+            Mensaje mensjaePro = new Mensaje
+            {
+                Fecha = mensaje.Fecha,
+                Texto = mensaje.Texto,
+                ChatId = mensaje.ChatId,
+                UsuarioId = mensaje.UsuarioId
+            };
+
             _context.Mensajes.Add(mensaje);
             await _context.SaveChangesAsync();
 
