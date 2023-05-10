@@ -4,6 +4,9 @@ import { GetAllEvento, GetUsuarioById, GetUsuarioChats, GetChatById, GetUsuarioB
 import { show } from "./LocalStorage.js"
 import { CambiarPagina } from "./PageChanger.js"
 
+var idUsuario = show();
+var idUsuario = 2; //Para Test
+
 function AddClickCambiarPagina(listDivs, isChat) {
     listDivs.forEach(div => {
         div.addEventListener('click', () => {
@@ -16,10 +19,10 @@ function AddClickCambiarPagina(listDivs, isChat) {
     });
 }
 
-GetUsuarioChats(2).then(async chatUsuarios => {
+GetUsuarioChats(idUsuario).then(async chatUsuarios => {
     chatUsuarios.forEach(cu => {
         GetChatById(cu.chatId).then(chat => {
-            GetUsuarioByChat(chat.id, 2).then(async users => {
+            GetUsuarioByChat(chat.id, idUsuario).then(async users => {
 
                 await GenerarChatsPrincipal(users, chat);
     

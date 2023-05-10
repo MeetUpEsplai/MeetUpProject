@@ -14,6 +14,8 @@ export function GenerarComentarios(evento)
             element.eventoId,
             element.comentarioPadreId
             ))
+
+            console.log("Pasa");
     });
     
     AddToHtml(comentarios);
@@ -34,7 +36,7 @@ async function AddToHtml(arrayModelo)
             mensaje = document.createElement("comentario");
 
         //Declaracion de clases e ids
-        contenedorGeneral.id = "comentario_" + chatMini.GetChatId();
+        contenedorGeneral.id = "comentario_" + comentario.GetId();
         contenedorGeneral.className = "row mb-4 divBgPastel cartaComentario";
         contenedorImg.className = "col-2 ms-4 mt-2";
         contenedorImg.id = "divImagenComentarios";
@@ -44,12 +46,12 @@ async function AddToHtml(arrayModelo)
 
         //Add Data
         await GetUsuarioById(comentario.GetId()).then(x => {
-            if (x.GetUserFoto() != null)
-                img.src = x.GetRefereciaFoto();
+            if (x.referenciaFoto != null)
+                img.src = x.referenciaFoto;
             else 
-                img.src = "";   
+                img.src = "../../imgEventDefault/fotoPerfilDefaul.png";   
 
-            nombreUser.innerHTML = x.GetNombre();
+            nombreUser.innerHTML = x.nombre;
         });
 
         mensaje.innerHTML = comentario.GetTexto();

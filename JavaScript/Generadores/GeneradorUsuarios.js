@@ -2,29 +2,22 @@ import { Usuario } from "../Modules/UsuarioClass.js"
 
 export function GenerarUsuarios(usuarios) 
 {
-    var usuariosModel = []
-
-    usuarios.comentarios.forEach(element => {
-        usuariosModel.push(new Usuario(
-            element.id,
-            element.nombre,
-            element.nombre,
-            element.email,
-            element.password,
-            element.fechaNacimiento,
-            element.referenciaFoto
-            ))
-    });
+    var usuario = new Usuario(
+        usuarios.id,
+        usuarios.nombre,
+        usuarios.nombre,
+        usuarios.email,
+        usuarios.password,
+        usuarios.fechaNacimiento,
+        usuarios.referenciaFoto
+        )
     
-    AddToHtml(usuariosModel);
+    AddToHtml(usuario);
 }
-
 
 function AddToHtml(arrayModelo) 
 {
-    for (var i = 0; i < arrayModelo.length; i++) 
-    {
-        var usuario = arrayModelo[i];
+        var usuario = arrayModelo;
 
         var contenedorGeneral  = document.createElement("div"),
             row  = document.createElement("div"),
@@ -34,10 +27,10 @@ function AddToHtml(arrayModelo)
 
         //Declaracion de clases e ids
         contenedorGeneral.id = "user_" + usuario.GetId();
-        contenedorGeneral.class = "col-2 cardAsistente divBgPastel";
-        row.class = "row";
+        contenedorGeneral.className = "col-2 cardAsistente divBgPastel";
+        row.className = "row";
         row.id = "divRow_imagenAsistente";
-        col.class = "col-2 centrarContenidoCarta";
+        col.className = "col-2 centrarContenidoCarta";
 
         //Add Data
         if (usuario.GetRefereciaFoto() != null)
@@ -54,5 +47,4 @@ function AddToHtml(arrayModelo)
         contenedorGeneral.appendChild(row);
 
         document.getElementById("divRow_contenidoAsistentes").appendChild(contenedorGeneral);
-    }
 }
