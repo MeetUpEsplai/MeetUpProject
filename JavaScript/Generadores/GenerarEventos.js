@@ -54,7 +54,7 @@ function AddToHtml(arrayModelo)
         containerData.className  = "col-8 text-white";
 
         //Add Data
-        if (modelo.GetFotoPrincipal() != null)
+        if (modelo.GetFotoPrincipal() != "")
             img.src = modelo.GetFotoPrincipal();
         else 
             img.src = "../../imgEventDefault/imgDefault.PNG";

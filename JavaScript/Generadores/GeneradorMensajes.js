@@ -69,7 +69,7 @@ export function AddUnoToHtml(modelo, idUserReg)
         imgRecibido.width = "50";
 
         GetUsuarioById(modelo.GetUsuarioId()).then(x => {
-            if (x.referenciaFoto != null)
+            if (x.referenciaFoto != "")
                 imgRecibido.src = x.referenciaFoto ;
             else 
                 imgRecibido.src = "../../imgEventDefault/fotoPerfilDefaul.png";

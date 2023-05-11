@@ -1,24 +1,40 @@
-function gusta(){
+import { show, showUser} from "../../JavaScript/Business/LocalStorage.js"
+import { PostReaccionEventos } from "../../JavaScript/API/ServiceAPI.js"
+import { UsuarioReaccionaeEvento } from "../../JavaScript/Modules/UsuarioReaccionaEventoClass.js"
+
+document.getElementById("gusta").addEventListener('click', () => {    
+    MandarDatos(3);
     document.getElementById('tituloReaccion').innerHTML='Me Gusta';
-}
+});
 
-function encanta(){
+document.getElementById("encanta").addEventListener('click', () => {
+    MandarDatos(2);
     document.getElementById('tituloReaccion').innerHTML='Me Encanta';
-}
+});
 
-function divierte(){
+document.getElementById("divierte").addEventListener('click', () => {
+    MandarDatos(5);
     document.getElementById('tituloReaccion').innerHTML='Me Divierte';
-}
+});
 
-function asombra(){
+document.getElementById("asombra").addEventListener('click', () => {
+    MandarDatos(1);
     document.getElementById('tituloReaccion').innerHTML='Me Asombra';
-}
+});
 
-function entristece(){
+document.getElementById("entristece").addEventListener('click', () => {
+    MandarDatos(6);
     document.getElementById('tituloReaccion').innerHTML='Me Entristece';
-}
+});
 
-function enfada(){
+document.getElementById("enfada").addEventListener('click', () => {
+    MandarDatos(4);
     document.getElementById('tituloReaccion').innerHTML='Me Enfada';
-}
+});
 
+function MandarDatos(intId) {
+    var reaccion = new UsuarioReaccionaeEvento(0, show(), showUser(), intId);
+    PostReaccionEventos(reaccion);
+    var num = parseInt(document.getElementById('tituloReaccion').innerHTML) + 1;
+    document.getElementById('tituloReaccion').innerHTML = num;
+}

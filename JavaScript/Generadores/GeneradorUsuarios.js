@@ -33,7 +33,7 @@ function AddToHtml(arrayModelo)
         col.className = "col-2 centrarContenidoCarta";
 
         //Add Data
-        if (usuario.GetRefereciaFoto() != null)
+        if (usuario.GetRefereciaFoto() != "")
             img.src = usuario.GetRefereciaFoto();
         else 
             img.src = "";

@@ -22,7 +22,7 @@ const EMAIL = "email_"
 const IDUSUARIO = "usuarioId_";
 const IDETIQUETA = "etiquetaId_";
 const IDEVENTO = "eventoId_";
-const IDTIPOREACCION = "tipoReaccionId";
+const IDTIPOREACCION = "tipoReaccionId_";
 const IDCOMENTARIO = "comentarioId_";
 const IDCHAT  = "chatId_";
 

@@ -46,7 +46,7 @@ async function AddToHtml(arrayModelo)
 
         //Add Data
         await GetUsuarioById(comentario.GetId()).then(x => {
-            if (x.referenciaFoto != null)
+            if (x.referenciaFoto != "")
                 img.src = x.referenciaFoto;
             else 
                 img.src = "../../imgEventDefault/fotoPerfilDefaul.png";   
