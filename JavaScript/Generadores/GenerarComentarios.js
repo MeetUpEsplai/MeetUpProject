@@ -6,18 +6,17 @@ export function GenerarComentarios(evento)
     var comentarios = []
 
     evento.comentarios.forEach(element => {
+        
         comentarios.push(new Comentario(
             element.id,
             element.fechaCreacion,
             element.texto,
-            element.texto,
+            element.usuarioId,
             element.eventoId,
             element.comentarioPadreId
             ))
-
-            console.log("Pasa");
     });
-    
+
     AddToHtml(comentarios);
 }
 
@@ -45,7 +44,7 @@ async function AddToHtml(arrayModelo)
         nombreUser.id = "nombreUserComentario";
 
         //Add Data
-        await GetUsuarioById(comentario.GetId()).then(x => {
+        await GetUsuarioById(comentario.GetIdUsuario()).then(x => {
             if (x.referenciaFoto != "")
                 img.src = x.referenciaFoto;
             else 
