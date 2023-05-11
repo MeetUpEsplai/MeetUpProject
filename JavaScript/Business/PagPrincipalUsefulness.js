@@ -5,7 +5,6 @@ import { showUser } from "./LocalStorage.js"
 import { CambiarPagina } from "./PageChanger.js"
 
 var idUsuario = showUser();
-var idUsuario = 1; //Para Test
 
 function AddClickCambiarPagina(listDivs, isChat) {
     listDivs.forEach(div => {
@@ -14,7 +13,7 @@ function AddClickCambiarPagina(listDivs, isChat) {
             if (isChat)
                 CambiarPagina("../../chat/chat.html", idUsuario, id);
             else
-                CambiarPagina("../../perfil/perfil.html", idUsuario, id);
+                CambiarPagina("../../evento/evento.html", idUsuario, id);
         });
     });
 }
@@ -22,7 +21,11 @@ function AddClickCambiarPagina(listDivs, isChat) {
 GetUsuarioChats(idUsuario).then(async chatUsuarios => {
     chatUsuarios.forEach(cu => {
         GetChatById(cu.chatId).then(chat => {
+            console.log(chat.id + " " + idUsuario)
+
             GetUsuarioByChat(chat.id, idUsuario).then(async users => {
+
+                console.log(users);
 
                 await GenerarChatsPrincipal(users, chat);
     

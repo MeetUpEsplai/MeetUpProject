@@ -1,238 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.3.1.slim.min.js">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/styleChat.css">
-    
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/styleChat.css">
+
 </head>
+
 <body>
-    <div class="background">
-        <!--Barra navegación-->
+  <div class="background">
+    <!--Barra navegación-->
     <nav class="navbar navbar-expand-lg" id="barraNavegacion">
-        <div class="container-fluid text-white" id="divNavegacion">
-          <div class="col-2" id="divCol_MeetUp">
-            <a href="#" class="ml-5 text-white" id="tituloMeetUp">MeetUp</a>
-          </div>
-        
-          <div class="col-6" id="divCol_buscar">
-            <div class="input-wrapper" id="divBuscar">
-              <input type="search" class="input" placeholder="Buscar" id="inputBuscar">
-              <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor" id="iconoBuscar">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-              </svg>
+      <div class="container-fluid text-white" id="divNavegacion">
+        <div class="col-2" id="divCol_MeetUp">
+          <a href="#" id="tituloMeetUp">MeetUp</a>
+        </div>
+
+        <div class="col-6" id="divCol_buscar">
+          <div class="input-wrapper search-container" id="divBuscar">
+            <input type="text" class="input" placeholder="Buscar" id="inputBuscar">
+            <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor"
+              id="iconoBuscar">
+              <path fill-rule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clip-rule="evenodd" />
+            </svg>
+            <div class="divFlotanteBuscar" id="divFlotanteBuscar">
+              <ul class="search-results"></ul>
             </div>
           </div>
-        
-          <div class="col-4 d-flex justify-content-around botonesDiv" id="divCol_InicioChatPerfil">
-            <button class="btn bg-white rounded-pill backgroundPastel" id="btnInicio"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door mb-1" id="iconoInicio" viewBox="0 0 16 16">
-                <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146ZM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5Z"/>
-              </svg></i> Inicio</button>
-            <button class="btn rounded-pill bgColorPastel" id="btnChat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots mb-1" id="iconoChat" viewBox="0 0 16 16">
-                <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z"/>
-              </svg> Chat</button>
-            <button class="btn bg-white rounded-pill" id="btnPerfil"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill mb-1" id="iconoPerfil" viewBox="0 0 16 16">
-                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-              </svg> Perfil</button>
-          </div>
         </div>
-      </nav>
+
+        <div class="col-4 d-flex justify-content-around" id="divCol_InicioChatPerfil">
+          <button class="btn bg-white rounded-pill backgroundPastel" id="btnInicio"><i class="bi bi-house-door"
+              id="iconoInicio"></i> Inicio</button>
+          <button class="btn bg-white rounded-pill" id="btnChat"><i class="bi bi-chat-dots" id="iconoChat"></i>
+            Chat</button>
+          <button class="btn bg-white rounded-pill" id="btnPerfil"><i class="bi bi-person" id="iconoPerfil"></i>
+            Perfil</button>
+        </div>
+      </div>
+    </nav>
+    <br>
     <div class="container py-5 px-4">
 
-  <div class="row rounded-lg overflow-hidden shadow">
-    <!-- Users box-->
-    <div class="col-5 px-0">
-      <div class="bg-white">
+      <div class="row rounded-lg overflow-hidden shadow">
+        <!-- Users box-->
+        <div class="col-5 px-0">
+          <div class="bg-white">
 
-        <div class="bg-gray px-4 py-2 bg-light">
-          <p class="h5 mb-0 py-1">Chat</p>
+            <div class="bg-gray px-4 py-2 bg-light">
+              <p class="h5 mb-0 py-1">Chat</p>
+            </div>
+
+            <div class="messages-box bg-light">
+              <div class="list-group rounded-0" id="listChat">
+                <a class="list-group-item list-group-item-action active text-white rounded-0">
+                  <div class="media"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
+                    <div class="media-body ml-4">
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h6 class="mb-0">Jason Derulo</h6><small class="small font-weight-bold">25 Dic</small>
+                      </div>
+                      <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore.</p>
+                    </div>
+                  </div>
+                </a>
+
+                <a class="list-group-item list-group-item-action active text-white rounded-0">
+                  <div class="media"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
+                    <div class="media-body ml-4">
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h6 class="mb-0">Jason Derulo</h6><small class="small font-weight-bold">25 Dic</small>
+                      </div>
+                      <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore.</p>
+                    </div>
+                  </div>
+                </a>
+
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="messages-box bg-light">
-          <div class="list-group rounded-0">
-            <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-4">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Jason Derulo</h6><small class="small font-weight-bold">25 Dic</small>
-                  </div>
-                  <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                </div>
-              </div>
-            </a>
-            
-            <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-4">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Jason Derulo</h6><small class="small font-weight-bold">25 Dic</small>
-                  </div>
-                  <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-4">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Jason Derulo</h6><small class="small font-weight-bold">25 Dic</small>
-                  </div>
-                  <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-4">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Jason Derulo</h6><small class="small font-weight-bold">25 Dic</small>
-                  </div>
-                  <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-4">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Jason Derulo</h6><small class="small font-weight-bold">25 Dic</small>
-                  </div>
-                  <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-4">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Jason Derulo</h6><small class="small font-weight-bold">25 Dic</small>
-                  </div>
-                  <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-4">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Jason Derulo</h6><small class="small font-weight-bold">25 Dic</small>
-                  </div>
-                  <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-4">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Jason Derulo</h6><small class="small font-weight-bold">25 Dic</small>
-                  </div>
-                  <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-4">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Jason Derulo</h6><small class="small font-weight-bold">25 Dic</small>
-                  </div>
-                  <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                </div>
-              </div>
-            </a>
+        <!-- Chat Box-->
+        <div class="col-7 px-0">
+          <div class="px-4 py-5 chat-box bgColorPastel" id="listaMensajes">
 
+
+            <!-- Sender Message-->
+            <div class="media w-50 mb-3"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
+              <div class="media-body ml-3">
+                <div class="bg-light rounded py-2 px-3 mb-2">
+                  <p class="text-small mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipisi</p>
+                </div>
+                <p class="small text-muted">12:10 PM | May 10</p>
+              </div>
+            </div>
+
+            <!-- Reciever Message-->
+            <div class="media w-50 ml-auto mb-3">
+              <div class="media-body">
+                <div class="bg-primary rounded py-2 px-3 mb-2">
+                  <p class="text-small mb-0 text-white">Lorem ipsum dolor sit amet, consectetur adipisi</p>
+                </div>
+                <p class="small text-muted">12:15 PM | May 10</p>
+              </div>
+            </div>
           </div>
+
+          <!-- Typing area -->
+          <form action="#" class="bg-light">
+            <div class="input-group">
+              <input type="text" placeholder="Escribe un mensaje" aria-describedby="button-addon2"
+                class="form-control rounded-0 border-0 py-4 bg-light">
+              <div class="input-group-append">
+                <button id="button-addon2" type="submit" class="btn btn-link"> <i
+                    class="fa fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </form>
+
         </div>
       </div>
-    </div>
-
-    <!-- Chat Box-->
-    <div class="col-7 px-0">
-      <div class="px-4 py-5 chat-box bgColorPastel">
-        <!-- Enviar Mensaje-->
-        <div class="media w-50 mb-3"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-          <div class="media-body ml-3">
-            <div class="bg-light rounded py-2 px-3 mb-2">
-              <p class="text-small mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipisi</p>
-            </div>
-            <p class="small text-muted">12:00 PM | Ago 13</p>
-          </div>
-        </div>
-
-        <!-- Recbir Mensage-->
-        <div class="media w-50 ml-auto mb-3">
-          <div class="media-body">
-            <div class="bg-primary rounded py-2 px-3 mb-2">
-              <p class="text-small mb-0 text-white">Lorem ipsum dolor sit amet, consectetur adipisi</p>
-            </div>
-            <p class="small text-muted">12:00 PM | May 10</p>
-          </div>
-        </div>
-
-        <!-- Enviar mensaje-->
-        <div class="media w-50 mb-3"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-          <div class="media-body ml-3">
-            <div class="bg-light rounded py-2 px-3 mb-2">
-              <p class="text-small mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipisi</p>
-            </div>
-            <p class="small text-muted">12:01 PM | May 10</p>
-          </div>
-        </div>
-
-        <!-- Reciever Message-->
-        <div class="media w-50 ml-auto mb-3">
-          <div class="media-body">
-            <div class="bg-primary rounded py-2 px-3 mb-2">
-              <p class="text-small mb-0 text-white">Lorem ipsum dolor sit amet, consectetur adipisit</p>
-            </div>
-            <p class="small text-muted">12:05 PM | May 10</p>
-          </div>
-        </div>
-
-        <!-- Sender Message-->
-        <div class="media w-50 mb-3"><img src="img/manProfile.jpeg" alt="user" width="50" class="rounded-circle">
-          <div class="media-body ml-3">
-            <div class="bg-light rounded py-2 px-3 mb-2">
-              <p class="text-small mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipisi</p>
-            </div>
-            <p class="small text-muted">12:10 PM | May 10</p>
-          </div>
-        </div>
-
-        <!-- Reciever Message-->
-        <div class="media w-50 ml-auto mb-3">
-          <div class="media-body">
-            <div class="bg-primary rounded py-2 px-3 mb-2">
-              <p class="text-small mb-0 text-white">Lorem ipsum dolor sit amet, consectetur adipisi</p>
-            </div>
-            <p class="small text-muted">12:15 PM | May 10</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Typing area -->
-      <form action="#" class="bg-light">
-        <div class="input-group">
-          <input type="text" placeholder="Escribe un mensaje" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
-          <div class="input-group-append">
-            <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
-          </div>
-        </div>
-      </form>
-
     </div>
   </div>
-</div>
-    </div>
-    
+
+  <script src="../JavaScript/Business/ChatUsefulness.js" type="module"></script>
+  <script src="../JavaScript/Business/Buscador.js" type="module"></script>
+
 </body>
+
 </html>

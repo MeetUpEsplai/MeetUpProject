@@ -104,13 +104,6 @@ namespace MeetUp.Controllers
         public async Task<ActionResult<Usuario>> BuscarUsuarioPorEmail(string email)
         {
             var usuarioEncontrado = await _context.Usuarios
-                .Include(x => x.Mensajes)
-                .Include(x => x.Eventos)
-                .Include(x => x.Comentarios)
-                .Include(x => x.UsuarioSuscribeEventos)
-                .Include(x => x.UsuarioReaccionaComentarios)
-                .Include(x => x.UsuarioReaccionaEventos)
-                .Include(x => x.ChatUsuarios)
                 .FirstOrDefaultAsync(u => u.Email == email);
 
             if (usuarioEncontrado == null)
@@ -129,8 +122,8 @@ namespace MeetUp.Controllers
 
             foreach (Chat chat in chats)
             {
-                ChatUsuarios cu = _context.ChatUsuarios.Where(x => x.ChatId == chat.Id).FirstOrDefault();
-                usuarios.Add(_context.Usuarios.Where(x => x.Id != idUsuario && x.Id == cu.UsuarioId).FirstOrDefault());
+                ChatUsuarios cu = _context.ChatUsuarios.Where(x => x.ChatId == chat.Id && x.UsuarioId != idUsuario).FirstOrDefault();
+                usuarios.Add(_context.Usuarios.Where(x => x.Id == cu.UsuarioId).FirstOrDefault());
             }
 
                 

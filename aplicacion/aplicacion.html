@@ -1,257 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App</title>
-    <!--Estilos de Bootstrap-->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous">
-    <!--Fuente de letra-->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!--Iconos-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <!--Calendario-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
-    <link rel="stylesheet" href="css/classic.css">
-    <link rel="stylesheet" href="css/classic.date.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!--Estilos personalizados con css-->
-    <link rel="stylesheet" href="css/styleAplicacion.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App</title>
+  <!--Estilos de Bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!--Fuente de letra-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!--Iconos-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <!--Calendario-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <link rel="stylesheet" href="css/classic.css">
+  <link rel="stylesheet" href="css/classic.date.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!--Estilos personalizados con css-->
+  <link rel="stylesheet" href="css/styleAplicacion.css">
+</head>
 
-  <body>
-    <!--Barra navegación-->
-    <nav class="navbar navbar-expand-lg" id="barraNavegacion">
-      <div class="container-fluid text-white" id="divNavegacion">
-        <div class="col-2" id="divCol_MeetUp">
-          <a href="#" id="tituloMeetUp">MeetUp</a>
-        </div>
-        
-        <div class="col-6" id="divCol_buscar">
-          <div class="input-wrapper search-container" id="divBuscar">
-            <input type="text" class="input" placeholder="Buscar" id="inputBuscar">
-            <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor" id="iconoBuscar">
-              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-            </svg>
-            <div class="divFlotanteBuscar">
-              <ul class="search-results">buscar</ul>
-            </div>
+<body>
+  <!--Barra navegación-->
+  <nav class="navbar navbar-expand-lg" id="barraNavegacion">
+    <div class="container-fluid text-white" id="divNavegacion">
+      <div class="col-2" id="divCol_MeetUp">
+        <a href="#" id="tituloMeetUp">MeetUp</a>
+      </div>
+
+      <div class="col-6" id="divCol_buscar">
+        <div class="input-wrapper search-container" id="divBuscar">
+          <input type="text" class="input" placeholder="Buscar" id="inputBuscar">
+          <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor"
+            id="iconoBuscar">
+            <path fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd" />
+          </svg>
+          <div class="divFlotanteBuscar" id="divFlotanteBuscar">
+            <ul class="search-results"></ul>
           </div>
         </div>
-
-        <div class="col-4 d-flex justify-content-around" id="divCol_InicioChatPerfil">
-          <button class="btn bg-white rounded-pill backgroundPastel" id="btnInicio"><i class="bi bi-house-door" id="iconoInicio"></i> Inicio</button>
-          <button class="btn bg-white rounded-pill" id="btnChat"><i class="bi bi-chat-dots" id="iconoChat"></i> Chat</button>
-          <button class="btn bg-white rounded-pill" id="btnPerfil"><i class="bi bi-person" id="iconoPerfil"></i> Perfil</button>
-        </div>
       </div>
-    </nav>
-    <br>
-    <!-- Body section -->
-    <div class="container">
-      <div class="row">
-        <div class="col-7">
-          <div class="row">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn fw-bold backgroundPastel"
-            data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnRegistrarse">
-                Crear Evento
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1"
-              aria-labelledby="modalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title ms-3" id="modalLabel">Crear evento</h5>
-                    <button type="button" class="btn-close"
-                      data-bs-dismiss="modal" aria-label="Close" id="btnCloseIcono"></button>
-                  </div>
-                  <div class="modal-body ms-3" id="divFormulario">
-                    <form action="#" id="formularioRegister">
-                      <label for="nombreEvento" class="form-label">Nombre del evento: </label>
-                      <input type="text" id="nombreEvento"><br><br>
-                      <label for="descripcionEvento">Descripción: </label>
-                      <input type="text" id="descripcionEvento"><br><br>
-                      <label for="fotoPerfilEvento">Foto perfil evento: </label>
-                      <input type="text" id="fotoPerfilEvento"><br><br>
-                      <label for="ubicacion">Ubicación: </label>
-                      <input type="text" id="ubicacion"><br><br>
-                      <!--Calendario-->
-                      <label for="fechaInicio">Fecha Inicio de enveto: </label>
-                      <div class="content mt-4" id="divGeneralCalendario">
-                        <div class="row" id="divRow_Calendario">
-                          <div class="col-lg-6" id="divCol_Calendario">
-                              <form action="#" id="formCalendario">
-                                <div class="form-group" id="divFormCalendario">
-                                  <input type="text" class="form-control" id="pick-date" placeholder="Feha de nacimiento">
-                                </div>
-                            </form>
-                          </div>
+
+      <div class="col-4 d-flex justify-content-around" id="divCol_InicioChatPerfil">
+        <button class="btn bg-white rounded-pill backgroundPastel" id="btnInicio"><i class="bi bi-house-door"
+            id="iconoInicio"></i> Inicio</button>
+        <button class="btn bg-white rounded-pill" id="btnChat"><i class="bi bi-chat-dots" id="iconoChat"></i>
+          Chat</button>
+        <button class="btn bg-white rounded-pill" id="btnPerfil"><i class="bi bi-person" id="iconoPerfil"></i>
+          Perfil</button>
+      </div>
+    </div>
+  </nav>
+  <br>
+  <!-- Body section -->
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        <div class="row">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn fw-bold backgroundPastel" data-bs-toggle="modal"
+            data-bs-target="#exampleModal" id="btnRegistrarse">
+            Crear Evento
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title ms-3" id="modalLabel">Crear evento</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    id="btnCloseIcono"></button>
+                </div>
+                <div class="modal-body ms-3" id="divFormulario">
+                  <form action="#" id="formularioRegister">
+                    <label for="nombreEvento" class="form-label">Nombre del evento: </label>
+                    <input type="text" id="nombreEvento"><br><br>
+                    <label for="descripcionEvento">Descripción: </label>
+                    <input type="text" id="descripcionEvento"><br><br>
+                    <label for="fotoPerfilEvento">Foto perfil evento: </label>
+                    <input type="text" id="fotoPerfilEvento"><br><br>
+                    <label for="ubicacion">Ubicación: </label>
+                    <input type="text" id="ubicacion"><br><br>
+                    <!--Calendario-->
+                    <label for="fechaInicio">Fecha Inicio de enveto: </label>
+                    <div class="content mt-4" id="divGeneralCalendario">
+                      <div class="row" id="divRow_Calendario">
+                        <div class="col-lg-6" id="divCol_Calendario">
+                          <form action="#" id="formCalendario">
+                            <div class="form-group" id="divFormCalendario">
+                              <input type="text" class="form-control" id="pick-date" placeholder="Feha de nacimiento">
+                            </div>
+                          </form>
                         </div>
                       </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer" id="divBotonesFormulario">
-                    <button type="button" class="btn btn-secondary"
-                      data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btnEnviar">Enviar</button>
-                  </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer" id="divBotonesFormulario">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                  <button type="button" class="btn btn-primary" id="btnEnviar">Enviar</button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row text-white mt-2">
-            <div class="col-3">
-              <h2 class="fw-bolder">Eventos</h2>
-            </div>
-            <div class="col-3">
-              <h2 class="fw-bolder">Mis Eventos</h2>
-            </div>
+        </div>
+        <div class="row text-white mt-2">
+          <div class="col-3">
+            <h2 class="fw-bolder">Eventos</h2>
           </div>
-          <div class="row">
+          <div class="col-3">
+            <h2 class="fw-bolder">Mis Eventos</h2>
+          </div>
+        </div>
+        <div class="row">
 
-            <!--Seccion filtros-->
-            <div class="col-2">
-              <div class="rounded-pill bg-white col-12 divFiltro">&nbsp;&nbsp;Cualquier dia <i class="bi bi-x-lg"></i></div>
-            </div>
-            <div class="col-3">
-              <div class="rounded-pill bg-white divFiltro">&nbsp;&nbsp;Cualquier dia <i class="bi bi-x-lg"></i></div>
-            </div>
-            <div class="col-1">
-              <i class="bi bi-funnel iconoFiltro"></i>
+          <!--Seccion filtros-->
+          <div class="col-2">
+            <div class="rounded-pill bg-white col-12 divFiltro">&nbsp;&nbsp;Cualquier dia <i class="bi bi-x-lg"></i>
             </div>
           </div>
-          <hr class="iconoFiltro"> <!-- Línea de separación -->
-          <!--Seccion publicaciones de Eventos-->
-          <div class="eventosList" id="eventosList">
-            <div class="row">
-              <div class="col-4">
-                <a href="#"><img src="https://cdn.pixabay.com/photo/2021/02/05/01/22/man-5983064_1280.jpg" class="rounded-3" alt="camping"></a>
-              </div>
-              <div class="col-8 text-white">
-                  <h5>18 JUN 2023 12:00 AM</h5>
-                  <h5>Quedada camping Barcelona <3</h5>
+          <div class="col-3">
+            <div class="rounded-pill bg-white divFiltro">&nbsp;&nbsp;Cualquier dia <i class="bi bi-x-lg"></i></div>
+          </div>
+          <div class="col-1">
+            <i class="bi bi-funnel iconoFiltro"></i>
+          </div>
+        </div>
+        <hr class="iconoFiltro"> <!-- Línea de separación -->
+        <!--Seccion publicaciones de Eventos-->
+        <div class="eventosList" id="eventosList">
+          <div class="row">
+            <div class="col-4">
+              <a href="#"><img src="https://cdn.pixabay.com/photo/2021/02/05/01/22/man-5983064_1280.jpg"
+                  class="rounded-3" alt="camping"></a>
+            </div>
+            <div class="col-8 text-white">
+              <h5>18 JUN 2023 12:00 AM</h5>
+              <h5>Quedada camping Barcelona <3< /h5>
                   <h5>Vamos a quedar en Arco de Triunfo para... <a href="#"><b>Leer Más</b></a></h5>
                   <h5>10 asistentes</h5>
-              </div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col-4">
-                <a href="#"><img src="https://cdn.pixabay.com/photo/2020/05/24/08/41/city-5213067_1280.jpg" class="rounded-3" alt="camping"></a>
-              </div>
-              <div class="col-8 text-white">
-                  <h5>2 MAY 2023 12:00 AM</h5>
-                  <h5>Vamos esas piernaaaaas!😄😄</h5>
-                  <h5>Eventazo de baile en Montjuic! Quedar... <a href="#"><b>Leer Más</b></a></h5>
-                  <h5>30 asistentes</h5>
-              </div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col-4">
-                <a href="#"><img src="https://cdn.pixabay.com/photo/2014/02/15/12/22/figure-skater-266512_1280.jpg" class="rounded-3" alt="camping"></a>
-              </div>
-              <div class="col-8 text-white">
-                  <h5>8 JUN 2023 16:00 PM</h5>
-                  <h5>A patinar se ha dicho!</h5>
-                  <h5>Vamos todos a patinar sobre hielo en el camp... <a href="#"><b>Leer Más</b></a></h5>
-                  <h5>100 asistentes</h5>
-              </div>
             </div>
           </div>
-        </div>
-        
-        <!--Contenedor mensajes-->
-        <div class="col-4 divMensajes">
-          <div class="row d-flex justify-content-around">
-            <img src="img/womanProfile.jpeg" class="imgProfile col-3">
-            <h2 class="fw-light col-4 titulo mt-3">Mensajes</h2>
-            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-three-dots col-3 mt-3 puntosMensaje" viewBox="0 0 16 16">
-              <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
-            </svg>
-          </div>
-          <hr> <!-- Línea de separación -->
-          <!--Buscador-->
+          <br>
           <div class="row">
-            <div class="input-wrapper">
-              <input type="search" class="input" placeholder="Buscar">
-              <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-              </svg>
+            <div class="col-4">
+              <a href="#"><img src="https://cdn.pixabay.com/photo/2020/05/24/08/41/city-5213067_1280.jpg"
+                  class="rounded-3" alt="camping"></a>
+            </div>
+            <div class="col-8 text-white">
+              <h5>2 MAY 2023 12:00 AM</h5>
+              <h5>Vamos esas piernaaaaas!😄😄</h5>
+              <h5>Eventazo de baile en Montjuic! Quedar... <a href="#"><b>Leer Más</b></a></h5>
+              <h5>30 asistentes</h5>
             </div>
           </div>
-          <!--Chat list-->
-          <div class="chatList mt-2" id="chatList">
-            <div class="row">
-              <div class="col-3">
-                <img src="img/manProfile.jpeg" class="imgProfileUsers">
-              </div>
-              <div class="col-9">
-                <div class="row">
-                  <div class="col-9">
-                    <h5 class="fw-bolder">Santiago Hernández</h5>
-                  </div>
-                  <div class="col-1">
-                    <h6>AYER</h6>
-                  </div>
-                </div>
-                <div class="row">
-                  <h5>Heyy. Qué te parece si <br> quedamos...</h5>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div class="row d-flex">
-              <div class="col-3">
-                <img src="img/happyWomanProfile.jpeg" class="imgProfileUsers">
-              </div>
-              <div class="col-9">
-                <div class="row justify-content-between">
-                  <div class="col-8">
-                    <h5 class="fw-bolder">Cristina Suárez</h5>
-                  </div>
-                  <div class="col-4">
-                    <h6>10 ABRIL</h6>
-                  </div>
-                </div>
-                <div class="row">
-                  <h5>Me ha encantado
-                    el evento de ayer!</h5>
-                </div>
-              </div>
-            </div>
-          </div>          
         </div>
       </div>
-      
+
+      <!--Contenedor mensajes-->
+      <div class="col-4 divMensajes">
+        <div class="row d-flex justify-content-around">
+          <img src="img/womanProfile.jpeg" class="imgProfile col-3">
+          <h2 class="fw-light col-4 titulo mt-3">Mensajes</h2>
+          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+            class="bi bi-three-dots col-3 mt-3 puntosMensaje" viewBox="0 0 16 16">
+            <path
+              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+          </svg>
+        </div>
+        <hr> <!-- Línea de separación -->
+        <!--Buscador-->
+        <div class="row">
+          <div class="input-wrapper">
+            <input type="search" class="input" placeholder="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+        <!--Chat list-->
+        <div class="row d-flex">
+          <div class="col-3" id="chatList">
+            <img src="img/happyWomanProfile.jpeg" class="imgProfileUsers">
+          </div>
+          <div class="col-9">
+            <div class="row justify-content-between">
+              <div class="col-8">
+                <h5 class="fw-bolder">Cristina Suárez</h5>
+              </div>
+              <div class="col-4">
+                <h6>10 ABRIL</h6>
+              </div>
+            </div>
+            <div class="row">
+              <h5>Me ha encantado
+                el evento de ayer!</h5>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous">
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <!--Calendario-->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/picker.js"></script>
-    <script src="js/picker.date.js"></script>
-    <script src="js/main.js"></script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816" integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw==" data-cf-beacon='{"rayId":"7c4921888894385d","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.4.0","si":100}' crossorigin="anonymous"></script>
+  <!--Calendario-->
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/picker.js"></script>
+  <script src="js/picker.date.js"></script>
+  <script src="js/main.js"></script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
+    integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
+    data-cf-beacon='{"rayId":"7c4921888894385d","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.4.0","si":100}'
+    crossorigin="anonymous"></script>
 
-    <script src="../JavaScript/Business/PagPrincipalUsefulness.js" type="module"></script>
-    <script src="../JavaScript/Business/Buscador.js" type="module"></script>
-  </body>
+  <script src="../JavaScript/Business/PagPrincipalUsefulness.js" type="module"></script>
+  <script src="../JavaScript/Business/Buscador.js" type="module"></script>
+</body>
 
 </html>

@@ -4,13 +4,14 @@ import { show, showUser } from "./LocalStorage.js"
 
 const searchInput = document.querySelector('.search-container input[type="text"]');
 const searchResults = document.querySelector('.search-container .search-results');
+const divFlotante = document.getElementById("divFlotanteBuscar")
 
 searchInput.addEventListener('input', async () => {
     const searchTerm = searchInput.value.trim();
     
     // Si no hay término de búsqueda, ocultar los resultados
-    if (!searchTerm) {
-        searchResults.style.display = 'none';
+    if (!searchTerm) {        
+        divFlotante.style.display = 'none';
         return;
     }
 
@@ -36,8 +37,8 @@ searchInput.addEventListener('input', async () => {
     `).join('');
 
     // Mostrar la lista de resultados
-    searchResults.innerHTML = resultList;
-    searchResults.style.display = 'block';
+    searchResults.innerHTML = resultList;    
+    divFlotante.style.display = 'block';
 });
 
 // Al hacer clic en un resultado, hacer algo con el ID del resultado

@@ -4,7 +4,6 @@ import { GenerarChatsPagChat } from "../Generadores/GenerarChat.js";
 import { show, showUser } from "./LocalStorage.js"
 
 var userId = showUser();
-var userId = 2;
 
 //Descomentar Para Funcionamiento completo
 AddNuevosMensajes(1, userId);

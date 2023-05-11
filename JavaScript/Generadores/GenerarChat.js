@@ -16,6 +16,7 @@ function ApiToModelo(usuarios, chat)
 {
     var ultimoMensaje = "";
 
+    console.log(usuarios);
     if (chat.mensajes.length != 0)
         ultimoMensaje = chat.mensajes[chat.mensajes.length - 1]
 

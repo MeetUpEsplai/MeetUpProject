@@ -1,136 +1,134 @@
 <!DOCTYPE html>
 <html lang="es">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!--Calendario-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
-    <link rel="stylesheet" href="css/classic.css">
-    <link rel="stylesheet" href="css/classic.date.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    
-    
-    <!--Link estilos css-->
-    <link rel="stylesheet" href="css/styleIndex.css">
-  </head>
 
-  <body>
-    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 mx-auto">
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1"
-              aria-labelledby="modalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title ms-3" id="modalLabel">Registrarse</h5>
-                    <button type="button" class="btn-close"
-                      data-bs-dismiss="modal" aria-label="Close" id="btnCloseIcono"></button>
-                  </div>
-                  <div class="modal-body ms-3" id="divFormulario">
-                    <div id="formularioRegister">
-                      <label for="nombre" class="form-label">Nombre: </label>
-                      <input type="text" id="nombre"><br><br>
-                      <label for="apellido">Apellido: </label>
-                      <input type="text" id="apellido"><br><br>
-                      <label for="emailSecundario">Email </label>
-                      <input type="text" id="emailSecundario"><br><br>
-                      <label for="pswSecundario">Constraseña: </label>
-                      <input type="text" id="pswSecundario"><br><br>
-                      <label for="pswRepeat">Repetir contraseña: </label>
-                      <input type="text" id="pswRepeat">
-                      <!--Calendario-->
-                      <div class="content mt-4" id="divGeneralCalendario">
-                        <div class="row" id="divRow_Calendario">
-                          <div class="col-lg-6" id="divCol_Calendario">
-                              <div action="#" id="formCalendario">
-                                <div class="form-group" id="divFormCalendario">
-                                  <input type="text" class="form-control" id="pick-date" placeholder="Feha de nacimiento">
-                                </div>
+  <!--Calendario-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <link rel="stylesheet" href="css/classic.css">
+  <link rel="stylesheet" href="css/classic.date.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+
+  <!--Link estilos css-->
+  <link rel="stylesheet" href="css/styleIndex.css">
+</head>
+
+<body>
+  <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title ms-3" id="modalLabel">Registrarse</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    id="btnCloseIcono"></button>
+                </div>
+                <div class="modal-body ms-3" id="divFormulario">
+                  <div id="formularioRegister">
+                    <label for="nombre" class="form-label">Nombre: </label>
+                    <input type="text" id="nombre"><br><br>
+                    <label for="apellido">Apellido: </label>
+                    <input type="text" id="apellido"><br><br>
+                    <label for="emailSecundario">Email </label>
+                    <input type="text" id="emailSecundario"><br><br>
+                    <label for="pswSecundario">Constraseña: </label>
+                    <input type="text" id="pswSecundario"><br><br>
+                    <label for="pswRepeat">Repetir contraseña: </label>
+                    <input type="text" id="pswRepeat">
+                    <!--Calendario-->
+                    <div class="content mt-4" id="divGeneralCalendario">
+                      <div class="row" id="divRow_Calendario">
+                        <div class="col-lg-6" id="divCol_Calendario">
+                          <div action="#" id="formCalendario">
+                            <div class="form-group" id="divFormCalendario">
+                              <input type="text" class="form-control" id="pick-date" placeholder="Feha de nacimiento">
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="modal-footer" id="divBotonesFormulario">
-                    <button type="button" class="btn btn-secondary"
-                      data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btnEnviar">Enviar</button>
-                  </div>
+                </div>
+                <div class="modal-footer" id="divBotonesFormulario">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                  <button type="button" class="btn btn-primary" id="btnEnviar">Enviar</button>
                 </div>
               </div>
             </div>
-            <div class="card m2 blur-effect" id="divBorroso">
-              <!--Contenido de la carta-->
-              <div class="row" id="divRow_tituloEmailPsw">
-                <div class="col-6" id="divCol_Titulo-Redes">
-                  <h1 id="tituloMeetUp">MeetUp</h1><br>
-                  <div class="redes" id="divRedes">
-                    <a href="#" class="me-5"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="me-5"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                  </div>
-                </div>
-                <div class="col-6" id="divCol_emailPsw">
-                  <div id="formularioEmail-Psw">
-                    <label for="emailPrincipal">Email: </label>
-                    <input type="text" id="emailPrincipal" name="emailPrincipal" class="inputsPrincipales" /><br><br>
-                    <label for="pswPrincipal">Contraseña: </label>
-                    <input type="text" id="pswPrincipal" name="pswPrincipal" class="inputsPrincipales" />
-                  </div>
+          </div>
+          <div class="card m2 blur-effect" id="divBorroso">
+            <!--Contenido de la carta-->
+            <div class="row" id="divRow_tituloEmailPsw">
+              <div class="col-6" id="divCol_Titulo-Redes">
+                <h1 id="tituloMeetUp">MeetUp</h1><br>
+                <div class="redes" id="divRedes">
+                  <a href="#" class="me-5"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="#" class="me-5"><i class="fa-brands fa-facebook"></i></a>
+                  <a href="#"><i class="fa-brands fa-twitter"></i></a>
                 </div>
               </div>
-              <br><br>
-              <div class="row" id="divRow_fraseCelebre">
-                <div class="col-6" id="divCol_FraseCelebre">
-                  <h5>Donde los intereses se <br>convierten en amistades</h5>
+              <div class="col-6" id="divCol_emailPsw">
+                <div id="formularioEmail-Psw">
+                  <label for="emailPrincipal">Email: </label>
+                  <input type="text" id="emailPrincipal" name="emailPrincipal" class="inputsPrincipales" /><br><br>
+                  <label for="pswPrincipal">Contraseña: </label>
+                  <input type="text" id="pswPrincipal" name="pswPrincipal" class="inputsPrincipales" />
                 </div>
-                <div class="col-6 d-flex justify-content-between" id="divCol_btnLoginRegister">
-                  <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-light" id="btnLogin">Login</button>
-                  <button type="button" class="btn btn-light"
-                    data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnRegistrarse">
-                      Registrarse
-                  </button>
-                </div>
+              </div>
+            </div>
+            <br><br>
+            <div class="row" id="divRow_fraseCelebre">
+              <div class="col-6" id="divCol_FraseCelebre">
+                <h5>Donde los intereses se <br>convierten en amistades</h5>
+              </div>
+              <div class="col-6 d-flex justify-content-between" id="divCol_btnLoginRegister">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-light" id="btnLogin">Login</button>
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                  id="btnRegistrarse">
+                  Registrarse
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <!--Calendario-->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/picker.js"></script>
-    <script src="js/picker.date.js"></script>
-    <script src="js/main.js"></script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816" integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw==" data-cf-beacon='{"rayId":"7c4921888894385d","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.4.0","si":100}' crossorigin="anonymous"></script>
+  <!--Calendario-->
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/picker.js"></script>
+  <script src="js/picker.date.js"></script>
+  <script src="js/main.js"></script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
+    integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
+    data-cf-beacon='{"rayId":"7c4921888894385d","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.4.0","si":100}'
+    crossorigin="anonymous"></script>
 
-    <script src="../JavaScript/Business/LoginBusiness.js" type="module"></script>
-  </body>
+  <script src="../JavaScript/Business/LoginBusiness.js" type="module"></script>
+</body>
 
 </html>

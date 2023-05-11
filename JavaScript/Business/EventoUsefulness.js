@@ -5,7 +5,6 @@ import { GenerarComentarios } from "../Generadores/GenerarComentarios.js";
 import { GenerarFotos } from "../Generadores/GeneradorFotos.js";
 
 var idEvento = show();
-var idEvento = 2; //Para Test
 
 GetEventoById(idEvento).then(evento => {
     document.getElementById("parrafoDetalles").innerText = evento.descripcion;
