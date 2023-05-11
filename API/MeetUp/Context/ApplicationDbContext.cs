@@ -29,5 +29,11 @@ namespace MeetUp.Context
             modelBuilder.Entity<ChatUsuarios>().HasKey(x => new { x.UsuarioId, x.ChatId });
             modelBuilder.Entity<EventoEtiquetas>().HasKey(x => new { x.EtiquetaId, x.EventoId });
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+                .EnableSensitiveDataLogging();
+        }
     }
 }

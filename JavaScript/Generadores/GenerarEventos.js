@@ -17,10 +17,10 @@ export async function GenerarEventos(listEventos)
             actual.descripcion,
             actual.coordenadas,
             actual.ciudadProxima,
-            actual.referenciaFotoPrincipaSl,
+            actual.referenciaFotoPrincipal,
             actual.usuarioId,
             null)
-    
+
             await GetEventoCountSuscritos(evento.id).then((result) => {
                 eventosContent.push(new EventoContent(evento, result + 1))
             });

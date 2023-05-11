@@ -90,6 +90,5 @@ export function AddUnoToHtml(modelo, idUserReg)
     body.appendChild(fecha);
     contenedorGeneral.appendChild(body);
 
-    var ultimoHijo =  document.getElementById("listaMensajes").lastChild;
-    document.getElementById("listaMensajes").insertBefore(contenedorGeneral, ultimoHijo.nextSibling);
+    document.getElementById("listaMensajes").appendChild(contenedorGeneral);
 }

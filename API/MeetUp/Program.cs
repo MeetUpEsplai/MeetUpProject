@@ -1,5 +1,6 @@
 using MeetUp.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text.Json.Serialization;
@@ -14,7 +15,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("connectionComputerServer"));
 });
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

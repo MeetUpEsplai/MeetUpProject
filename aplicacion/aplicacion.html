@@ -31,7 +31,7 @@
   <nav class="navbar navbar-expand-lg" id="barraNavegacion">
     <div class="container-fluid text-white" id="divNavegacion">
       <div class="col-2" id="divCol_MeetUp">
-        <a href="#" id="tituloMeetUp">MeetUp</a>
+        <a href="#" id="tituloMeetUp">TogetherAgain</a>
       </div>
 
       <div class="col-6" id="divCol_buscar">
@@ -112,63 +112,18 @@
             </div>
           </div>
         </div>
-        <div class="row text-white mt-2">
-          <div class="col-3">
-            <h2 class="fw-bolder">Eventos</h2>
-          </div>
-          <div class="col-3">
-            <h2 class="fw-bolder">Mis Eventos</h2>
-          </div>
-        </div>
-        <div class="row">
 
-          <!--Seccion filtros-->
-          <div class="col-2">
-            <div class="rounded-pill bg-white col-12 divFiltro">&nbsp;&nbsp;Cualquier dia <i class="bi bi-x-lg"></i>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="rounded-pill bg-white divFiltro">&nbsp;&nbsp;Cualquier dia <i class="bi bi-x-lg"></i></div>
-          </div>
-          <div class="col-1">
-            <i class="bi bi-funnel iconoFiltro"></i>
-          </div>
-        </div>
+        
         <hr class="iconoFiltro"> <!-- Línea de separación -->
         <!--Seccion publicaciones de Eventos-->
         <div class="eventosList" id="eventosList">
-          <div class="row">
-            <div class="col-4">
-              <a href="#"><img src="https://cdn.pixabay.com/photo/2021/02/05/01/22/man-5983064_1280.jpg"
-                  class="rounded-3" alt="camping"></a>
-            </div>
-            <div class="col-8 text-white">
-              <h5>18 JUN 2023 12:00 AM</h5>
-              <h5>Quedada camping Barcelona </h5>
-                  <h5>Vamos a quedar en Arco de Triunfo para... <a href="#"><b>Leer Más</b></a></h5>
-                  <h5>10 asistentes</h5>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-4">
-              <a href="#"><img src="https://cdn.pixabay.com/photo/2020/05/24/08/41/city-5213067_1280.jpg"
-                  class="rounded-3" alt="camping"></a>
-            </div>
-            <div class="col-8 text-white">
-              <h5>2 MAY 2023 12:00 AM</h5>
-              <h5>Vamos esas piernaaaaas!😄😄</h5>
-              <h5>Eventazo de baile en Montjuic! Quedar... <a href="#"><b>Leer Más</b></a></h5>
-              <h5>30 asistentes</h5>
-            </div>
-          </div>
         </div>
       </div>
 
       <!--Contenedor mensajes-->
       <div class="col-4 divMensajes">
         <div class="row d-flex justify-content-around">
-          <img src="img/womanProfile.jpeg" class="imgProfile col-3">
+          <img src="img/womanProfile.jpeg" class="imgProfile col-3" id="imgProfileUsers">
           <h2 class="fw-light col-4 titulo mt-3">Mensajes</h2>
           <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
             class="bi bi-three-dots col-3 mt-3 puntosMensaje" viewBox="0 0 16 16">
@@ -189,24 +144,7 @@
           </div>
         </div>
         <!--Chat list-->
-        <div class="row d-flex">
-          <div class="col-3" id="chatList">
-            <img src="img/happyWomanProfile.jpeg" class="imgProfileUsers">
-          </div>
-          <div class="col-9">
-            <div class="row justify-content-between">
-              <div class="col-8">
-                <h5 class="fw-bolder">Cristina Suárez</h5>
-              </div>
-              <div class="col-4">
-                <h6>10 ABRIL</h6>
-              </div>
-            </div>
-            <div class="row">
-              <h5>Me ha encantado
-                el evento de ayer!</h5>
-            </div>
-          </div>
+        <div class="row d-flex" id="chatList">
         </div>
       </div>
     </div>

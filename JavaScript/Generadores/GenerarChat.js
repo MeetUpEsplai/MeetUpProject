@@ -16,9 +16,11 @@ function ApiToModelo(usuarios, chat)
 {
     var ultimoMensaje = "";
 
-    console.log(usuarios);
     if (chat.mensajes.length != 0)
+    {
         ultimoMensaje = chat.mensajes[chat.mensajes.length - 1]
+    }
+        
 
     var chatMini = new ChatMini(chat.id, ultimoMensaje, usuarios[0].referenciaFoto, usuarios[0].nombre);
         
@@ -62,7 +64,7 @@ function AddToHtmlPrincipal(arrayModelo)
                 
         fecha.innerHTML = ultimoMensaje.fecha;
         nombre.innerHTML = chatMini.GetUserName();
-        mensaje.innerHTML = chatMini.texto;
+        mensaje.innerHTML = ultimoMensaje.texto;
 
         //Asignar padre
         contenedorImg.appendChild(img);
@@ -112,7 +114,7 @@ function AddToHtmlChat(arrayModelo)
         img.width = "50";
         fecha.innerHTML = ultimoMensaje.fecha;
         nombre.innerHTML = chatMini.GetUserName();
-        mensaje.innerHTML = chatMini.texto;
+        mensaje.innerHTML = ultimoMensaje.texto;
 
         if (chatMini.GetUserFoto() != null)
             img.src = chatMini.GetUserFoto();

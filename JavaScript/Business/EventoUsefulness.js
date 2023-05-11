@@ -20,8 +20,10 @@ GetEventoById(idEvento).then(evento => {
 
         document.getElementById("nombreCreadora").innerText = usuario.nombre;
 
-        if (usuario.referenciaFotoPrincipal != null)
-            document.getElementById("imgCreadoPor").src = usuario.referenciaFotoPrincipal;
+        console.log(usuario);
+
+        if (usuario.referenciaFoto != null)
+            document.getElementById("imgCreadoPor").src = usuario.referenciaFoto;
         else
             document.getElementById("imgCreadoPor").src = "../../imgEventDefault/fotoPerfilDefaul.png";
 
@@ -36,10 +38,9 @@ GetEventoById(idEvento).then(evento => {
                     });
                 });
             }
-
         });
-
     }); 
-    
 });
+
+
 
