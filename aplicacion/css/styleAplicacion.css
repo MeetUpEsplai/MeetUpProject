@@ -13,6 +13,16 @@ nav{
     background-color: #252627;
 }
 
+.divFlotanteBuscar{
+    position: fixed;
+    background-color: #b6b2b2;
+    color: black;
+    width: 400px;
+    min-height: 25px;
+    margin-left: 1px;
+    margin-top: 5px;
+}
+
 a{
     text-decoration: none;
     color: white;

@@ -10,9 +10,20 @@ body{
     background-color: #18191B;
 }
 
+/*Navegador*/
 nav{
     padding: 5%;
     background-color: #252627;
+}
+
+.divFlotanteBuscar{
+    position: fixed;
+    background-color: #b6b2b2;
+    color: black;
+    width: 400px;
+    min-height: 25px;
+    margin-left: 1px;
+    margin-top: 5px;
 }
 
 a{
@@ -131,4 +142,77 @@ img{
 .cartaComentario{
     min-height: 120px;
     border-radius: 20px 20px;
+}
+
+.heightMin{
+    height: 170px;
+}
+
+/*Reacciones*/
+.conteneorReacciones{
+    height: 110px;
+    width: 50%;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.cont-iconos{
+    height: 70px;
+    width: 50%;
+    background-color: white;
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 3s;
+}
+
+.contadorReacciones{
+
+    height: 70px;
+    width: 54%;
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.espacioContadorReacciones{
+    color: white;
+    margin-right: 52px;
+}
+
+span img{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+span img:hover{
+    transition: .2s;
+    transform: scale(1.3);
+}
+
+.reDimensionar img{
+    height: 45px;
+    width: 45px;
+}
+
+.reBlanco img{
+    height: 60px;
+    width: 60px;
+}
+
+.tituloReaccion{
+    color: white;
+    margin-left: 20%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
 }

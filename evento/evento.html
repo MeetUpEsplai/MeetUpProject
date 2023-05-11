@@ -26,13 +26,16 @@
           <div class="col-2" id="divCol_MeetUp">
             <a href="#" id="tituloMeetUp">MeetUp</a>
           </div>
-  
+          
           <div class="col-6" id="divCol_buscar">
-            <div class="input-wrapper" id="divBuscar">
-              <input type="search" class="input" placeholder="Buscar" id="inputBuscar">
+            <div class="input-wrapper search-container" id="divBuscar">
+              <input type="text" class="input" placeholder="Buscar" id="inputBuscar">
               <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor" id="iconoBuscar">
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
               </svg>
+              <div class="divFlotanteBuscar">
+                <ul class="search-results">buscar</ul>
+              </div>
             </div>
           </div>
   
@@ -57,7 +60,7 @@
               </div>
               <div class="col-11">
                 <h5>Creado por</h5>
-                <h5><b id="nombreCreadora">Cristina Ramirez</b></h5>
+                <h5><b>Cristina Ramirez</b></h5>
               </div>
           </div>
       </div>
@@ -127,16 +130,81 @@
             </div>
           </div>
         </div>
+        <!--Reacciones-->
+        <div class="row">
+          <div class="col-6">
+            <h2 class="text-white">Reacionar</h2>
+          </div>
+        </div>
+        <div class="contenedorReacciones" id="contenedorReacciones">
+          <div class="cont-iconos" id="divSeccionIconos">
+            <span class="gusta" id="gusta"><img src="gifs/gusta.gif" onclick="gusta();"></span>
+            <span class="encanta reDimensionar" id="encanta" onclick="encanta();"><img src="gifs/ENCANTA.gif"></span>
+            <span class="divierte reBlanco" id="divierte" onclick="divierte();"><img src="gifs/divierte.gif"></span>
+            <span class="asombra reBlanco" id="asombra" onclick="asombra();"><img src="gifs/asombra2.gif"></span>
+            <span class="entristece reBlanco" id="entristece" onclick="entristece();"><img src="gifs/entristece.gif"></span>
+            <span class="enoja" id="enoja" onclick="enfada();"><img src="gifs/enoja.gif"></span>
+          </div>
+          <div class="contadorReacciones">
+            <h4 class="espacioContadorReacciones" id="contadorgusta">2</h4>
+            <h4 class="espacioContadorReacciones" id="contadorEncanta">2</h4>
+            <h4 class="espacioContadorReacciones" id="contadorDivierte">2</h4>
+            <h4 class="espacioContadorReacciones" id="contadorAsombra">2</h4>
+            <h4 class="espacioContadorReacciones" id="contadorEntristece">2</h4>
+            <h4 class="espacioContadorReacciones" id="contadorEnfada">2</h4>
+          </div>
+          <h4 class="tituloReaccion" id="tituloReaccion">Me gusta</h4>
+        </div>
         <div class="row" id="divRow_tituloAsistentes">
           <div class="col-6" id="divCol_tituloAsistentes">
-            <h2 class="text-white" id="tituloAsistentes">Asistentes(10)</h2>
+            <h2 class="text-white mt-4" id="tituloAsistentes">Asistentes(10)</h2>
           </div>
         </div>
         <div class="row mt-3" id="divRow_listaAsistentes">
           <div class="col-6 divOverflow" id="divCol_listaAsistentes">
             <div class="scrolldivMin" id="contenidoAsistentes">
-              <div class="row" id="divRow_contenidoAsistentes">
+              <div class="row heightMin" id="divRow_contenidoAsistentes">
                 <!--contenido lista asistentes (imagen-nombre)-->
+                <div class="col-2 cardAsistente divBgPastel ">
+                  <div class="row" id="divRow_imagenAsistente">
+                    <div class="col-2 centrarContenidoCarta">
+                      <img src="img/happyWomanProfile.jpeg">
+                      <h5>Jessica John</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2 cardAsistente divBgPastel ">
+                  <div class="row" id="divRow_imagenAsistente">
+                    <div class="col-2 centrarContenidoCarta">
+                      <img src="img/happyWomanProfile.jpeg">
+                      <h5>Jessica John</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2 cardAsistente divBgPastel ">
+                  <div class="row" id="divRow_imagenAsistente">
+                    <div class="col-2 centrarContenidoCarta">
+                      <img src="img/happyWomanProfile.jpeg">
+                      <h5>Jessica John</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2 cardAsistente divBgPastel ">
+                  <div class="row" id="divRow_imagenAsistente">
+                    <div class="col-2 centrarContenidoCarta">
+                      <img src="img/happyWomanProfile.jpeg">
+                      <h5>Jessica John</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2 cardAsistente divBgPastel ">
+                  <div class="row" id="divRow_imagenAsistente">
+                    <div class="col-2 centrarContenidoCarta">
+                      <img src="img/happyWomanProfile.jpeg">
+                      <h5>Jessica John</h5>
+                    </div>
+                  </div>
+                </div>
                 <div class="col-2 cardAsistente divBgPastel ">
                   <div class="row" id="divRow_imagenAsistente">
                     <div class="col-2 centrarContenidoCarta">
@@ -259,7 +327,7 @@
       crossorigin="anonymous">
     </script>
 
-    <script src="../JavaScript/Business/EventoUsefulness.js" type="module"></script>
-    <script src="../JavaScript/Business/Buscador.js" type="module"></script>
+    <!--Reacciones-->
+    <script src="js/reacciones.js"></script>
 </body>
 </html>
