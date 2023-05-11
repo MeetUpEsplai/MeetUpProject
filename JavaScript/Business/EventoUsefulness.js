@@ -30,13 +30,19 @@ GetEventoById(idEvento).then(evento => {
 
         //Informacion dependiente del usuarios Suscritos
         GetEventoCountSuscritos(idEvento).then(count => {
-            document.getElementById("tituloAsistentes").innerText = "Asistentes (" + count + ")";
+            document.getElementById("tituloAsistentes").innerText = "Asistentes (" + (count + 1) + ")";
         
             if (count > 0) {
-                usuario.usuarioSuscribeEventos.forEach(userSubEv => {
+                evento.usuarioSuscribeEventos.forEach(userSubEv => {
+                    console.log(userSubEv)
+                    
                     GetUsuarioById(userSubEv.usuarioId).then(usuario => {
                         GenerarUsuarios(usuario);
                     });
+                });
+
+                GetUsuarioById(evento.usuarioId).then(usuario => {
+                    GenerarUsuarios(usuario);
                 });
             }
         });
