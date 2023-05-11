@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString("connectionComputerServer"));
+    option.UseSqlServer(builder.Configuration.GetConnectionString("connectionLocalDb"));
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

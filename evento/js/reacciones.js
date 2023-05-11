@@ -27,13 +27,13 @@ document.getElementById("entristece").addEventListener('click', () => {
     document.getElementById('tituloReaccion').innerHTML='Me Entristece';
 });
 
-document.getElementById("enfada").addEventListener('click', () => {
+document.getElementById("enoja").addEventListener('click', () => {
     MandarDatos(4);
     document.getElementById('tituloReaccion').innerHTML='Me Enfada';
 });
 
 function MandarDatos(intId) {
-    var reaccion = new UsuarioReaccionaeEvento(0, show(), showUser(), intId);
+    var reaccion = new UsuarioReaccionaeEvento(show(), showUser(), intId);
     PostReaccionEventos(reaccion);
     var num = parseInt(document.getElementById('tituloReaccion').innerHTML) + 1;
     document.getElementById('tituloReaccion').innerHTML = num;
