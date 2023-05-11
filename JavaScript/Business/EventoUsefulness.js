@@ -8,6 +8,7 @@ import { UsuarioSuscribeEvento } from "../Modules/UsuarioSuscribeEventoClass.js"
 var idEvento = show();
 
 GetEventoById(idEvento).then(evento => {
+    document.getElementById("titulo").innerText = evento.nombre;
     document.getElementById("parrafoDetalles").innerText = evento.descripcion;
     document.getElementById("parrafoHorario").innerText = evento.fechaEvento;
     document.getElementById("ubicacionGeneral").innerText = evento.ciudadProxima;
