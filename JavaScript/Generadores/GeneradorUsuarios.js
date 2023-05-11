@@ -5,7 +5,7 @@ export function GenerarUsuarios(usuarios)
     var usuario = new Usuario(
         usuarios.id,
         usuarios.nombre,
-        usuarios.nombre,
+        usuarios.apellido,
         usuarios.email,
         usuarios.password,
         usuarios.fechaNacimiento,
@@ -38,7 +38,7 @@ function AddToHtml(arrayModelo)
         else 
             img.src = "";
 
-        nombreUser.innerHTML = usuario.GetNombre() + usuario.GetApellido();
+        nombreUser.innerHTML = usuario.GetNombre() + " " + usuario.GetApellido();
 
         //Asignar padre
         col.appendChild(img);
