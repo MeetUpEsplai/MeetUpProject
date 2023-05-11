@@ -19,7 +19,6 @@ GetUsuarioChats(userId).then(usChatList => {
                 chats.forEach(div => {
                     div.addEventListener('click', () => 
                     {
-                        console.log("papa");
                         EliminarCacheMensajes();
                         const id = div.id.split('_')[1];
                         AddNuevosMensajes(id);

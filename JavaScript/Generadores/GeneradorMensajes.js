@@ -5,6 +5,8 @@ export function GenerarMensajes(chat, idUserReg)
 {
     var mensajesModel = []
 
+    chat.mensajes.sort(CompararFechas);
+
     chat.mensajes.forEach(element => {
         mensajesModel.push(new Mensaje(
             element.id,
@@ -19,15 +21,22 @@ export function GenerarMensajes(chat, idUserReg)
 }
 
 
+function CompararFechas(a, b) {
+    var fechaA = new Date(a.fecha.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3"));
+    var fechaB = new Date(b.fecha.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3"));
+    return fechaA - fechaB;
+}
+
 function AddToHtml(arrayModelo, idUserReg) 
 {
     for (var i = 0; i < arrayModelo.length; i++) 
     {
+        console.log(arrayModelo[i].GetTexto());
         AddUnoToHtml(arrayModelo[i], idUserReg);
     }
 }
 
-export async function AddUnoToHtml(modelo, idUserReg) 
+export function AddUnoToHtml(modelo, idUserReg) 
 {
     var contenedorGeneral  = document.createElement("div"),
         body  = document.createElement("div"),
@@ -47,6 +56,7 @@ export async function AddUnoToHtml(modelo, idUserReg)
     mensaje.innerHTML = modelo.GetTexto();
     fecha.innerHTML = modelo.GetFecha();
 
+    
     //Data Dependiente de si es un mensaje recibido o enviado
     if (modelo.GetUsuarioId() != idUserReg)
     {
@@ -58,7 +68,7 @@ export async function AddUnoToHtml(modelo, idUserReg)
         imgRecibido.alt = "user";
         imgRecibido.width = "50";
 
-        await GetUsuarioById(modelo.GetUsuarioId()).then(x => {
+        GetUsuarioById(modelo.GetUsuarioId()).then(x => {
             if (x.referenciaFoto != null)
                 imgRecibido.src = x.referenciaFoto ;
             else 
@@ -74,10 +84,12 @@ export async function AddUnoToHtml(modelo, idUserReg)
         mensaje.className += " text-white";
     }
 
+
     contentData.appendChild(mensaje);
     body.appendChild(contentData);
     body.appendChild(fecha);
     contenedorGeneral.appendChild(body);
 
-    document.getElementById("listaMensajes").appendChild(contenedorGeneral);
+    var ultimoHijo =  document.getElementById("listaMensajes").lastChild;
+    document.getElementById("listaMensajes").insertBefore(contenedorGeneral, ultimoHijo.nextSibling);
 }

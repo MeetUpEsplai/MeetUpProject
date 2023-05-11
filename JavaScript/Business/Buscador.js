@@ -48,9 +48,9 @@ searchResults.addEventListener('click', event => {
         const resultId = clickedResult.dataset.id;
         var isUser = clickedResult.innerHTML.split(":")[0] == "Usuario";
         if (isUser)
-            CambiarPagina("../../perfil/perfil.html", resultId);
+            CambiarPagina("../../perfil/perfil.html", showUser(),resultId);
         else
-            CambiarPagina("../../evento/evento.html", resultId);
+            CambiarPagina("../../evento/evento.html", showUser(), resultId);
     }
 });
 
