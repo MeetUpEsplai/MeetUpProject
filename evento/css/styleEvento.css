@@ -17,6 +17,7 @@ nav{
 }
 
 .divFlotanteBuscar{
+    display: none;
     position: fixed;
     background-color: #b6b2b2;
     color: black;
@@ -24,6 +25,8 @@ nav{
     min-height: 25px;
     margin-left: 1px;
     margin-top: 5px;
+
+    opacity: 0;   
 }
 
 a{
