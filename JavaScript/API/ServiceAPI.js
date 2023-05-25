@@ -24,7 +24,6 @@ const IDETIQUETA = "etiquetaId_";
 const IDEVENTO = "eventoId_";
 const IDTIPOREACCION = "tipoReaccionId";
 const IDCOMENTARIO = "comentarioId_";
-const IDMENSAJE = "mensajeId_";
 
 function Post(stringClase, modelo) { return setQuery(ROOT + stringClase, modelo); }
 function Put(stringClase, modelo, id) { return setQuery(ROOT + stringClase + "/" + ID + id, modelo); }

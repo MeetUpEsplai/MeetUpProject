@@ -25,6 +25,9 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Chats
+        /// <summary>
+        /// Recoge todos los chats de la base de datos
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Chat>>> GetChats()
         {
@@ -40,6 +43,10 @@ namespace MeetUp.Controllers
 
 
         // GET: api/Chats/5
+        /// <summary>
+        /// Recoge un chat por id
+        /// </summary>
+        /// <param name="id">Id del chat</param>
         [HttpGet("id_{id}")]
         public async Task<ActionResult<Chat>> GetChat(int id)
         {
@@ -68,6 +75,10 @@ namespace MeetUp.Controllers
 
         // PUT: api/Chats/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Actualiza un chat por id
+        /// </summary>
+        /// <param name="id">Id del chat a cambiar</param>
         [HttpPut("id_{id}")]
         public async Task<IActionResult> PutChat(int id, ChatViewModel modelo)
         {
@@ -103,6 +114,10 @@ namespace MeetUp.Controllers
 
         // POST: api/Chats
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade un chat
+        /// </summary>
+        /// <param name="id">Id del chat a añadir</param>
         [HttpPost]
         public async Task<ActionResult<Chat>> PostChat(ChatViewModel model)
         {
@@ -125,6 +140,10 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Chats/5
+        /// <summary>
+        /// Elimina un chat por id
+        /// </summary>
+        /// <param name="id">Id del chat a eliminar</param>
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteChat(int id)
         {

@@ -1,6 +1,18 @@
 import { ChatMini } from "../Modules/ChatClass.js"
 
-export function GenerarChats(usuario) 
+export function GenerarChatsPrincipal(usuario) 
+{
+    content = ApiToModelo(usuario)
+    AddToHtmlPrincipal(content);
+}
+
+export function GenerarChatsPagChat(usuario) 
+{
+    content = ApiToModelo(usuario)
+    AddToHtmlChat(content);
+}
+
+function ApiToModelo(usuario)
 {
     var chats = usuario.chats;
     var chatContent = [];
@@ -24,12 +36,11 @@ export function GenerarChats(usuario)
 
         chatContent.push(new ChatMini(chats[i].id, ultimoMensaje, fotoUsuario, nombreUsuario));
     }
-    
-    AddToHtml(eventosContent);
+
+    return chatContent;
 }
 
-
-function AddToHtml(arrayModelo) 
+function AddToHtmlPrincipal(arrayModelo) 
 {
     for (var i = 0; i < arrayModelo.length; i++) 
     {
@@ -85,5 +96,56 @@ function AddToHtml(arrayModelo)
         contenedorGeneral.appendChild(contenedorData);
 
         document.getElementById("chatList").appendChild(contenedorGeneral);
+    }
+}
+
+function AddToHtmlChat(arrayModelo) 
+{
+    for (var i = 0; i < arrayModelo.length; i++) 
+    {
+        var ultimoMensaje = arrayModelo[i].GetUltimoMensaje();
+        var chatMini = arrayModelo[i];
+
+        var contenedorGeneral = document.createElement("a"),
+            contenedorImg = document.createElement("div"),
+            img  = document.createElement("img"),
+            body = document.createElement("div"),
+            contenedorUser = document.createElement("div"),
+            nombre = document.createElement("h6"),
+            fecha = document.createElement("small"),
+            mensaje = document.createElement("p");
+        
+        //Declaracion de clases e ids
+        contenedorGeneral.id = "chat_" + chatMini.GetChatId();
+        contenedorGeneral.className = "list-group-item list-group-item-action active text-white rounded-0";
+        contenedorImg.className = "media";
+        imgRecibido.className = "rounded-circle";
+        body.className = "media-body ml-4";
+        contenedorUser.className = "d-flex align-items-center justify-content-between mb-1";
+        nombre.className = "mb-0";
+        fecha.className = "small font-weight-bold";
+        mensaje.className = "font-italic mb-0 text-small";
+
+        //Add Data
+        imgRecibido.alt = "user";
+        imgRecibido.width = "50";
+        fecha.innerHTML = ultimoMensaje.GetFecha();
+        nombre.innerHTML = modelo.GetUserName();
+        mensaje.innerHTML = modelo.GetTexto();
+
+        if (modelo.GetUserFoto() != null)
+                img.src = chatMini.GetUserFoto();
+        else 
+            img.src = "";
+
+        contenedorUser.appendChild(nombre);
+        contenedorUser.appendChild(fecha);
+        body.appendChild(contenedorUser);
+        body.appendChild(mensaje);
+        contenedorImg.appendChild(img);
+        contenedorImg.appendChild(body);
+        contenedorGeneral.appendChild(contenedorImg);
+
+        document.getElementById("").appendChild(contenedorGeneral);
     }
 }

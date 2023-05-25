@@ -25,6 +25,9 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/Comentarios
+        /// <summary>
+        /// Recoge todos los comentarios de la base de datos
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Comentario>>> GetComentarios()
         {
@@ -38,6 +41,10 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/Comentarios/5
+        /// <summary>
+        /// Recoge un comentario por id
+        /// </summary>
+        /// <param name="id">Id del comentario</param>
         [HttpGet("id_{id}")]
         public async Task<ActionResult<Comentario>> GetComentario(int id)
         {
@@ -65,6 +72,10 @@ namespace MeetUp.Controllers
 
         // PUT: api/Comentarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Actualiza un comentario por id
+        /// </summary>
+        /// <param name="id">Id del comentario a cambiar</param>
         [HttpPut("id_{id}")]
         public async Task<IActionResult> PutComentario(int id, ComentarioViewModel model)
         {
@@ -99,6 +110,9 @@ namespace MeetUp.Controllers
 
         // POST: api/Comentarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade un comentario
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<Comentario>> PostComentario(ComentarioViewModel model)
         {
@@ -121,6 +135,10 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/Comentarios/5
+        /// <summary>
+        /// Elimina un comentario por id
+        /// </summary>
+        /// <param name="id">Id del comentario a eliminar</param>
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteComentario(int id)
         {

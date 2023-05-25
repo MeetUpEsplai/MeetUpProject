@@ -45,33 +45,33 @@ function AddToHtml(arrayModelo)
             descripcion = document.createElement("h5"),
             numAsistentes = document.createElement("h5");
 
-            //Declaracion de clases y ids html
-            row.id = "evento_" + modelo.GetId();
-            row.className = "row evento";
-            containerImg.className = "col-4";
-            img.className = "rounded-3";
-            containerData.className  = "col-8 text-white";
+        //Declaracion de clases y ids html
+        row.id = "evento_" + modelo.GetId();
+        row.className = "row evento";
+        containerImg.className = "col-4";
+        img.className = "rounded-3";
+        containerData.className  = "col-8 text-white";
 
-            //Add Data
-            if (modelo.GetFotoPrincipal() != null)
-                img.src = modelo.GetFotoPrincipal();
-            else 
-                img.src = "";
+        //Add Data
+        if (modelo.GetFotoPrincipal() != null)
+            img.src = modelo.GetFotoPrincipal();
+        else 
+            img.src = "";
                 
-            fecha.innerHTML = modelo.GetFechaEvento();
-            titulo.innerHTML = modelo.GetNombre();
-            descripcion.innerHTML = modelo.GetDescripcion();
-            numAsistentes.innerHTML = count + " asistentes";
+        fecha.innerHTML = modelo.GetFechaEvento();
+        titulo.innerHTML = modelo.GetNombre();
+        descripcion.innerHTML = modelo.GetDescripcion();
+        numAsistentes.innerHTML = count + " asistentes";
             
-            //Asignar padre
-            containerImg.appendChild(img);
-            containerData.appendChild(fecha);
-            containerData.appendChild(titulo);
-            containerData.appendChild(descripcion);
-            containerData.appendChild(numAsistentes);
-            row.appendChild(containerImg);
-            row.appendChild(containerData);
+        //Asignar padre
+        containerImg.appendChild(img);
+        containerData.appendChild(fecha);
+        containerData.appendChild(titulo);
+        containerData.appendChild(descripcion);
+        containerData.appendChild(numAsistentes);
+        row.appendChild(containerImg);
+        row.appendChild(containerData);
 
-            document.getElementById("eventosList").appendChild(row);
+        document.getElementById("eventosList").appendChild(row);
     }
 }

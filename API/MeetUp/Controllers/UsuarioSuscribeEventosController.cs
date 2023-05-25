@@ -23,6 +23,9 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/UsuarioSuscribeEventos
+        /// <summary>
+        /// Recoge todos los objetos UsuarioSuscribeEvento de la base de datos
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UsuarioSuscribeEvento>>> GetUsuarioSuscribeEvento()
         {
@@ -34,6 +37,9 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/UsuarioSuscribeEventos/5
+        /// <summary>
+        /// Recoge un objeto GetUsuarioSuscribeEvento por id
+        /// </summary>
         [HttpGet("id_{id}")]
         public async Task<ActionResult<UsuarioSuscribeEvento>> GetUsuarioSuscribeEvento(int id)
         {
@@ -54,6 +60,9 @@ namespace MeetUp.Controllers
 
         // POST: api/UsuarioSuscribeEventos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade un objeto UsuarioSuscribeEvento
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<UsuarioSuscribeEvento>> PostUsuarioSuscribeEvento(UsuarioSuscribeEvento usuarioSuscribeEvento)
         {
@@ -84,6 +93,9 @@ namespace MeetUp.Controllers
         }
 
         // DELETE: api/UsuarioSuscribeEventos/5
+        /// <summary>
+        /// Elimina un objeto UsuarioSuscribeEvento por id
+        /// </summary>
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteUsuarioSuscribeEvento(int id)
         {

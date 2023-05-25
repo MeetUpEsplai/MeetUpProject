@@ -25,6 +25,9 @@ namespace MeetUp.Controllers
         #region Get
 
         // GET: api/TipoReacciones
+        /// <summary>
+        /// Recoge todos los tipos de reacciones
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TipoReaccion>>> GetTipoReacciones()
         {
@@ -39,6 +42,10 @@ namespace MeetUp.Controllers
         }
 
         // GET: api/TipoReacciones/5
+        /// <summary>
+        /// Recoge un tipo de reacción por id
+        /// </summary>
+        /// <param name="id">Id del tipo de reacción</param>
         [HttpGet("id_{id}")]
         public async Task<ActionResult<TipoReaccion>> GetTipoReaccion(int id)
         {
@@ -66,6 +73,11 @@ namespace MeetUp.Controllers
 
         // PUT: api/TipoReacciones/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Actualiza un tipo de reacción por id
+        /// </summary>
+        /// <param name="id">Id del tipo de reacción a cambiar</param>
+        /// <param name="mode">Tipo de reacción a añadir</param>
         [HttpPut("id_{id}")]
         public async Task<IActionResult> PutTipoReaccion(int id, TipoReaccionViewModel model)
         {
@@ -100,6 +112,10 @@ namespace MeetUp.Controllers
 
         // POST: api/TipoReacciones
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Añade un tipo de reacción
+        /// </summary>
+        /// <param name="mode">Tipo de reacción a añadir</param>
         [HttpPost]
         public async Task<ActionResult<TipoReaccion>> PostTipoReaccion(TipoReaccionViewModel model)
         {
@@ -123,6 +139,10 @@ namespace MeetUp.Controllers
         #region Delete
 
         // DELETE: api/TipoReacciones/5
+        /// <summary>
+        /// Elimina un tipo de reacción
+        /// </summary>
+        /// <param name="id">Id del tipo de reacción a eliminar</param>
         [HttpDelete("id_{id}")]
         public async Task<IActionResult> DeleteTipoReaccion(int id)
         {
